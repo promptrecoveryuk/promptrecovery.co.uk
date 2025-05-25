@@ -67,6 +67,13 @@ function Footer() {
       </div>
       <div className={styles['footer-bottom']}>
         <p>&copy; {new Date().getFullYear()} Prompt Recovery. All rightsreserved.</p>
+        <p>
+          Registered company{' '}
+          <a href="https://find-and-update.company-information.service.gov.uk/company/16305356" target="_blank">
+            16305356
+          </a>
+          .
+        </p>
       </div>
     </footer>
   );
