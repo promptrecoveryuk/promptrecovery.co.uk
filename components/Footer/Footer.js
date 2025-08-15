@@ -6,7 +6,7 @@ import styles from './footer.module.css';
 
 function Footer() {
   const phoneNumber = '07799525650';
-  const email = 'nick@promtrecovery.co.uk';
+  const email = 'nick@promptrecovery.co.uk';
 
   return (
     <footer className={styles['site-footer']}>
