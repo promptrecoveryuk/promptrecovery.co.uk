@@ -215,6 +215,15 @@
   background: linear-gradient(135deg, #c71f1f, #ff4545);
 }
 
+.review-count {
+  text-decoration: none;
+}
+
+.rating-tagline {
+  font-size: 14px;
+  color: gold;
+}
+
 @media (max-width: 768px) {
   .desktop-menu,
   .call-button {

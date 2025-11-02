@@ -3,10 +3,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import StarRating from '../StarRating/StarRating';
 import logo from '../../assets/images/logo-128x128.png';
 import styles from './navbar.module.css';
 
-function Navbar() {
+function Navbar({rating, count, reviewsUrl}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShrunk, setIsShrunk] = useState(false);
   const menuRef = useRef(null);
@@ -79,6 +80,13 @@ function Navbar() {
           </Link>
           <Link href="/blog" onClick={closeMenu}>
             Blog
+          </Link>
+        </div>
+
+        <div className={styles['spacer']}>
+          <Link href={reviewsUrl} target="_blank" rel="noopener noreferrer" className={styles['review-count']}>
+            <StarRating rating={rating} outOf={5} />
+            <span className={styles['rating-tagline']}>{rating.toFixed(1)} from {count} reviews</span>
           </Link>
         </div>
 

@@ -1,0 +1,13 @@
+.star-rating {
+  height: 1.5rem;
+}
+
+.star-rating-back {
+  height: 1.5rem;
+}
+
+.star-rating-front {
+  height: 1.5rem;
+  margin-top: -1.5rem;
+  overflow: clip;
+}
