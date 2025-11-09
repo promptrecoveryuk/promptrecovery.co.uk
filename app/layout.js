@@ -5,6 +5,8 @@ import Navbar from '../components/Navigation/Navbar';
 import Footer from '../components/Footer/Footer';
 import reportWebVitals from './reportWebVitals';
 
+import { rating, userRatingCount, googleMapsLinks } from './data/google-reviews.json';
+
 import './global.css';
 
 /**
@@ -68,7 +70,7 @@ export default function RootLayout({ children }) {
         {/* Layout UI */}
         {/* Place children where you want to render a page or nested layout */}
         <div className="app">
-          <Navbar rating={5} count={39} reviewsUrl="https://www.google.com/maps/place/Prompt+Recovery/@51.68032,-0.3993182,17z/data=!4m8!3m7!1s0xa470618e0a0b3b7f:0xc97900f577ce9f7c!8m2!3d51.68032!4d-0.3967379!9m1!1b1!16s%2Fg%2F11xgsxw_k3?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D" />
+          <Navbar rating={rating} count={userRatingCount} reviewsUrl={googleMapsLinks.reviewsUri} />
 
           <main className="main-content">{children}</main>
 

@@ -93,6 +93,7 @@
   box-shadow: 0 4px 15px rgba(162, 18, 18, 0.4);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
+  text-align: center;
   display: block;
 }
 
@@ -103,11 +104,12 @@
 }
 
 .burger-button {
+  align-items: center;
   display: none;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  width: 30px;
+  width: 70px;
   height: 30px;
   position: relative;
   z-index: 101;
@@ -216,12 +218,18 @@
 }
 
 .review-count {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 12px;
+  margin-right: 12px;
   text-decoration: none;
 }
 
 .rating-tagline {
   font-size: 14px;
   color: gold;
+  text-wrap-mode: nowrap;
 }
 
 @media (max-width: 768px) {
