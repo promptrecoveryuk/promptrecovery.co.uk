@@ -1,11 +1,13 @@
 {
   "displayName": "Prompt Recovery",
   "rating": 5,
-  "userRatingCount": 58,
+  "userRatingCount": 60,
   "reviews": [
     {
       "rating": 5,
-      "text": { "text": "I can’t recommend Prompt Recovery enough! I was thoroughly impressed by the level of professionalism and efficiency they provided. The driver arrived quickly, was professional and friendly, and clearly knew exactly what he was doing. It’s clear that they take great pride in their work and genuinely care about their customers. I wouldn’t hesitate to call them again or recommend them to anyone in need of roadside assistance!" },
+      "text": {
+        "text": "I can’t recommend Prompt Recovery enough! I was thoroughly impressed by the level of professionalism and efficiency they provided. The driver arrived quickly, was professional and friendly, and clearly knew exactly what he was doing. It’s clear that they take great pride in their work and genuinely care about their customers. I wouldn’t hesitate to call them again or recommend them to anyone in need of roadside assistance!"
+      },
       "relativePublishTimeDescription": "a week ago",
       "authorAttribution": {
         "displayName": "N& D",
@@ -15,7 +17,9 @@
     },
     {
       "rating": 5,
-      "text": { "text": "I arranged with Nick to recover a car for me, his communication was excellent and extremely punctual at the location, messaging me the night before to reassure me, his service was excellent and very polite. I would highly recommend him. Superb from start to finish. 👍👍👍👍" },
+      "text": {
+        "text": "I arranged with Nick to recover a car for me, his communication was excellent and extremely punctual at the location, messaging me the night before to reassure me, his service was excellent and very polite. I would highly recommend him. Superb from start to finish. 👍👍👍👍"
+      },
       "relativePublishTimeDescription": "2 weeks ago",
       "authorAttribution": {
         "displayName": "Reza Vaziri",
