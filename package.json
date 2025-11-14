@@ -22,7 +22,8 @@
     "build:analyze": "ANALYZE=true next build",
     "start": "next start",
     "deploy": "gh-pages -d out",
-    "lint": "next lint"
+    "lint": "next lint",
+    "fetch-reviews": "node scripts/fetch-google-reviews.mjs"
   },
   "eslintConfig": {
     "extends": [

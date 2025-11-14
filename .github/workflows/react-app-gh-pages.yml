@@ -4,6 +4,9 @@ on:
   push:
     # Runs on pushes targeting the main branch
     branches: ['main']
+  schedule:
+    # Runs every day at 06:00 UTC
+    - cron: '0 6 */1 * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -42,6 +45,12 @@ jobs:
       - name: Setup Pages
         id: setup_pages
         uses: actions/configure-pages@v5
+
+      - name: Fetch latest Google Reviews
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+        run: npm run fetch-reviews
 
       - name: Build React App
         run: npm run build
