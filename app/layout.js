@@ -1,5 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 
 import Navbar from '../components/Navigation/Navbar';
 import Footer from '../components/Footer/Footer';
@@ -64,8 +65,32 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }) {
+  const gtmId = 'GTM-T6L73LZF';
   return (
     <html lang="en">
+      <Script
+        defer
+        id="googleTagManager"
+        dangerouslySetInnerHTML={{
+          __html: `
+          setTimeout(function() {
+              (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                (w)[l].push({
+                  "gtm.start": new Date().getTime(),
+                  event: "gtm.js",
+                });
+                var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+              })(window, document, "script", "dataLayer", "${gtmId}");
+            }, 2000);
+          `,
+        }}
+      />
       <body>
         {/* Layout UI */}
         {/* Place children where you want to render a page or nested layout */}
@@ -77,6 +102,14 @@ export default function RootLayout({ children }) {
           <Footer reviewsUrl={reviewsUrl} />
         </div>
       </body>
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          height={0}
+          width={0}
+          style={{ display: 'none', visibility: 'hidden' }}
+        ></iframe>
+      </noscript>
       {/* Using next/script for GA may impact page performance. Instead it is
           recommended to use GoogleAnalytics from @next/third-parties/google as
           per https://nextjs.org/docs/messages/next-script-for-ga */}
