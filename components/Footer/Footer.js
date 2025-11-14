@@ -4,7 +4,7 @@ import Image from 'next/image';
 import logo from '../../assets/images/logo-128x128.png';
 import styles from './footer.module.css';
 
-function Footer() {
+function Footer({ reviewsUrl }) {
   const phoneNumber = '07799525650';
   const email = 'nick@promptrecovery.co.uk';
 
@@ -58,8 +58,8 @@ function Footer() {
             </a>
           </p>
           <p>
-            Trustpilot:{' '}
-            <a href="https://uk.trustpilot.com/review/promptrecovery.co.uk" target="_blank">
+            Google Reviews:{' '}
+            <a href={reviewsUrl} target="_blank">
               promptrecovery.co.uk
             </a>
           </p>

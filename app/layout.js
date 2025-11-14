@@ -5,7 +5,7 @@ import Navbar from '../components/Navigation/Navbar';
 import Footer from '../components/Footer/Footer';
 import reportWebVitals from './reportWebVitals';
 
-import { rating, userRatingCount, googleMapsLinks } from './data/google-reviews.json';
+import { rating, userRatingCount, reviewsUrl } from './data/google-reviews.json';
 
 import './global.css';
 
@@ -70,11 +70,11 @@ export default function RootLayout({ children }) {
         {/* Layout UI */}
         {/* Place children where you want to render a page or nested layout */}
         <div className="app">
-          <Navbar rating={rating} count={userRatingCount} reviewsUrl={googleMapsLinks.reviewsUri} />
+          <Navbar rating={rating} count={userRatingCount} reviewsUrl={reviewsUrl} />
 
           <main className="main-content">{children}</main>
 
-          <Footer />
+          <Footer reviewsUrl={reviewsUrl} />
         </div>
       </body>
       {/* Using next/script for GA may impact page performance. Instead it is
