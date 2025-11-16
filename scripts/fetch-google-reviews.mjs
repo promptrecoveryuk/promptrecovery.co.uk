@@ -71,7 +71,7 @@ async function main() {
     'utf8'
   );
 
-  console.log(`Wrote ${selected.length} reviews to app/data/google-reviews.json`);
+  console.log(`Wrote ${selected.length} reviews, plus overall count of ${data.userRatingCount} and rating of ${output.rating} to app/data/google-reviews.json`);
 }
 
 main().catch(err => {
