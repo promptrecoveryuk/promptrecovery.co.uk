@@ -46,12 +46,12 @@ and re-evaluates these within days to weeks of deployment.
 
 ### Before deploying
 
-- [] Make sure [Google Search Console](https://search.google.com/search-console) is set up for promptrecovery.co.uk and
-  you have access
-- [] Ensure `/src/app/data/seo.url` is <https://promptrecovery.co.uk>
-- [] Ensure `/public/CNAME` is <https://promptrecovery.co.uk>
-- [] Decide on /blog (stub redirect vs accept 404)
-- [] Remove APP_INDEX_MODE=NOINDEX from the production environment (don't set it as a GitHub Actions secret/variable)
+- [x] Make sure [Google Search Console](https://search.google.com/search-console) is set up for promptrecovery.co.uk and
+      you have access
+- [x] Ensure `/src/app/data/seo.url` is <https://promptrecovery.co.uk>
+- [x] Ensure `/public/CNAME` is <https://promptrecovery.co.uk>
+- [x] Decide on /blog (stub redirect vs accept 404)
+- [x] Remove APP_INDEX_MODE=NOINDEX from the production environment (don't set it as a GitHub Actions secret/variable)
 
 ### Deploy day
 
