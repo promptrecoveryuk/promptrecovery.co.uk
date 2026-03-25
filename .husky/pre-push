@@ -1,0 +1,12 @@
+# Pre-push hook — runs on every `git push`.
+#
+# Runs the full test suite before allowing the push through, so broken tests
+# are caught locally rather than in CI. Both suites must pass; if either fails
+# the push is blocked.
+#
+# 1. Node native unit tests (node:test via tsx).
+# 2. Playwright end-to-end tests — requires the dev or preview server to be
+#    running, or a baseURL configured in playwright.config.ts.
+
+npm test || exit 1
+npm run test:ui || exit 1

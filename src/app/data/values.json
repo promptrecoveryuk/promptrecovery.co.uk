@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Speed and Efficiency",
+    "description": "We know your time is valuable. Our quick response times and efficient service get you back on the road as soon as possible.",
+    "icon": "Zap"
+  },
+  {
+    "name": "Honesty and Transparency",
+    "description": "No hidden fees or surprise costs. We're upfront about our services and prices from the first call.",
+    "icon": "Handshake"
+  },
+  {
+    "name": "Local Commitment",
+    "description": "As Watford locals, we're invested in our community and dedicated to providing exceptional service to our neighbours.",
+    "icon": "House"
+  },
+  {
+    "name": "Customer First Mentality",
+    "description": "Your satisfaction is our priority. We tailor our approach to meet your specific needs with care and attention.",
+    "icon": "UserStar"
+  }
+]

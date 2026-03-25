@@ -1,0 +1,104 @@
+# GitHub Actions workflow: build the Next.js static site and deploy to
+# GitHub Pages on every push to `main`, or when triggered manually.
+#
+# Prerequisites (one-time GitHub repo setup):
+#   1. Go to Settings → Pages → Source → select "GitHub Actions".
+#   2. If using a custom domain, ensure the CNAME DNS record points to
+#      <username>.github.io before enabling the custom domain in Settings → Pages.
+#      The `public/CNAME` file in this repo tells GitHub Pages which domain to use.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Allows manual triggering from the Actions tab in GitHub.
+  workflow_dispatch:
+
+# Grant the workflow the minimum permissions it needs.
+permissions:
+  contents: read # checkout the repo
+  pages: write # upload the Pages artifact
+  id-token: write # required by the OIDC-based deploy-pages action
+
+# Only allow one deployment at a time. If a new push arrives while a
+# deployment is in progress, the in-progress run is NOT cancelled (to avoid
+# a partial deploy), but any queued runs are dropped.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build static site
+    runs-on: ubuntu-latest
+    # Needed to access environment secrets stored under the github-pages environment.
+    environment: github-pages
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          # Cache npm dependencies keyed on package-lock.json to speed up CI.
+          cache: 'npm'
+
+      - name: Install dependencies
+        # `npm ci` installs exactly what is in package-lock.json — faster and
+        # more deterministic than `npm install` in CI environments.
+        run: npm ci
+
+      - name: Run tests
+        # Tests run before the build so a test failure blocks deployment.
+        run: npm test
+
+      - name: Fetch latest Google Reviews
+        # Fetch the latest reviews to be stored in /src/app/data/google-reviews.json.
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+        run: npm run fetch-reviews
+
+      - name: Build
+        # Produces the static export in the `out/` directory.
+        # Secrets are injected here so config.ts can read them via process.env.
+        # These are environment secrets stored under Environments → github-pages.
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /
+          FORM_ACCESS_KEY: ${{ secrets.FORM_ACCESS_KEY }}
+          GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
+          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+          APP_INDEX_MODE: ${{ secrets.APP_INDEX_MODE }}
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run UI tests
+        run: npm run test:ui
+
+      - name: Configure GitHub Pages
+        # Reads the repository's Pages settings and sets ACTION_ID / BASE_URL
+        # environment variables used by later steps.
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        # Packages the `out/` directory as an artifact that the deploy job consumes.
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      # The URL is injected by the deploy-pages action after deployment.
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

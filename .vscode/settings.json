@@ -6,24 +6,32 @@
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "theme"],
+  "tailwindCSS.experimental.classRegex": [
+    ["twMerge\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["createTheme(?:<\\w+>)?\\s*\\(([^)]*)\\)", "{?\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?}?"]
+  ],
   "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#d01717",
-    "activityBar.background": "#d01717",
+    "activityBar.activeBackground": "#132f59",
+    "activityBar.background": "#132f59",
     "activityBar.foreground": "#e7e7e7",
     "activityBar.inactiveForeground": "#e7e7e799",
-    "activityBarBadge.background": "#063906",
+    "activityBarBadge.background": "#b82761",
     "activityBarBadge.foreground": "#e7e7e7",
     "commandCenter.border": "#e7e7e799",
-    "sash.hoverBorder": "#d01717",
-    "statusBar.background": "#a21212",
+    "sash.hoverBorder": "#132f59",
+    "statusBar.background": "#0a192f",
     "statusBar.foreground": "#e7e7e7",
-    "statusBarItem.hoverBackground": "#d01717",
-    "statusBarItem.remoteBackground": "#a21212",
+    "statusBarItem.hoverBackground": "#132f59",
+    "statusBarItem.remoteBackground": "#0a192f",
     "statusBarItem.remoteForeground": "#e7e7e7",
-    "titleBar.activeBackground": "#a21212",
+    "titleBar.activeBackground": "#0a192f",
     "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveBackground": "#a2121299",
+    "titleBar.inactiveBackground": "#0a192f99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "#a21212"
+  "peacock.color": "#0a192f"
 }

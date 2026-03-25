@@ -1,0 +1,60 @@
+/*
+  Tailwind v4 uses a CSS-first approach. A single `@import` replaces the
+  three directives used in v3 (`@tailwind base/components/utilities`).
+  Tailwind auto-detects your source files and generates only the classes
+  your project actually uses — no `content` globs to maintain.
+
+  To customise the design system (colours, fonts, spacing, etc.), use a
+  `@theme` block with CSS custom properties directly in this file, e.g.:
+
+    @theme {
+      --color-brand: #1a56db;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+  There is no tailwind.config.ts in a v4 project.
+*/
+@import 'tailwindcss';
+
+@import 'flowbite/src/themes/default';
+
+@plugin 'flowbite/plugin';
+
+/*
+  Safelist the CSS classes Flowbite's carousel applies dynamically via
+  classList.add/remove at runtime. Tailwind's scanner never sees these in
+  source files, so without this they are pruned from the output.
+
+  Flowbite's _rotate() removes `hidden` from three items (left, middle,
+  right) and adds these classes to push the off-screen ones out of view:
+    - translate-x-0          the active (centre) slide
+    - -translate-x-full      the previous slide (off left)
+    -  translate-x-full      the next slide (off right)
+    - z-10 / z-20 / z-30    stacking order during the crossfade
+
+  @source inline() is Tailwind v4's built-in safelist mechanism — it
+  generates the listed utilities unconditionally, independent of scanning.
+*/
+@source inline('translate-x-0 -translate-x-full translate-x-full z-10 z-20 z-30');
+
+/* Apply a consistent yellow focus ring to all footer links. */
+footer a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-yellow);
+  border-radius: var(--radius-sm, 2px);
+}
+
+@theme {
+  --color-brand: #a21212;
+  --color-brand-light: #c43737;
+  --color-yellow-dark: #deaa00;
+  --color-yellow: #ffc400;
+  --color-heading: #0a192f;
+  --color-navy: #0a192f;
+  --color-fg-brand: #a21212;
+  --color-light-grey: #f5f7fa;
+
+  --breakpoint-xs: 32rem;
+
+  --font-sans: 'Inter', sans-serif;
+}

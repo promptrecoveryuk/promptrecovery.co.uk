@@ -1,0 +1,7 @@
+@placeId = {{$dotenv GOOGLE_PLACE_ID}}
+@apiKey = {{$dotenv GOOGLE_MAPS_API_KEY}}
+
+###
+GET https://places.googleapis.com/v1/places/{{placeId}}
+X-Goog-Api-Key: {{apiKey}}
+X-Goog-FieldMask: reviews.rating,reviews.text,reviews.publishTime,reviews.authorAttribution.displayName,reviews.authorAttribution.photoUri

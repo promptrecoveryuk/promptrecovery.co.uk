@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Arrive quickly",
+    "description": "We pick up the phone immediately — no hold music, no call centre - and if we can help, we will get to you quickly.",
+    "icon": "Zap"
+  },
+  {
+    "name": "Great value",
+    "description": "Price is agreed upfront on the phone. What you're told is what you pay — no hidden fees.",
+    "icon": "BadgePoundSterling"
+  },
+  {
+    "name": "Deliver when others let you down",
+    "description": "Have you been told your breakdown cover can't help? We can step in where the big names can't. If you're tired of waiting on hold, we pick up on the first ring.",
+    "icon": "ShieldCheck"
+  },
+  {
+    "name": "Valued service",
+    "description": "Customers come back, and they tell their friends.",
+    "icon": "Star"
+  },
+  {
+    "name": "Go the extra mile",
+    "description": "Out-of-hours callouts. Overnight storage. Last-minute destination changes. We will sort it.",
+    "icon": "ArrowRight"
+  },
+  {
+    "name": "Fully transparent, never any surprises",
+    "description": "Quote given before arrival. Price confirmed before we touch your vehicle. That's it.",
+    "icon": "Eye"
+  }
+]

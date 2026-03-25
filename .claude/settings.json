@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find ~/code/promptrecovery.co.uk -maxdepth 1 -type f \\\\\\(-name .eslintrc* -o -name tailwind.config.* -o -name postcss.config.* \\\\\\))",
+      "Bash(npx playwright:*)"
+    ]
+  }
+}
