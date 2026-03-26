@@ -49,7 +49,7 @@ export default function Footer({
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Prompt Recovery</span>
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-[1fr_1fr_2fr] sm:gap-6">
             <div>
               <h2 className="text-yellow mb-6 text-sm font-semibold uppercase">Pages</h2>
               <ul className="font-medium text-white">
@@ -149,7 +149,7 @@ export default function Footer({
             <Link href="https://promptrecovery.co.uk/" className="hover:underline">
               Prompt Recovery
             </Link>
-            . All Rights Reserved.&nbsp;
+            . <span className="whitespace-nowrap">All Rights Reserved.</span>&nbsp;
           </span>
           <span className="inline-block text-sm text-white sm:text-center">
             Registered company{' '}
