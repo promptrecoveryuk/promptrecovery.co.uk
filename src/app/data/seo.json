@@ -18,7 +18,13 @@
     "longitude": -0.3967379
   },
   "openingHours": ["Mo-Su 00:00-23:59"],
-  "sameAs": ["https://www.facebook.com/promptrecovery", "https://x.com/prompt_recovery"],
+  "sameAs": [
+    "https://www.facebook.com/promptrecovery",
+    "https://x.com/prompt_recovery",
+    "https://maps.app.goo.gl/qCNxAxhV54F4epAV6",
+    "https://uk.trustpilot.com/review/promptrecovery.co.uk",
+    "https://find-and-update.company-information.service.gov.uk/company/16305356"
+  ],
   "areaServed": "Watford, Bushey, Rickmansworth, Croxley Green, and surrounding areas",
   "ogImage": {
     "url": "/images/image2-1185x593.jpg",
