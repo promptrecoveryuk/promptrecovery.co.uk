@@ -66,11 +66,14 @@ const localBusinessSchema = {
   description: seo.description,
   url: seo.url,
   telephone: seo.phone,
+  image: [seo.ogImage.url],
+  priceRange: '$',
   address: {
     '@type': 'PostalAddress',
     streetAddress: seo.address.streetAddress,
     addressLocality: seo.address.addressLocality,
     addressRegion: seo.address.addressRegion,
+    postalCode: seo.address.postalCode,
     addressCountry: seo.address.addressCountry,
   },
   geo: {

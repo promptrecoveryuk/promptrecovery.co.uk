@@ -60,10 +60,10 @@ export default async function BlogPostPage({ params }: Props) {
     '@type': 'BlogPosting',
     headline: meta.title,
     description: meta.description,
-    datePublished: meta.date,
-    dateModified: meta.date,
+    datePublished: `${meta.date}T00:00:00+00:00`,
+    dateModified: `${meta.date}T00:00:00+00:00`,
     image: schemaImageUrl,
-    author: { '@type': 'Person', name: meta.author },
+    author: { '@type': 'Person', name: meta.author, url: `${seo.url}/about/` },
     publisher: { '@type': 'LocalBusiness', name: seo.businessName, url: seo.url },
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
   };
