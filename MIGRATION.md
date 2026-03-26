@@ -56,9 +56,9 @@ and re-evaluates these within days to weeks of deployment.
 ### Deploy day
 
 - [x] Push to `main` — GitHub Actions builds and deploys to `promptrecovery.co.uk`
-- [] Verify <https://promptrecovery.co.uk/robots.txt> shows `Allow: /` (confirms NOINDEX is off)
-- [] In GSC: **Sitemaps** → remove the old sitemap entry → submit <https://promptrecovery.co.uk/sitemap.xml>
-- [] In GSC: **URL Inspection** → test the home page → request indexing
+- [x] Verify <https://promptrecovery.co.uk/robots.txt> shows `Allow: /` (confirms NOINDEX is off)
+- [x] In GSC: **Sitemaps** → remove the old sitemap entry → submit <https://promptrecovery.co.uk/sitemap.xml>
+- [x] In GSC: **URL Inspection** → test the home page → request indexing
 
 ### First week
 
