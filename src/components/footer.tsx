@@ -54,22 +54,22 @@ export default function Footer({
               <h2 className="text-yellow mb-6 text-sm font-semibold uppercase">Pages</h2>
               <ul className="font-medium text-white">
                 <li className="mb-4">
-                  <Link href="/about" className="hover:underline">
+                  <Link href="/about/" className="hover:underline">
                     About
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/services" className="hover:underline">
+                  <Link href="/services/" className="hover:underline">
                     Services
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/faqs" className="hover:underline">
+                  <Link href="/faqs/" className="hover:underline">
                     FAQs
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="hover:underline">
+                  <Link href="/blog/" className="hover:underline">
                     Blog
                   </Link>
                 </li>

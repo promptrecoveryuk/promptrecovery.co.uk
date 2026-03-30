@@ -84,7 +84,7 @@ export default function HomePage() {
               </p>
               <p className="mt-8">
                 <Link
-                  href="/about"
+                  href="/about/"
                   className="text-navy underline-navy inline text-xl leading-5 font-semibold underline-offset-4 hover:underline"
                 >
                   Learn more about us

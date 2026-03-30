@@ -17,10 +17,10 @@ import { Menu } from './icons';
 
 const pages: Record<string, string> = {
   Home: '/',
-  About: '/about',
-  Services: '/services',
-  FAQs: '/faqs',
-  Blog: '/blog',
+  About: '/about/',
+  Services: '/services/',
+  FAQs: '/faqs/',
+  Blog: '/blog/',
 };
 
 /**
@@ -86,8 +86,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
     // Use exact match for `/` (home) to avoid highlighting it on every page.
     // For all other routes, also match any sub-paths (e.g. /services/tyres
     // still highlights the Services link).
-    const isActive =
-      pageRoute === '/' ? pathname === '/' : pathname === pageRoute || pathname.startsWith(pageRoute + '/');
+    const isActive = pageRoute === '/' ? pathname === '/' : pathname.startsWith(pageRoute);
 
     return (
       <li key={pageName}>
