@@ -68,6 +68,11 @@ export default function Footer({
                     FAQs
                   </Link>
                 </li>
+                <li className="mb-4">
+                  <Link href="/areas/" className="hover:underline">
+                    Areas
+                  </Link>
+                </li>
                 <li>
                   <Link href="/blog/" className="hover:underline">
                     Blog
@@ -133,9 +138,14 @@ export default function Footer({
                     WhatsApp
                   </Link>
                 </li>
-                <li>
+                <li className="mb-4">
                   <Link href={`mailto:${email}`} className="hover:underline" target="_blank" rel="noopener noreferrer">
                     {email}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#request-a-quote" className="hover:underline">
+                    Request quote
                   </Link>
                 </li>
               </ul>

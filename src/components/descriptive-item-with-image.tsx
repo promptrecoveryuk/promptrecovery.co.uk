@@ -19,7 +19,10 @@ export function DescriptiveItemWithImage({ item }: { item: ItemWithIconAndPictur
   return (
     <>
       {/* Card */}
-      <div className="group hover:bg-muted-hover focus:bg-muted-focus flex size-full justify-between gap-x-4 gap-y-6 rounded-lg p-5 focus:outline-hidden">
+      <div
+        id={item.id}
+        className="group hover:bg-muted-hover focus:bg-muted-focus flex size-full justify-between gap-x-4 gap-y-6 rounded-lg p-5 focus:outline-hidden"
+      >
         <Icon className="size-8 shrink-0" />
         <div className="flex flex-col">
           <h3 className="text-foreground block font-semibold">{item.name}</h3>

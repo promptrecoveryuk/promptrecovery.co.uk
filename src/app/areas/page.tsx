@@ -3,40 +3,40 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { PageHeader } from '@/components/page-header';
+import { getAllAreasMeta } from '@/lib/areas';
 import { getPictureAsImage } from '@/lib/pictures';
-import { getAllPostsMeta } from '@/lib/posts';
 
 import { seo } from '../data/index';
 import { baseOpenGraph } from '../layout';
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  alternates: { canonical: `${seo.url}/blog/` },
+  title: 'Areas',
+  alternates: { canonical: `${seo.url}/areas/` },
   description:
-    'Helpful guides and advice on roadside recovery, breakdowns, and staying safe on the road — from the team at Prompt Recovery in Watford.',
-  openGraph: { ...baseOpenGraph, url: `${seo.url}/blog/` },
+    'Helpful guides and advice for the areas covered by our services — from the team at Prompt Recovery in Watford.',
+  openGraph: { ...baseOpenGraph, url: `${seo.url}/areas/` },
 };
 
-export default function BlogPage() {
-  const posts = getAllPostsMeta();
+export default function AreaPage() {
+  const areas = getAllAreasMeta();
 
   return (
     <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
       <PageHeader
-        title="Blog"
+        title="Areas"
         subtitle="Helpful guides and advice on roadside recovery, breakdowns, and staying safe on the road."
       />
 
       <ul className="mx-auto max-w-2xl divide-y divide-gray-200">
-        {posts.map((post) => {
-          const image = getPictureAsImage(post.imageIndex, 2);
+        {areas.map((area) => {
+          const image = getPictureAsImage(area.imageIndex, 2);
           return (
-            <li key={post.slug} className="py-8">
-              <Link href={`/blog/${post.slug}/`} className="hover:text-brand">
+            <li key={area.slug} className="py-8">
+              <Link href={`/areas/${area.slug}/`} className="hover:text-brand">
                 <time className="text-sm text-gray-500">
-                  {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {new Date(area.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </time>
-                <h3 className="mt-2 text-xl font-semibold">{post.title}</h3>
+                <h3 className="mt-2 text-xl font-semibold">{area.title}</h3>
                 {image && (
                   <Image
                     className="rounded-base my-3 h-auto w-full"
@@ -46,7 +46,7 @@ export default function BlogPage() {
                     alt={image.description}
                   />
                 )}
-                <p className="mt-2">{post.description}</p>
+                <p className="mt-2">{area.description}</p>
                 <span className="mt-3 inline-block text-sm font-medium">Read more →</span>
               </Link>
             </li>

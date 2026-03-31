@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
+import { FaqItem } from '@/components/faq-item';
+import { getAllAreasMeta, getAreaContent, getAreaSlugs } from '@/lib/areas';
 import { getPictureAsImage } from '@/lib/pictures';
-import { getAllPostsMeta, getPostContent, getPostSlugs } from '@/lib/posts';
 
 import { mdxComponents } from '../../../../mdx-components';
 import { seo } from '../../data/index';
@@ -15,19 +16,19 @@ import { baseOpenGraph } from '../../layout';
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug }));
+  return getAreaSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { meta } = getPostContent(slug);
+  const { meta } = getAreaContent(slug);
   const image = getPictureAsImage(meta.imageIndex, 1);
 
   return {
     title: meta.title,
     description: meta.description,
-    alternates: { canonical: `${seo.url}/blog/${slug}/` },
-    openGraph: { ...baseOpenGraph, url: `${seo.url}/blog/${slug}/`, images: [image], type: 'article' },
+    alternates: { canonical: `${seo.url}/areas/${slug}/` },
+    openGraph: { ...baseOpenGraph, url: `${seo.url}/areas/${slug}/`, images: [image], type: 'article' },
     twitter: {
       card: 'summary_large_image',
       images: [image],
@@ -35,27 +36,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function AreaPostPage({ params }: Props) {
   const { slug } = await params;
 
-  if (!getPostSlugs().includes(slug)) {
+  if (!getAreaSlugs().includes(slug)) {
     notFound();
   }
 
-  const { meta, content } = getPostContent(slug);
+  const { meta, content } = getAreaContent(slug);
   const image450 = getPictureAsImage(meta.imageIndex, 1);
 
   // Absolute image URL for structured data (always uses the canonical domain).
   const schemaImageUrl = `${seo.url}${picturesData[meta.imageIndex - 1].filePath1}`;
-  const canonicalUrl = `${seo.url}/blog/${slug}/`;
+  const canonicalUrl = `${seo.url}/areas/${slug}/`;
 
   // Reading time: ~200 words per minute.
   const wordCount = content.split(/\s+/).filter(Boolean).length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
-  const relatedPosts = getAllPostsMeta().filter((p) => p.slug !== slug);
+  const relatedPosts = getAllAreasMeta().filter((p) => p.slug !== slug);
 
-  const blogPostingSchema = {
+  const areaPostingSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: meta.title,
@@ -73,27 +74,29 @@ export default async function BlogPostPage({ params }: Props) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${seo.url}/` },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${seo.url}/blog/` },
+      { '@type': 'ListItem', position: 2, name: 'Areas', item: `${seo.url}/areas/` },
       { '@type': 'ListItem', position: 3, name: meta.title },
     ],
   };
 
-  const howToSchema = meta.steps
+  const faqPageSchema = meta.faqs
     ? {
         '@context': 'https://schema.org',
-        '@type': 'HowTo',
-        name: meta.title,
-        description: meta.description,
-        step: meta.steps.map((name, i) => ({ '@type': 'HowToStep', position: i + 1, name })),
+        '@type': 'FAQPage',
+        mainEntity: meta.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        })),
       }
     : null;
 
   return (
     <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(areaPostingSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      {howToSchema && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
+      {faqPageSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }} />
       )}
 
       <div className="mx-auto max-w-2xl">
@@ -103,8 +106,8 @@ export default async function BlogPostPage({ params }: Props) {
             Home
           </Link>
           <span aria-hidden="true">/</span>
-          <Link href="/blog/" className="hover:text-brand">
-            Blog
+          <Link href="/areas/" className="hover:text-brand">
+            Areas
           </Link>
           <span aria-hidden="true">/</span>
           <span className="text-gray-700" aria-current="page">
@@ -135,13 +138,20 @@ export default async function BlogPostPage({ params }: Props) {
           <MDXRemote source={content} components={mdxComponents} />
         </article>
 
+        <aside className="mt-12 border-t border-gray-200 pt-8">
+          <h2 className="text-heading mb-6 text-xl font-semibold">Common questions</h2>
+          {meta.faqs?.map((faq) => (
+            <FaqItem key={faq.question} faq={faq} />
+          ))}
+        </aside>
+
         {relatedPosts.length > 0 && (
           <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading mb-6 text-xl font-semibold">More from the blog</h2>
+            <h2 className="text-heading mb-6 text-xl font-semibold">More from the area</h2>
             <ul className="space-y-4">
               {relatedPosts.map((post) => (
                 <li key={post.slug}>
-                  <Link href={`/blog/${post.slug}/`} className="text-brand hover:text-brand-light font-medium">
+                  <Link href={`/areas/${post.slug}/`} className="text-brand hover:text-brand-light font-medium">
                     {post.title}
                   </Link>
                   <p className="mt-1 text-sm text-gray-500">

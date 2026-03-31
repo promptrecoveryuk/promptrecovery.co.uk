@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 
+import { getAreaContent, getAreaSlugs } from '../lib/areas';
 import { getPostContent, getPostSlugs } from '../lib/posts';
 import { seo } from './data/index';
 
@@ -11,6 +12,17 @@ const blogPostSitemapEntries: MetadataRoute.Sitemap = getPostSlugs().map((slug) 
   const { meta } = getPostContent(slug);
   return {
     url: `${seo.url}/blog/${slug}/`,
+    lastModified: new Date(meta.date),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  };
+});
+
+// Get sitemap details for area pages
+const areaPageSitemapEntries: MetadataRoute.Sitemap = getAreaSlugs().map((slug) => {
+  const { meta } = getAreaContent(slug);
+  return {
+    url: `${seo.url}/areas/${slug}/`,
     lastModified: new Date(meta.date),
     changeFrequency: 'monthly',
     priority: 0.7,
@@ -53,5 +65,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     ...blogPostSitemapEntries,
+    ...areaPageSitemapEntries,
   ];
 }

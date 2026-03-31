@@ -86,6 +86,7 @@ export type ItemWithIcon = {
 
 export type ItemWithIconAndPicture = {
   name: string;
+  id?: string;
   description: string;
   icon: string;
   picture: Picture;
@@ -110,3 +111,25 @@ export type PictureImage = {
   width: number;
   height: number;
 };
+
+export interface PostMeta {
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  imageIndex: number;
+  author: string;
+  /** Optional ordered step names — used to generate HowTo structured data. */
+  steps?: string[];
+}
+
+export interface AreaMeta {
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  imageIndex: number;
+  author: string;
+  /** Optional FAQs — used to generate FAQPage structured data. */
+  faqs?: Faq[];
+}

@@ -17,6 +17,7 @@
 export {
   ArrowRight,
   BadgePoundSterling,
+  BatteryWarning,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -28,6 +29,7 @@ export {
   Mail,
   Menu,
   Navigation,
+  OctagonAlert,
   Phone,
   Route,
   ShieldCheck,

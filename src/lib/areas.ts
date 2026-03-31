@@ -3,19 +3,19 @@ import path from 'node:path';
 
 import matter from 'gray-matter';
 
-import { PostMeta } from '@/types';
+import { AreaMeta } from '@/types';
 
-const postsDirectory = path.join(process.cwd(), 'src/content/posts');
+const areasDirectory = path.join(process.cwd(), 'src/content/areas');
 
-export function getPostSlugs(): string[] {
+export function getAreaSlugs(): string[] {
   return fs
-    .readdirSync(postsDirectory)
+    .readdirSync(areasDirectory)
     .filter((f) => f.endsWith('.mdx'))
     .map((f) => f.replace(/\.mdx$/, ''));
 }
 
-export function getPostMeta(slug: string): PostMeta {
-  const filePath = path.join(postsDirectory, `${slug}.mdx`);
+export function getAreaMeta(slug: string): AreaMeta {
+  const filePath = path.join(areasDirectory, `${slug}.mdx`);
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data } = matter(raw);
 
@@ -26,12 +26,12 @@ export function getPostMeta(slug: string): PostMeta {
     description: data.description as string,
     imageIndex: data.imageIndex as number,
     author: (data.author as string) ?? 'Nick',
-    steps: Array.isArray(data.steps) ? (data.steps as string[]) : undefined,
+    faqs: Array.isArray(data.faqs) ? data.faqs : undefined,
   };
 }
 
-export function getPostContent(slug: string): { meta: PostMeta; content: string } {
-  const filePath = path.join(postsDirectory, `${slug}.mdx`);
+export function getAreaContent(slug: string): { meta: AreaMeta; content: string } {
+  const filePath = path.join(areasDirectory, `${slug}.mdx`);
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
 
@@ -44,13 +44,13 @@ export function getPostContent(slug: string): { meta: PostMeta; content: string 
       description: data.description as string,
       imageIndex: data.imageIndex as number,
       author: (data.author as string) ?? 'Nick',
-      steps: Array.isArray(data.steps) ? (data.steps as string[]) : undefined,
+      faqs: Array.isArray(data.faqs) ? data.faqs : undefined,
     },
   };
 }
 
-export function getAllPostsMeta(): PostMeta[] {
-  return getPostSlugs()
-    .map(getPostMeta)
+export function getAllAreasMeta(): AreaMeta[] {
+  return getAreaSlugs()
+    .map(getAreaMeta)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }

@@ -20,6 +20,7 @@ const pages: Record<string, string> = {
   About: '/about/',
   Services: '/services/',
   FAQs: '/faqs/',
+  Areas: '/areas/',
   Blog: '/blog/',
 };
 
