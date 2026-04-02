@@ -1,3 +1,4 @@
+import { renderMarkdownLinks } from '@/lib/markdown-links';
 import { Faq } from '@/types';
 
 import { CircleHelp } from './icons';
@@ -19,7 +20,7 @@ export function FaqItem({ faq }: { faq: Faq }) {
           <h3 className="text-foreground decoration-yellow font-semibold underline decoration-3 underline-offset-8 md:text-lg">
             {faq.question}
           </h3>
-          <p className="text-navy mt-4">{faq.answer}</p>
+          <p className="text-navy mt-4">{renderMarkdownLinks(faq.answer)}</p>
         </div>
       </div>
     </div>

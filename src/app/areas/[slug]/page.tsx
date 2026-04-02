@@ -6,6 +6,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 
 import { FaqItem } from '@/components/faq-item';
 import { getAllAreasMeta, getAreaContent, getAreaSlugs } from '@/lib/areas';
+import { stripMarkdownLinks } from '@/lib/markdown-links';
 import { getPictureAsImage } from '@/lib/pictures';
 
 import { mdxComponents } from '../../../../mdx-components';
@@ -90,7 +91,7 @@ export default async function AreaPostPage({ params }: Props) {
         mainEntity: meta.faqs.map((faq) => ({
           '@type': 'Question',
           name: faq.question,
-          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+          acceptedAnswer: { '@type': 'Answer', text: stripMarkdownLinks(faq.answer) },
         })),
       }
     : null;

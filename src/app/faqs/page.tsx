@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { FaqItem } from '@/components/faq-item';
 import { PageHeader } from '@/components/page-header';
+import { stripMarkdownLinks } from '@/lib/markdown-links';
 
 import { faqs, seo } from '../data/index';
 import { baseOpenGraph } from '../layout';
@@ -30,7 +31,7 @@ export default function FaqsPage() {
       name: faq.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: faq.answer,
+        text: stripMarkdownLinks(faq.answer),
       },
     })),
   };
