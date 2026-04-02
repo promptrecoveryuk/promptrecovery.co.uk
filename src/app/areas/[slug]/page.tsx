@@ -117,7 +117,9 @@ export default async function AreaPostPage({ params }: Props) {
 
         <article>
           <header className="mb-8 border-b border-gray-200 pb-8">
-            <h1 className="text-heading text-center text-3xl leading-tight font-bold md:text-4xl">{meta.title}</h1>
+            <h1 className="text-heading text-center text-3xl leading-tight font-bold md:text-left md:text-4xl">
+              {meta.title}
+            </h1>
             <h2 className="mt-3 text-lg text-gray-600">{meta.description}</h2>
             <p className="mt-3 text-sm text-gray-500">
               By {meta.author} &middot;{' '}

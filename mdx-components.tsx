@@ -8,8 +8,14 @@ import { basePath } from './src/app/base-path';
  * `useMDXComponents` hook below which @next/mdx requires for app-router pages.
  */
 export const mdxComponents: MDXComponents = {
-  h1: ({ children }) => <h1 className="text-heading mt-8 mb-6 text-center text-3xl font-bold">{children}</h1>,
-  h2: ({ children }) => <h2 className="text-heading mt-8 mb-4 text-2xl font-semibold">{children}</h2>,
+  h1: ({ children }) => (
+    <h1 className="text-heading mt-8 mb-6 text-center text-3xl font-bold lg:text-left">{children}</h1>
+  ),
+  h2: ({ children }) => (
+    <h2 className="text-heading decoration-yellow mt-8 mb-4 text-2xl font-semibold underline decoration-3 underline-offset-8">
+      {children}
+    </h2>
+  ),
   h3: ({ children }) => <h3 className="text-heading mt-6 mb-3 text-xl font-semibold">{children}</h3>,
   p: ({ children }) => <p className="mb-4 leading-relaxed text-gray-700">{children}</p>,
   ul: ({ children }) => <ul className="mb-4 list-disc space-y-1 pl-6 text-gray-700">{children}</ul>,
