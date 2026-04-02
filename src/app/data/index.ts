@@ -29,6 +29,10 @@ const seo = {
     ...seoData.ogImage,
     url: /^https?:\/\//.test(seoData.ogImage.url) ? seoData.ogImage.url : joinUrl(siteUrl, seoData.ogImage.url),
   },
+  images: seoData.images.map((img) => ({
+    ...img,
+    url: /^https?:\/\//.test(img.url) ? img.url : joinUrl(siteUrl, img.url),
+  })),
 };
 
 export { faqs, googleReviews, pictures, reasonsToChooseNick, seo, services, values };

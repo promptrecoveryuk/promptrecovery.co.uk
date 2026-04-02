@@ -95,7 +95,7 @@ export default function HomePage() {
               </p>
             </div>
             <Image
-              src={`${basePath}/images/image2-1185x593.jpg`}
+              src={`${basePath}/images/nick-1060x593-16x9.jpg`}
               width={1185}
               height={593}
               className="rounded-base"

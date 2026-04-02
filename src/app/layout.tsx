@@ -66,6 +66,7 @@ export const viewport = {
 };
 
 const localBusinessSchema = {
+  '@id': `${seo.url}/#localbusiness`,
   '@context': 'https://schema.org',
   '@type': ['LocalBusiness', 'AutomotiveBusiness'],
   name: seo.businessName,
@@ -73,7 +74,7 @@ const localBusinessSchema = {
   description: seo.description,
   url: seo.url,
   telephone: seo.phone,
-  image: [seo.ogImage.url],
+  image: seo.images.map((img) => img.url),
   priceRange: '$',
   address: {
     '@type': 'PostalAddress',
@@ -98,9 +99,11 @@ const localBusinessSchema = {
     bestRating: 5,
     worstRating: 1,
   },
+  hasMap: seo.googleMapsUrl,
 };
 
 const websiteSchema = {
+  '@id': `${seo.url}/#website`,
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: seo.businessName,

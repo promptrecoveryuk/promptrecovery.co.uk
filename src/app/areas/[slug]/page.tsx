@@ -49,6 +49,8 @@ export default async function AreaPostPage({ params }: Props) {
   // Absolute image URL for structured data (always uses the canonical domain).
   const schemaImageUrl = `${seo.url}${picturesData[meta.imageIndex - 1].filePath1}`;
   const canonicalUrl = `${seo.url}/areas/${slug}/`;
+  const websiteId = `${seo.url}/#website`;
+  const localBusinessId = `${seo.url}/#localbusiness`;
 
   // Reading time: ~200 words per minute.
   const wordCount = content.split(/\s+/).filter(Boolean).length;
@@ -59,14 +61,16 @@ export default async function AreaPostPage({ params }: Props) {
   const areaPostingSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
+    '@id': `${canonicalUrl}#blogposting`,
     headline: meta.title,
     description: meta.description,
     datePublished: `${meta.date}T00:00:00+00:00`,
     dateModified: `${meta.date}T00:00:00+00:00`,
     image: schemaImageUrl,
     author: { '@type': 'Person', name: meta.author, url: `${seo.url}/about/` },
-    publisher: { '@type': 'LocalBusiness', name: seo.businessName, url: seo.url },
+    publisher: { '@id': localBusinessId },
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+    isPartOf: { '@id': websiteId },
   };
 
   const breadcrumbSchema = {
