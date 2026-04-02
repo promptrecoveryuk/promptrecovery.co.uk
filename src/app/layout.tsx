@@ -100,6 +100,14 @@ const localBusinessSchema = {
   },
 };
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: seo.businessName,
+  alternateName: seo.legalName,
+  url: seo.url,
+};
+
 const inter = Inter({
   subsets: ['latin'],
 });
@@ -121,7 +129,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ></iframe>
         </noscript>
 
-        {/* LocalBusiness JSON-LD — Google supports structured data anywhere in the document */}
+        {/* Site name and business schema help Google understand the brand and entity behind the site. */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
         {/* Navbar determines the active page itself via usePathname() —
