@@ -9,6 +9,7 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
+  "js/ts.experimental.useTsgo": true,
   "tailwindCSS.classAttributes": ["class", "className", "theme"],
   "tailwindCSS.experimental.classRegex": [
     ["twMerge\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
