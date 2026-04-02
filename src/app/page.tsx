@@ -19,8 +19,10 @@ import { baseOpenGraph } from './layout';
 // This page's browser tab will read: "Home | Prompt Recovery"
 export const metadata: Metadata = {
   // Use absolute title (no template) so og:title is also descriptive
-  title: { absolute: 'Prompt Recovery | Roadside Recovery & Towing in Watford' },
+  title: { absolute: 'Breakdown Recovery Watford | Car & Van Recovery | Prompt Recovery' },
   alternates: { canonical: `${seo.url}/` },
+  description:
+    'Breakdown recovery in Watford for cars and vans. Fast, friendly vehicle recovery, towing, motorway recovery, and jump starts across Watford and surrounding areas.',
   openGraph: { ...baseOpenGraph, url: seo.url },
 };
 
@@ -38,13 +40,13 @@ export default function HomePage() {
               {/*-- Title --*/}
               <div className="mt-4 md:mb-12">
                 <h1 className="text-foreground mb-4 text-center text-4xl font-bold md:text-left lg:text-5xl">
-                  Roadside recovery you can rely on
+                  Breakdown Recovery in Watford
                 </h1>
                 <h2 className="text-foreground mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
-                  Serving Watford and the surrounding areas
+                  Serving Watford, Bushey, Rickmansworth, and the surrounding areas
                 </h2>
                 <p className="text-muted-foreground-2 mb-4 text-center text-xl font-light md:text-left">
-                  Fast, friendly and affordable help for vehicles under 4 tonnes
+                  Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on
                 </p>
                 <p className="pt-4 text-center md:text-left">
                   <Link
@@ -79,8 +81,9 @@ export default function HomePage() {
             <div>
               <SectionHeading sectionName="About" />
               <p className="text-xl font-light">
-                Prompt Recovery Ltd is a locally trusted roadside recovery company based in Watford. With experience and
-                a commitment to fast, reliable service, we&apos;re the first call you make when you&apos;re stuck.
+                Prompt Recovery Ltd is a locally trusted vehicle recovery company based in Watford. With experience and
+                a commitment to fast, reliable service, we provide breakdown recovery and towing for cars and vans
+                across Watford and the surrounding area. We&apos;re the first call you make when you&apos;re stuck.
               </p>
               <p className="mt-8">
                 <Link

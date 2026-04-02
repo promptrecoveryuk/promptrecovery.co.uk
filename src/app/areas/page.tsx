@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'Areas',
   alternates: { canonical: `${seo.url}/areas/` },
   description:
-    'Helpful guides and advice for the areas covered by our services — from the team at Prompt Recovery in Watford.',
+    'Breakdown recovery areas covered by Prompt Recovery in Watford, including local service pages for towns and nearby roads.',
   openGraph: { ...baseOpenGraph, url: `${seo.url}/areas/` },
 };
 
@@ -24,7 +24,7 @@ export default function AreaPage() {
     <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
       <PageHeader
         title="Areas"
-        subtitle="Helpful guides and advice on roadside recovery, breakdowns, and staying safe on the road."
+        subtitle="Local breakdown recovery pages for Watford, nearby towns, and the roads we regularly cover."
       />
 
       <ul className="mx-auto max-w-2xl divide-y divide-gray-200">

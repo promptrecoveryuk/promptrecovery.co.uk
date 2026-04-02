@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: 'About',
   alternates: { canonical: `${seo.url}/about/` },
   description:
-    'Meet Nick — founder of Prompt Recovery Ltd, with 20+ years of professional driving experience. Trusted, local roadside recovery in Watford and nearby areas.',
+    'Meet Nick — founder of Prompt Recovery Ltd, with 20+ years of professional driving experience. Trusted, local breakdown recovery and vehicle recovery in Watford and nearby areas.',
   openGraph: { ...baseOpenGraph, url: `${seo.url}/about/` },
 };
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
         <PageHeader
           title="Meet Prompt Recovery — Watford's trusted recovery specialist"
-          subtitle="Prompt Recovery Ltd was built on one mission: to provide fast, friendly and reliable roadside recovery across Watford and nearby areas. Get to know the person behind the wheel and what drives our services."
+          subtitle="Prompt Recovery Ltd was built on one mission: to provide fast, friendly and reliable breakdown recovery across Watford and nearby areas. Get to know the person behind the wheel and what drives our services."
         />
 
         <div className="mx-auto max-w-7xl px-4 py-10 pt-4 sm:px-6 lg:px-8 lg:py-14 lg:pt-4">

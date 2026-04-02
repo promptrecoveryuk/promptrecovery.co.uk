@@ -238,5 +238,29 @@
     "width2": 600,
     "height2": 200,
     "description": "Prompt Recovery DAF LF flatbed truck at night on a grass verge recovering a large white van, headlights illuminating the dark roadside"
+  },
+  {
+    "filePath": "/images/pics/21.jpg",
+    "filePath1": "/images/pics/21-1.jpg",
+    "filePath2": "/images/pics/21-2.jpg",
+    "width": 600,
+    "height": 900,
+    "width1": 600,
+    "height1": 450,
+    "width2": 600,
+    "height2": 200,
+    "description": "Prompt Recovery DAF LF flatbed truck at night transporting a accident-damaged car with a crumpled front end"
+  },
+  {
+    "filePath": "/images/pics/22.jpg",
+    "filePath1": "/images/pics/22-1.jpg",
+    "filePath2": "/images/pics/22-2.jpg",
+    "width": 600,
+    "height": 900,
+    "width1": 600,
+    "height1": 450,
+    "width2": 600,
+    "height2": 200,
+    "description": "Prompt Recovery with a NOCO Boost X battery pack and jumper cables, jump-starting a car with a flat battery"
   }
 ]

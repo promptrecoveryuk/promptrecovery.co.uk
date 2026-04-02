@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'FAQs',
   alternates: { canonical: `${seo.url}/faqs/` },
   description:
-    'Got a question before booking? Find answers to the most common questions about our roadside recovery services in Watford and surrounding areas.',
+    'Got a question before booking? Find answers to the most common questions about our breakdown recovery and towing services in Watford and surrounding areas.',
   openGraph: { ...baseOpenGraph, url: `${seo.url}/faqs/` },
 };
 
@@ -35,7 +35,7 @@ export default function FaqsPage() {
       <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
         <PageHeader
           title="Frequently asked questions"
-          subtitle="Got a question before booking? Here are answers to the most common things customers ask about our roadside recovery services in Watford and the surrounding area."
+          subtitle="Got a question before booking? Here are answers to the most common things customers ask about our breakdown recovery and towing services in Watford and the surrounding area."
         />
 
         <div className="divide-line-2 mx-auto max-w-2xl divide-y">

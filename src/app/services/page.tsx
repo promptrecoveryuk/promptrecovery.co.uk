@@ -7,10 +7,10 @@ import { pictures, seo, services } from '../data/index';
 import { baseOpenGraph } from '../layout';
 
 export const metadata: Metadata = {
-  title: 'Services',
+  title: 'Vehicle Recovery Services in Watford',
   alternates: { canonical: `${seo.url}/services/` },
   description:
-    'Breakdown towing, motorway recovery, van recovery, stuck roadside recovery, and more. Safe, fast, and affordable — serving Watford and surrounding areas.',
+    'Vehicle recovery services in Watford, including breakdown recovery, motorway recovery, van recovery, towing, jump starts, and accident recovery.',
   openGraph: { ...baseOpenGraph, url: `${seo.url}/services/` },
 };
 
@@ -19,7 +19,7 @@ export default function ServicesPage() {
     <>
       <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
         <PageHeader
-          title="The services that we offer"
+          title="Vehicle recovery services in and around Watford"
           subtitle="We provide safe, fast, and affordable towing for cars and vans that can't be driven — whether you're at home, at work, or stuck after a breakdown."
         />
 

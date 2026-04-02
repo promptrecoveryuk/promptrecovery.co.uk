@@ -1,15 +1,15 @@
 [
   {
     "question": "What areas do you cover?",
-    "answer": "We provide towing services in Watford, Bushey, Rickmansworth, Croxley Green, and nearby towns. If you’re unsure whether we cover your area, feel free to give us a call."
+    "answer": "We provide breakdown recovery and towing in Watford, Bushey, Rickmansworth, Croxley Green, and nearby towns. If you're unsure whether we cover your area, feel free to give us a call."
   },
   {
     "question": "What types of vehicles can you tow?",
     "answer": "We specialize in towing cars, SUVs, and small vans under 4 tonnes. If your vehicle is non-operable, we can safely transport it to your chosen destination."
   },
   {
-    "question": "Do you offer roadside assistance?",
-    "answer": "We focus strictly on towing non-drivable vehicles. While we don’t offer on-site repairs or breakdown assistance, we can tow your vehicle to a trusted garage or your preferred location."
+    "question": "Do you carry out roadside repairs?",
+    "answer": "We focus on recovering and towing non-drivable vehicles rather than carrying out full roadside repairs. If your vehicle can't be driven, we can recover it and tow it to a trusted garage or your preferred location."
   },
   {
     "question": "How quickly can you arrive?",
@@ -21,10 +21,10 @@
   },
   {
     "question": "What should I do if I've been in an accident?",
-    "answer": "If your vehicle is non-drivable, call us immediately. We'll safely tow it from the scene to your home, a body shop, or your insurer’s preferred garage."
+    "answer": "If your vehicle is non-drivable, call us immediately. We'll safely tow it from the scene to your home, a body shop, or your insurer's preferred garage."
   },
   {
     "question": "Do you operate on weekends?",
-    "answer": "Our standard hours are Monday to Friday, 06:00–17:00. However, you can still call us on weekends to check availability we’ll help if we can."
+    "answer": "Our standard days are Monday to Friday. However, you can still call us on weekends to check availability we'll help if we can."
   }
 ]
