@@ -7,27 +7,34 @@ import { faqs, seo } from '../data/index';
 import { baseOpenGraph } from '../layout';
 
 export const metadata: Metadata = {
-  title: 'FAQs',
+  title: 'Breakdown Recovery FAQs in Watford',
   alternates: { canonical: `${seo.url}/faqs/` },
   description:
     'Got a question before booking? Find answers to the most common questions about our breakdown recovery and towing services in Watford and surrounding areas.',
   openGraph: { ...baseOpenGraph, url: `${seo.url}/faqs/` },
 };
 
-const faqPageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.answer,
-    },
-  })),
-};
-
 export default function FaqsPage() {
+  const canonicalUrl = `${seo.url}/faqs/`;
+  const faqPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': canonicalUrl,
+    url: canonicalUrl,
+    name: 'Breakdown Recovery FAQs in Watford',
+    description: metadata.description,
+    isPartOf: { '@id': `${seo.url}/#website` },
+    about: { '@id': `${seo.url}/#localbusiness` },
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }} />

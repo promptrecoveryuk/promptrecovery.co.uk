@@ -29,8 +29,20 @@ export const metadata: Metadata = {
 // This is the home page, rendered at the root path `/`.
 // Replace this placeholder with real content as the site is built out.
 export default function HomePage() {
+  const webpageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${seo.url}/`,
+    url: `${seo.url}/`,
+    name: 'Breakdown Recovery Watford | Car & Van Recovery | Prompt Recovery',
+    description: metadata.description,
+    isPartOf: { '@id': `${seo.url}/#website` },
+    about: { '@id': `${seo.url}/#localbusiness` },
+  };
+
   return (
     <main className="flex min-h-screen flex-col justify-center">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       {/*-- Hero --*/}
       <div className="from-primary-100 dark:from-primary-950 bg-light-grey relative bg-linear-to-bl via-transparent dark:via-transparent">
         <div className="mx-auto max-w-7xl px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-36">

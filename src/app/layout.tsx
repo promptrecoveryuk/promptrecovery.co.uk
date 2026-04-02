@@ -8,6 +8,7 @@ import Script from 'next/script';
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Rating } from '@/components/rating';
+import { ratingToString } from '@/lib/rating-to-string';
 
 import config from './config';
 import { googleReviews, seo } from './data/index';
@@ -142,7 +143,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex justify-center">
             <Rating rating={googleReviews.rating} />
             <span className="text-white">
-              &nbsp;{googleReviews.rating}.0 from {googleReviews.userRatingCount} reviews on Google
+              &nbsp;
+              <a
+                href={`https://www.google.com/maps/place/${config.socials.googleReviewsId}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Rated {ratingToString(googleReviews.rating)}/5 from {googleReviews.userRatingCount} Google reviews
+              </a>
             </span>
           </div>
         </Navbar>

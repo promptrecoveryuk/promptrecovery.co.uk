@@ -11,7 +11,7 @@ import { pictures, seo, values } from '../data/index';
 import { baseOpenGraph } from '../layout';
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About Prompt Recovery in Watford',
   alternates: { canonical: `${seo.url}/about/` },
   description:
     'Meet Nick — founder of Prompt Recovery Ltd, with 20+ years of professional driving experience. Trusted, local breakdown recovery and vehicle recovery in Watford and nearby areas.',
@@ -19,8 +19,21 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const canonicalUrl = `${seo.url}/about/`;
+  const webpageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': canonicalUrl,
+    url: canonicalUrl,
+    name: 'About Prompt Recovery in Watford',
+    description: metadata.description,
+    isPartOf: { '@id': `${seo.url}/#website` },
+    about: { '@id': `${seo.url}/#localbusiness` },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       {/* About */}
       <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
         <PageHeader

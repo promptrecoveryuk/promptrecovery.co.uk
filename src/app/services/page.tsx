@@ -15,8 +15,21 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
+  const canonicalUrl = `${seo.url}/services/`;
+  const webpageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+    url: canonicalUrl,
+    name: 'Vehicle Recovery Services in Watford',
+    description: metadata.description,
+    isPartOf: { '@id': `${seo.url}/#website` },
+    about: { '@id': `${seo.url}/#localbusiness` },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
         <PageHeader
           title="Vehicle recovery services in and around Watford"

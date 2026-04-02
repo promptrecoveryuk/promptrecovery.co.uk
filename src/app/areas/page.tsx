@@ -10,7 +10,7 @@ import { seo } from '../data/index';
 import { baseOpenGraph } from '../layout';
 
 export const metadata: Metadata = {
-  title: 'Areas',
+  title: 'Breakdown Recovery Areas We Cover',
   alternates: { canonical: `${seo.url}/areas/` },
   description:
     'Breakdown recovery areas covered by Prompt Recovery in Watford, including local service pages for towns and nearby roads.',
@@ -19,9 +19,21 @@ export const metadata: Metadata = {
 
 export default function AreaPage() {
   const areas = getAllAreasMeta();
+  const canonicalUrl = `${seo.url}/areas/`;
+  const webpageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': canonicalUrl,
+    url: canonicalUrl,
+    name: 'Breakdown Recovery Areas We Cover',
+    description: metadata.description,
+    isPartOf: { '@id': `${seo.url}/#website` },
+    about: { '@id': `${seo.url}/#localbusiness` },
+  };
 
   return (
     <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       <PageHeader
         title="Areas"
         subtitle="Local breakdown recovery pages for Watford, nearby towns, and the roads we regularly cover."
