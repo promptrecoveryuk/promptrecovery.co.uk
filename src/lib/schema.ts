@@ -25,7 +25,7 @@ export function buildPageSchema({
   url,
   websiteId,
 }: {
-  description?: string;
+  description?: string | null;
   localBusinessId: string;
   name: string;
   pageType?: 'AboutPage' | 'CollectionPage' | 'FAQPage' | 'WebPage';
