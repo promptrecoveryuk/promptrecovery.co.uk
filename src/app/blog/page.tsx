@@ -41,7 +41,7 @@ export default function BlogPage() {
           const image = getPictureAsImage(post.imageIndex, 2);
           return (
             <li key={post.slug} className="py-8">
-              <Link href={`/blog/${post.slug}/`} className="hover:text-brand">
+              <Link href={`/blog/${post.slug}/`} className="hover:text-brand block">
                 <time className="text-sm text-gray-500">
                   {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </time>

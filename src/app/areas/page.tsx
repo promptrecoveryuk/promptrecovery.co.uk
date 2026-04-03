@@ -44,7 +44,7 @@ export default function AreaPage() {
           const image = getPictureAsImage(area.imageIndex, 2);
           return (
             <li key={area.slug} className="py-8">
-              <Link href={`/areas/${area.slug}/`} className="hover:text-brand">
+              <Link href={`/areas/${area.slug}/`} className="hover:text-brand block">
                 <time className="text-sm text-gray-500">
                   {new Date(area.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </time>
