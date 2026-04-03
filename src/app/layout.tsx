@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     'Prompt Recovery',
   ],
   formatDetection: { telephone: true },
-  icons: { icon: `${seo.url}/images/logo-128x128.png` },
+  icons: { icon: `${seo.url}/favicon.png` },
   manifest: '/manifest.json',
   openGraph: baseOpenGraph,
   twitter: {
