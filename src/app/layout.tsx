@@ -9,6 +9,7 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Rating } from '@/components/rating';
 import { ratingToString } from '@/lib/rating-to-string';
+import { buildLocalBusinessSchema, buildWebsiteSchema } from '@/lib/schema';
 
 import config from './config';
 import { googleReviews, seo } from './data/index';
@@ -66,51 +67,29 @@ export const viewport = {
   colorScheme: 'light',
 };
 
-const localBusinessSchema = {
-  '@id': `${seo.url}/#localbusiness`,
-  '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'AutomotiveBusiness'],
-  name: seo.businessName,
-  legalName: seo.legalName,
-  description: seo.description,
-  url: seo.url,
-  telephone: seo.phone,
-  image: seo.images.map((img) => img.url),
-  priceRange: '$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: seo.address.streetAddress,
-    addressLocality: seo.address.addressLocality,
-    addressRegion: seo.address.addressRegion,
-    postalCode: seo.address.postalCode,
-    addressCountry: seo.address.addressCountry,
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: seo.geo.latitude,
-    longitude: seo.geo.longitude,
-  },
-  openingHours: seo.openingHours,
+const localBusinessSchema = buildLocalBusinessSchema({
+  address: seo.address,
   areaServed: seo.areaServed,
-  sameAs: seo.sameAs,
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: googleReviews.rating,
-    reviewCount: googleReviews.userRatingCount,
-    bestRating: 5,
-    worstRating: 1,
-  },
+  description: seo.description,
+  geo: seo.geo,
   hasMap: seo.googleMapsUrl,
-};
+  image: seo.images.map((img) => img.url),
+  legalName: seo.legalName,
+  openingHours: seo.openingHours,
+  phone: seo.phone,
+  priceRange: '$',
+  ratingValue: googleReviews.rating,
+  reviewCount: googleReviews.userRatingCount,
+  sameAs: seo.sameAs,
+  siteName: seo.businessName,
+  siteUrl: seo.url,
+});
 
-const websiteSchema = {
-  '@id': `${seo.url}/#website`,
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: seo.businessName,
+const websiteSchema = buildWebsiteSchema({
   alternateName: seo.legalName,
-  url: seo.url,
-};
+  siteName: seo.businessName,
+  siteUrl: seo.url,
+});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -148,6 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href={`https://www.google.com/maps/place/${config.socials.googleReviewsId}`}
                 rel="noopener noreferrer"
                 target="_blank"
+                className="text-sm md:text-lg"
               >
                 Rated {ratingToString(googleReviews.rating)}/5 from {googleReviews.userRatingCount} Google reviews
               </a>

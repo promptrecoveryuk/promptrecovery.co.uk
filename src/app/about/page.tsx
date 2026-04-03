@@ -5,6 +5,7 @@ import { GridGallery } from '@/components/grid-gallery';
 import { PageHeader } from '@/components/page-header';
 import { SectionHeading } from '@/components/section-heading';
 import { ServiceItem } from '@/components/service-item';
+import { buildPageSchema, getSchemaIds } from '@/lib/schema';
 
 import { basePath } from '../base-path';
 import { pictures, seo, values } from '../data/index';
@@ -20,16 +21,15 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const canonicalUrl = `${seo.url}/about/`;
-  const webpageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    '@id': canonicalUrl,
-    url: canonicalUrl,
-    name: 'About Prompt Recovery in Watford',
+  const { localBusiness, website } = getSchemaIds(seo.url);
+  const webpageSchema = buildPageSchema({
     description: metadata.description,
-    isPartOf: { '@id': `${seo.url}/#website` },
-    about: { '@id': `${seo.url}/#localbusiness` },
-  };
+    localBusinessId: localBusiness,
+    name: 'About Prompt Recovery in Watford',
+    pageType: 'AboutPage',
+    url: canonicalUrl,
+    websiteId: website,
+  });
 
   return (
     <>

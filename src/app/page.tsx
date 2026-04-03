@@ -9,6 +9,7 @@ import { ReviewCardV2 } from '@/components/review-card-v2';
 import { Section } from '@/components/section';
 import { SectionHeading } from '@/components/section-heading';
 import { ServiceItem } from '@/components/service-item';
+import { buildPageSchema, getSchemaIds } from '@/lib/schema';
 
 import { basePath } from './base-path';
 import config from './config';
@@ -29,16 +30,14 @@ export const metadata: Metadata = {
 // This is the home page, rendered at the root path `/`.
 // Replace this placeholder with real content as the site is built out.
 export default function HomePage() {
-  const webpageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': `${seo.url}/`,
-    url: `${seo.url}/`,
-    name: 'Breakdown Recovery Watford | Car & Van Recovery | Prompt Recovery',
+  const { localBusiness, website } = getSchemaIds(seo.url);
+  const webpageSchema = buildPageSchema({
     description: metadata.description,
-    isPartOf: { '@id': `${seo.url}/#website` },
-    about: { '@id': `${seo.url}/#localbusiness` },
-  };
+    localBusinessId: localBusiness,
+    name: 'Breakdown Recovery Watford | Car & Van Recovery | Prompt Recovery',
+    url: `${seo.url}/`,
+    websiteId: website,
+  });
 
   return (
     <main className="flex min-h-screen flex-col justify-center">

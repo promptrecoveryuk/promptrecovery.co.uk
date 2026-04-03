@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { FaqItem } from '@/components/faq-item';
 import { PageHeader } from '@/components/page-header';
 import { stripMarkdownLinks } from '@/lib/markdown-links';
+import { buildPageSchema, getSchemaIds } from '@/lib/schema';
 
 import { faqs, seo } from '../data/index';
 import { baseOpenGraph } from '../layout';
@@ -17,15 +18,16 @@ export const metadata: Metadata = {
 
 export default function FaqsPage() {
   const canonicalUrl = `${seo.url}/faqs/`;
+  const { localBusiness, website } = getSchemaIds(seo.url);
   const faqPageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    '@id': canonicalUrl,
-    url: canonicalUrl,
-    name: 'Breakdown Recovery FAQs in Watford',
-    description: metadata.description,
-    isPartOf: { '@id': `${seo.url}/#website` },
-    about: { '@id': `${seo.url}/#localbusiness` },
+    ...buildPageSchema({
+      description: metadata.description,
+      localBusinessId: localBusiness,
+      name: 'Breakdown Recovery FAQs in Watford',
+      pageType: 'FAQPage',
+      url: canonicalUrl,
+      websiteId: website,
+    }),
     mainEntity: faqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,

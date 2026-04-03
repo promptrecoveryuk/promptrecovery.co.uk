@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { PageHeader } from '@/components/page-header';
 import { getPictureAsImage } from '@/lib/pictures';
 import { getAllPostsMeta } from '@/lib/posts';
+import { buildPageSchema, getSchemaIds } from '@/lib/schema';
 
 import { seo } from '../data/index';
 import { baseOpenGraph } from '../layout';
@@ -20,16 +21,15 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   const posts = getAllPostsMeta();
   const canonicalUrl = `${seo.url}/blog/`;
-  const webpageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    '@id': canonicalUrl,
-    url: canonicalUrl,
-    name: 'Breakdown Recovery Blog',
+  const { localBusiness, website } = getSchemaIds(seo.url);
+  const webpageSchema = buildPageSchema({
     description: metadata.description,
-    isPartOf: { '@id': `${seo.url}/#website` },
-    about: { '@id': `${seo.url}/#localbusiness` },
-  };
+    localBusinessId: localBusiness,
+    name: 'Breakdown Recovery Blog',
+    pageType: 'CollectionPage',
+    url: canonicalUrl,
+    websiteId: website,
+  });
 
   return (
     <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">

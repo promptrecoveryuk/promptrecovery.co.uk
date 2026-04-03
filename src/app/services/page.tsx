@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { DescriptiveItemWithImage } from '@/components/descriptive-item-with-image';
 import { PageHeader } from '@/components/page-header';
+import { buildPageSchema, getSchemaIds } from '@/lib/schema';
 
 import { pictures, seo, services } from '../data/index';
 import { baseOpenGraph } from '../layout';
@@ -16,16 +17,14 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   const canonicalUrl = `${seo.url}/services/`;
-  const webpageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': canonicalUrl,
-    url: canonicalUrl,
-    name: 'Vehicle Recovery Services in Watford',
+  const { localBusiness, website } = getSchemaIds(seo.url);
+  const webpageSchema = buildPageSchema({
     description: metadata.description,
-    isPartOf: { '@id': `${seo.url}/#website` },
-    about: { '@id': `${seo.url}/#localbusiness` },
-  };
+    localBusinessId: localBusiness,
+    name: 'Vehicle Recovery Services in Watford',
+    url: canonicalUrl,
+    websiteId: website,
+  });
 
   return (
     <>
