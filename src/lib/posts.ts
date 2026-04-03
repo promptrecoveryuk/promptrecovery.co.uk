@@ -1,24 +1,46 @@
-import fs from 'node:fs';
 import path from 'node:path';
 
-import matter from 'gray-matter';
+import type { PostMeta } from '@/types';
 
-import { PostMeta } from '@/types';
+import { getCollectionMeta, getCollectionSlugs, getMdxContent, getMdxMeta } from './mdx-collections';
 
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
+/**
+ * Lists every blog post stored in `src/content/posts`.
+ */
 export function getPostSlugs(): string[] {
-  return fs
-    .readdirSync(postsDirectory)
-    .filter((f) => f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx$/, ''));
+  return getCollectionSlugs(postsDirectory);
 }
 
+/**
+ * Returns the typed frontmatter for a single post.
+ */
 export function getPostMeta(slug: string): PostMeta {
-  const filePath = path.join(postsDirectory, `${slug}.mdx`);
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  const { data } = matter(raw);
+  return getMdxMeta(postsDirectory, slug, parsePostFrontmatter);
+}
 
+/**
+ * Returns both the parsed frontmatter and MDX body for a single post.
+ */
+export function getPostContent(slug: string) {
+  return getMdxContent(postsDirectory, slug, parsePostFrontmatter);
+}
+
+/**
+ * Returns all post metadata sorted newest-first for listing/related content.
+ */
+export function getAllPostsMeta(): PostMeta[] {
+  return getCollectionMeta(postsDirectory, parsePostFrontmatter).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
+/**
+ * Narrows raw gray-matter output into the `PostMeta` shape expected by the
+ * route layer.
+ */
+function parsePostFrontmatter(slug: string, data: Record<string, unknown>): PostMeta {
   return {
     slug,
     title: data.title as string,
@@ -28,29 +50,4 @@ export function getPostMeta(slug: string): PostMeta {
     author: (data.author as string) ?? 'Nick',
     steps: Array.isArray(data.steps) ? (data.steps as string[]) : undefined,
   };
-}
-
-export function getPostContent(slug: string): { meta: PostMeta; content: string } {
-  const filePath = path.join(postsDirectory, `${slug}.mdx`);
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(raw);
-
-  return {
-    content,
-    meta: {
-      slug,
-      title: data.title as string,
-      date: data.date as string,
-      description: data.description as string,
-      imageIndex: data.imageIndex as number,
-      author: (data.author as string) ?? 'Nick',
-      steps: Array.isArray(data.steps) ? (data.steps as string[]) : undefined,
-    },
-  };
-}
-
-export function getAllPostsMeta(): PostMeta[] {
-  return getPostSlugs()
-    .map(getPostMeta)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }

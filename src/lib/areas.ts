@@ -1,24 +1,46 @@
-import fs from 'node:fs';
 import path from 'node:path';
 
-import matter from 'gray-matter';
+import type { AreaMeta } from '@/types';
 
-import { AreaMeta } from '@/types';
+import { getCollectionMeta, getCollectionSlugs, getMdxContent, getMdxMeta } from './mdx-collections';
 
 const areasDirectory = path.join(process.cwd(), 'src/content/areas');
 
+/**
+ * Lists every area page stored in `src/content/areas`.
+ */
 export function getAreaSlugs(): string[] {
-  return fs
-    .readdirSync(areasDirectory)
-    .filter((f) => f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx$/, ''));
+  return getCollectionSlugs(areasDirectory);
 }
 
+/**
+ * Returns the typed frontmatter for a single area page.
+ */
 export function getAreaMeta(slug: string): AreaMeta {
-  const filePath = path.join(areasDirectory, `${slug}.mdx`);
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  const { data } = matter(raw);
+  return getMdxMeta(areasDirectory, slug, parseAreaFrontmatter);
+}
 
+/**
+ * Returns both the parsed frontmatter and MDX body for a single area page.
+ */
+export function getAreaContent(slug: string) {
+  return getMdxContent(areasDirectory, slug, parseAreaFrontmatter);
+}
+
+/**
+ * Returns all area metadata sorted newest-first for listing/related content.
+ */
+export function getAllAreasMeta(): AreaMeta[] {
+  return getCollectionMeta(areasDirectory, parseAreaFrontmatter).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
+/**
+ * Narrows raw gray-matter output into the `AreaMeta` shape expected by the
+ * route layer.
+ */
+function parseAreaFrontmatter(slug: string, data: Record<string, unknown>): AreaMeta {
   return {
     slug,
     title: data.title as string,
@@ -28,29 +50,4 @@ export function getAreaMeta(slug: string): AreaMeta {
     author: (data.author as string) ?? 'Nick',
     faqs: Array.isArray(data.faqs) ? data.faqs : undefined,
   };
-}
-
-export function getAreaContent(slug: string): { meta: AreaMeta; content: string } {
-  const filePath = path.join(areasDirectory, `${slug}.mdx`);
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(raw);
-
-  return {
-    content,
-    meta: {
-      slug,
-      title: data.title as string,
-      date: data.date as string,
-      description: data.description as string,
-      imageIndex: data.imageIndex as number,
-      author: (data.author as string) ?? 'Nick',
-      faqs: Array.isArray(data.faqs) ? data.faqs : undefined,
-    },
-  };
-}
-
-export function getAllAreasMeta(): AreaMeta[] {
-  return getAreaSlugs()
-    .map(getAreaMeta)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }

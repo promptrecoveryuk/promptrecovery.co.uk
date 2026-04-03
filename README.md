@@ -176,12 +176,12 @@ npm test
 This expands to:
 
 ```bash
-node --import tsx --test 'src/**/*.test.ts'
+node --import tsx --test src/__tests__/*.test.ts
 ```
 
 - `--import tsx` loads TypeScript support so `.ts` files run directly without a separate compile step.
 - `--test` activates the native test runner.
-- The glob `src/**/*.test.ts` is expanded by the shell (zsh/bash) before Node receives it.
+- The shell expands `src/__tests__/*.test.ts` before Node receives it.
 
 ### Run a single file
 
@@ -191,7 +191,7 @@ node --import tsx --test src/__tests__/example.test.ts
 
 ### Writing tests
 
-Place test files anywhere under `src/` and name them `*.test.ts`. The test runner picks them up automatically.
+Place test files in `src/__tests__/` and name them `*.test.ts`. The test runner picks them up automatically.
 
 ```ts
 import { describe, it, before, after, beforeEach, afterEach } from 'node:test';
@@ -222,8 +222,43 @@ The native runner produces TAP-compatible output by default. Pass `--test-report
 format:
 
 ```bash
-node --import tsx --test --test-reporter=spec 'src/**/*.test.ts'
+node --import tsx --test --test-reporter=spec src/__tests__/*.test.ts
 ```
+
+---
+
+## Content Architecture
+
+The site currently has two MDX-backed content collections:
+
+- `src/content/posts` for blog posts
+- `src/content/areas` for local area/location pages
+
+Both collections now share the same loading and rendering pipeline:
+
+- `src/lib/mdx-collections.ts` Generic helpers for reading slugs, frontmatter, and content bodies from an MDX directory.
+- `src/lib/posts.ts` Post-specific wrapper that converts raw frontmatter into `PostMeta`.
+- `src/lib/areas.ts` Area-specific wrapper that converts raw frontmatter into `AreaMeta`.
+- `src/components/content-article-page.tsx` Shared page shell used by both `/blog/[slug]` and `/areas/[slug]`.
+- `src/lib/schema.ts` Shared JSON-LD builders for article, breadcrumb, FAQ, and HowTo schemas.
+
+This keeps the blog and area routes structurally aligned and makes it easier to introduce future MDX-backed sections,
+such as individual service pages, without duplicating the loader and schema logic again.
+
+### Content flow
+
+1. A route calls `getPostContent()` or `getAreaContent()`.
+2. That collection wrapper delegates to the generic helpers in `mdx-collections.ts`.
+3. The route builds page metadata and structured data with the shared helpers in `schema.ts`.
+4. The route passes the final result into `ContentArticlePage` for rendering.
+
+### Shared metadata types
+
+`src/types.ts` contains the shared content metadata model:
+
+- `BaseContentMeta` for fields common to all MDX-backed content pages
+- `PostMeta` for blog-post-specific fields such as `steps`
+- `AreaMeta` for area-page-specific fields such as `faqs`
 
 ---
 
@@ -242,9 +277,13 @@ node --import tsx --test --test-reporter=spec 'src/**/*.test.ts'
 │   ├── app/
 │   │   ├── about/
 │   │   │   └── page.tsx            # /about page
+│   │   ├── areas/
+│   │   │   ├── [slug]/
+│   │   │   │   └── page.tsx        # /areas/<slug> — MDX-backed area page
+│   │   │   └── page.tsx            # /areas — lists all area pages
 │   │   ├── blog/
 │   │   │   ├── [slug]/
-│   │   │   │   └── page.tsx        # /blog/<slug> — renders an MDX post via next-mdx-remote
+│   │   │   │   └── page.tsx        # /blog/<slug> — MDX-backed blog post
 │   │   │   └── page.tsx            # /blog — lists all posts
 │   │   ├── data/
 │   │   │   ├── index.ts            # Barrel re-export for all data files
@@ -262,8 +301,14 @@ node --import tsx --test --test-reporter=spec 'src/**/*.test.ts'
 │   │   ├── globals.css             # Tailwind import + @theme customisation
 │   │   ├── layout.tsx              # Root HTML shell, site-wide metadata, JSON-LD
 │   │   └── page.tsx                # Home page (/)
+│   ├── __tests__/
+│   │   ├── areas.test.ts           # Real-content tests for area helpers
+│   │   ├── mdx-collections.test.ts # Temp-file tests for generic MDX collection helpers
+│   │   ├── posts.test.ts           # Real-content tests for post helpers
+│   │   └── schema.test.ts          # Unit tests for shared schema builders
 │   ├── components/
 │   │   ├── carousel.tsx            # Flowbite-powered review carousel
+│   │   ├── content-article-page.tsx # Shared article shell for MDX-backed routes
 │   │   ├── contact-form.tsx        # Quote request form (Web3Forms submission)
 │   │   ├── faq-item.tsx            # Individual FAQ row
 │   │   ├── footer.tsx              # Site footer
@@ -281,11 +326,18 @@ node --import tsx --test --test-reporter=spec 'src/**/*.test.ts'
 │   │   ├── toast.tsx               # Success/error notification
 │   │   └── yes-no-radio-group.tsx  # Yes/No radio pair for contact form
 │   ├── content/
+│   │   ├── areas/
+│   │   │   └── *.mdx               # Area/location pages (one file per area)
 │   │   └── posts/
 │   │       └── *.mdx               # Blog posts (one file per post)
 │   ├── lib/
+│   │   ├── areas.ts                # Area collection wrapper over shared MDX helpers
+│   │   ├── markdown-links.tsx      # Markdown-style link renderer/stripper for FAQ answers
+│   │   ├── mdx-collections.ts      # Shared MDX collection loader utilities
 │   │   ├── pictures.ts             # Helper to resolve a picture by index and size
-│   │   └── posts.ts                # Blog post helpers: list slugs, read meta, read content
+│   │   ├── posts.ts                # Post collection wrapper over shared MDX helpers
+│   │   ├── rating-to-string.ts     # Review/rating display helper
+│   │   └── schema.ts               # Shared JSON-LD builder helpers
 │   └── types.ts                    # Shared TypeScript types
 ├── .gitignore
 ├── .nvmrc                          # Pins the Node.js version for nvm users (run: nvm use)
