@@ -26,7 +26,7 @@ interactions are powered by Flowbite; icons come from Lucide React; quote reques
 
 ## Prerequisites
 
-- **Node.js 22+** — matches the CI environment. Node 18/20 may work but are untested locally.
+- **Node.js 24.x** — matches the CI environment and the pinned local version in `.nvmrc`.
 - **npm 10.5+** — Tailwind v4 uses a native Rust module (`@tailwindcss/oxide`) distributed via npm optional
   dependencies. Older npm releases (pre-10.5) have a bug where optional sub-packages are silently skipped, causing a
   "Cannot find native binding" error at runtime. See [Troubleshooting](#troubleshooting) if you hit this.
@@ -34,8 +34,8 @@ interactions are powered by Flowbite; icons come from Lucide React; quote reques
 Check your versions:
 
 ```bash
-node --version   # should be v22.x or higher
-npm --version    # should be 10.5 or higher
+node --version   # should be v24.x
+npm --version    # should be 10.9 or higher
 ```
 
 Upgrade if needed:
@@ -43,7 +43,7 @@ Upgrade if needed:
 ```bash
 # Upgrade Node via your version manager (nvm, fnm, volta, etc.)
 # e.g. with nvm:
-nvm install 22 && nvm use 22
+nvm install
 
 # Upgrade npm independently of Node:
 npm install -g npm@latest
