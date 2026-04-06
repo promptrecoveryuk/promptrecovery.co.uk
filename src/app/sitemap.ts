@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 
 import { getAreaContent, getAreaSlugs } from '../lib/areas';
 import { getPostContent, getPostSlugs } from '../lib/posts';
+import { getServiceContent, getServiceSlugs } from '../lib/services';
 import { seo } from './data/index';
 
 // Required for `output: 'export'` — see https://github.com/vercel/next.js/issues/68667
@@ -23,6 +24,17 @@ const areaPageSitemapEntries: MetadataRoute.Sitemap = getAreaSlugs().map((slug) 
   const { meta } = getAreaContent(slug);
   return {
     url: `${seo.url}/areas/${slug}/`,
+    lastModified: new Date(meta.date),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  };
+});
+
+// Get sitemap details for service pages
+const servicePageSitemapEntries: MetadataRoute.Sitemap = getServiceSlugs().map((slug) => {
+  const { meta } = getServiceContent(slug);
+  return {
+    url: `${seo.url}/services/${slug}/`,
     lastModified: new Date(meta.date),
     changeFrequency: 'monthly',
     priority: 0.7,
@@ -52,6 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    ...servicePageSitemapEntries,
     {
       url: `${seo.url}/faqs/`,
       lastModified: new Date(),

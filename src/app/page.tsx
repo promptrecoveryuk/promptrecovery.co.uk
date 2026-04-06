@@ -10,6 +10,7 @@ import { Section } from '@/components/section';
 import { SectionHeading } from '@/components/section-heading';
 import { ServiceItem } from '@/components/service-item';
 import { buildPageSchema, getSchemaIds } from '@/lib/schema';
+import { hasServicePage } from '@/lib/services';
 
 import { basePath } from './base-path';
 import config from './config';
@@ -130,7 +131,11 @@ export default function HomePage() {
           <SectionHeading sectionName="Services" />
           <div className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
-              <ServiceItem key={service.name} service={service} />
+              <ServiceItem
+                key={service.name}
+                href={hasServicePage(service.id) ? `/services/${service.id}/` : undefined}
+                service={service}
+              />
             ))}
           </div>
         </div>

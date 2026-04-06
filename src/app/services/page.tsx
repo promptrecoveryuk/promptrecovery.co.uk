@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { DescriptiveItemWithImage } from '@/components/descriptive-item-with-image';
 import { PageHeader } from '@/components/page-header';
 import { buildPageSchema, getSchemaIds } from '@/lib/schema';
+import { hasServicePage } from '@/lib/services';
 
 import { pictures, seo, services } from '../data/index';
 import { baseOpenGraph } from '../layout';
@@ -38,7 +39,13 @@ export default function ServicesPage() {
         <div className="mx-auto grid max-w-7xl items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const picture = pictures[service.pictureIndex];
-            return <DescriptiveItemWithImage key={service.name} item={{ ...service, picture }} />;
+            return (
+              <DescriptiveItemWithImage
+                key={service.name}
+                href={hasServicePage(service.id) ? `/services/${service.id}/` : undefined}
+                item={{ ...service, picture }}
+              />
+            );
           })}
         </div>
       </div>

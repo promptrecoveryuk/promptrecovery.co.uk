@@ -131,6 +131,11 @@ export interface AreaMeta extends BaseContentMeta {
   faqs?: Faq[];
 }
 
+export interface ServiceMeta extends BaseContentMeta {
+  /** Optional FAQs — used to generate FAQPage structured data. */
+  faqs?: Faq[];
+}
+
 export type MdxContent<TMeta extends BaseContentMeta> = {
   meta: TMeta;
   content: string;
