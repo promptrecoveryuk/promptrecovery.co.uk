@@ -13,7 +13,7 @@ const blogPostSitemapEntries: MetadataRoute.Sitemap = getPostSlugs().map((slug) 
   const { meta } = getPostContent(slug);
   return {
     url: `${seo.url}/blog/${slug}/`,
-    lastModified: new Date(meta.date),
+    lastModified: new Date(meta.modified),
     changeFrequency: 'monthly',
     priority: 0.7,
   };
@@ -24,7 +24,7 @@ const areaPageSitemapEntries: MetadataRoute.Sitemap = getAreaSlugs().map((slug) 
   const { meta } = getAreaContent(slug);
   return {
     url: `${seo.url}/areas/${slug}/`,
-    lastModified: new Date(meta.date),
+    lastModified: new Date(meta.modified),
     changeFrequency: 'monthly',
     priority: 0.7,
   };
@@ -35,7 +35,7 @@ const servicePageSitemapEntries: MetadataRoute.Sitemap = getServiceSlugs().map((
   const { meta } = getServiceContent(slug);
   return {
     url: `${seo.url}/services/${slug}/`,
-    lastModified: new Date(meta.date),
+    lastModified: new Date(meta.modified),
     changeFrequency: 'monthly',
     priority: 0.7,
   };

@@ -43,7 +43,11 @@ export default function BlogPage() {
             <li key={post.slug} className="py-8">
               <Link href={`/blog/${post.slug}/`} className="hover:text-brand block">
                 <time className="text-sm text-gray-500">
-                  {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {new Date(post.modified).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
                 </time>
                 <h3 className="mt-2 text-xl font-semibold">{post.title}</h3>
                 {image && (

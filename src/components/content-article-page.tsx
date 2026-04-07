@@ -77,8 +77,12 @@ export function ContentArticlePage({
             <h2 className="mt-3 text-lg text-gray-600">{meta.description}</h2>
             <p className="mt-3 text-sm text-gray-500">
               By {meta.author} &middot;{' '}
-              <time dateTime={meta.date}>
-                {new Date(meta.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              <time dateTime={meta.modified}>
+                {new Date(meta.modified).toLocaleDateString('en-GB', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })}
               </time>{' '}
               &middot; {readingTime} min read
             </p>

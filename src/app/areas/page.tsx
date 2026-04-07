@@ -46,7 +46,11 @@ export default function AreaPage() {
             <li key={area.slug} className="py-8">
               <Link href={`/areas/${area.slug}/`} className="hover:text-brand block">
                 <time className="text-sm text-gray-500">
-                  {new Date(area.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {new Date(area.modified).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
                 </time>
                 <h3 className="mt-2 text-xl font-semibold">{area.title}</h3>
                 {image && (

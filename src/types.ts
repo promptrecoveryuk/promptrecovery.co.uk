@@ -116,6 +116,8 @@ export interface BaseContentMeta {
   slug: string;
   title: string;
   date: string;
+  /** Date the content was last modified. Defaults to `date` if not set. */
+  modified: string;
   description: string;
   imageIndex: number;
   author: string;

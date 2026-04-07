@@ -41,10 +41,12 @@ export function getAllAreasMeta(): AreaMeta[] {
  * route layer.
  */
 function parseAreaFrontmatter(slug: string, data: Record<string, unknown>): AreaMeta {
+  const date = data.date as string;
   return {
     slug,
     title: data.title as string,
-    date: data.date as string,
+    date,
+    modified: (data.modified as string) ?? date,
     description: data.description as string,
     imageIndex: data.imageIndex as number,
     author: (data.author as string) ?? 'Nick',
