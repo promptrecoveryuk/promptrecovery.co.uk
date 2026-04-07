@@ -80,7 +80,7 @@ export default function AboutPage() {
 
         <div className="mt-4">
           <SectionHeading sectionName="Some of our recoveries" />
-          <GridGallery items={pictures} />
+          <GridGallery items={pictures.slice(0, 22)} />
         </div>
       </div>
       {/* End About */}

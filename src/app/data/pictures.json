@@ -262,5 +262,17 @@
     "width2": 600,
     "height2": 200,
     "description": "Prompt Recovery with a NOCO Boost X battery pack and jumper cables, jump-starting a car with a flat battery"
+  },
+  {
+    "filePath": "/images/pics/rickmansworth.png",
+    "filePath1": "/images/pics/rickmansworth-1.png",
+    "filePath2": "/images/pics/rickmansworth-2.png",
+    "width": 1466,
+    "height": 1100,
+    "width1": 600,
+    "height1": 450,
+    "width2": 600,
+    "height2": 200,
+    "description": "Rickmansworth canal and river with the slucegates in the foreground and houses and trees in the background"
   }
 ]
