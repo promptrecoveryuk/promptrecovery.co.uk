@@ -11,7 +11,7 @@ import {
 
 // These tests intentionally use the real service content collection so the
 // homepage/services card-linking logic stays aligned with the files on disk.
-const LINKED_SERVICE_SLUG = 'breakdown-towing';
+const LINKED_SERVICE_SLUG = 'breakdown-recovery-watford';
 const UNLINKED_SERVICE_SLUG = 'motorway-recovery';
 
 describe('getServiceSlugs()', () => {
@@ -28,7 +28,7 @@ describe('getServiceMeta(slug)', () => {
     const meta = getServiceMeta(LINKED_SERVICE_SLUG);
 
     assert.equal(meta.slug, LINKED_SERVICE_SLUG);
-    assert.equal(meta.title, 'Breakdown & Towing in Watford');
+    assert.equal(meta.title, 'Breakdown Recovery in and around Watford');
     assert.equal(typeof meta.description, 'string');
     assert.equal(typeof meta.imageIndex, 'number');
   });
@@ -39,7 +39,7 @@ describe('getServiceContent(slug)', () => {
     const { meta, content } = getServiceContent(LINKED_SERVICE_SLUG);
 
     assert.equal(meta.slug, LINKED_SERVICE_SLUG);
-    assert.ok(content.includes('What this service covers'));
+    assert.ok(content.includes('Common Breakdown Scenarios We Handle in Watford'));
     assert.deepEqual(meta, getServiceMeta(LINKED_SERVICE_SLUG));
   });
 });

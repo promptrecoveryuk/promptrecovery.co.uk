@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-const LINKED_SERVICE_TITLE = 'Breakdown & Towing';
-const LINKED_SERVICE_SLUG = 'breakdown-towing';
+const LINKED_SERVICE_TITLE = 'Breakdown Recovery';
+const LINKED_SERVICE_SLUG = 'breakdown-recovery-watford';
 const UNLINKED_SERVICE_TITLE = 'Motorway Recovery';
 
 test.describe('Services listing page', () => {
