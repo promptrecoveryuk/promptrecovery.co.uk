@@ -9,4 +9,4 @@ public/
 scripts/
 
 # MDX files - frontmatter is always formatted in an incompabitle way
-src/content/posts
+src/content/**/*.mdx
