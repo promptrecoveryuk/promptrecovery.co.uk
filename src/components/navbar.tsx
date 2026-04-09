@@ -192,7 +192,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           </button>
         </div>
         <div className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto" id="navbar-sticky">
-          <ul className="border-default rounded-base mt-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:space-x-8 rtl:space-x-reverse">
+          <ul className="border-default rounded-base mt-4 mb-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:space-x-8 rtl:space-x-reverse">
             {menuItemLinks}
           </ul>
         </div>
