@@ -77,6 +77,9 @@ function mockFailure(page: Page) {
 test.describe('Contact form', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    // Wait for network to go idle so React hydration and the Carousel's
+    // dynamic Flowbite import have both completed before we interact.
+    await page.waitForLoadState('networkidle');
     await scrollToForm(page);
   });
 
