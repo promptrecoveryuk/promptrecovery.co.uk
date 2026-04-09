@@ -94,7 +94,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         {isActive ? (
           <Link
             href={pageRoute}
-            className="text-yellow bg-brand block rounded-sm px-3 py-2 text-xl font-normal hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:bg-transparent md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent"
+            className="text-yellow bg-brand block rounded-sm px-3 py-2 text-xl font-normal hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:bg-transparent md:p-0 md:text-base md:hover:bg-transparent lg:text-xl md:dark:hover:bg-transparent"
             aria-current="page"
             onClick={() => closeMenu()}
           >
@@ -103,7 +103,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         ) : (
           <Link
             href={pageRoute}
-            className="hover:text-yellow md:hover:text-yellow focus-visible:ring-yellow block rounded px-3 py-2 text-xl font-normal text-white hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent"
+            className="hover:text-yellow md:hover:text-yellow focus-visible:ring-yellow block rounded px-3 py-2 text-xl font-normal text-white hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:p-0 md:text-base md:hover:bg-transparent lg:text-xl md:dark:hover:bg-transparent"
             onClick={() => closeMenu()}
           >
             {pageName}
@@ -124,15 +124,17 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
             src={`${basePath}/images/logo-128x128.png`}
             width={128}
             height={128}
-            className="size-18"
+            className="size-18 md:size-14 lg:size-18"
             alt="Prompt Recovery Logo"
           />
-          <span className="self-center pr-2 text-xl font-semibold whitespace-nowrap text-white">Prompt Recovery</span>
+          <span className="self-center pr-2 text-xl font-semibold whitespace-nowrap text-white md:text-base lg:text-xl">
+            Prompt Recovery
+          </span>
         </Link>
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
           <Link
             href={`tel:${phoneNumber}`}
-            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent px-3 py-3 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none"
+            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent px-3 py-3 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base lg:text-xl"
           >
             Call Now
           </Link>
@@ -143,9 +145,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 175.216 175.552"
-              width="40"
-              height="40"
-              className="inline-block align-middle"
+              className="inline-block size-10 align-middle"
             >
               <defs>
                 <linearGradient id="b" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
