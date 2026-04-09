@@ -5,6 +5,7 @@ import pictures from './pictures.json';
 import reasonsToChooseNick from './reasons-to-choose-nick.json';
 import seoData from './seo.json';
 import services from './services.json';
+import staticGoogleReviews from './static-google-reviews.json';
 import values from './values.json';
 
 function normalizeBasePath(path: string): string {
@@ -35,4 +36,4 @@ const seo = {
   })),
 };
 
-export { faqs, googleReviews, pictures, reasonsToChooseNick, seo, services, values };
+export { faqs, googleReviews, pictures, reasonsToChooseNick, seo, services, staticGoogleReviews, values };

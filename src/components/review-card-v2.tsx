@@ -20,11 +20,14 @@ export function ReviewCardV2({ review }: { review: GoogleReview }) {
         {/*-- Blockquote --*/}
         <blockquote className="text-center lg:mx-auto lg:w-3/5">
           <GoogleUserProfile userProfile={review}>
-            <Rating rating={review.rating} outOf={5} />
-            <span className="text-left">&nbsp;{review.when}</span>
+            <p className="text-left text-sm text-gray-500">{review.authorDetails}</p>
           </GoogleUserProfile>
+          <p className="mt-1 text-left">
+            <Rating rating={review.rating} outOf={5} />
+            <span>&nbsp;{review.when}</span>
+          </p>
 
-          <div className="mt-6 lg:mt-10">
+          <div className="mt-4 lg:mt-6">
             <p className="text-foreground relative text-lg font-medium sm:text-xl md:text-xl md:leading-normal">
               <svg
                 className="absolute start-4 top-0 size-16 -translate-x-8 -translate-y-8 transform text-black/20 sm:h-24 sm:w-24 lg:start-0"
@@ -40,7 +43,7 @@ export function ReviewCardV2({ review }: { review: GoogleReview }) {
                   fill="currentColor"
                 />
               </svg>
-              <span className="text-foreground relative z-10 text-xl font-light italic">{review.text}</span>
+              <span className="text-foreground relative z-10 text-xl font-normal italic">{review.text}</span>
             </p>
           </div>
         </blockquote>

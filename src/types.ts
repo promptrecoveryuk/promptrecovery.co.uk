@@ -50,6 +50,10 @@ export type GoogleReview = {
    * The url to the author's Google profile photo
    */
   authorPhoto: string;
+  /**
+   * Additional author details (e.g. "Top reviewer", "Local Guide level 5") — not always present in the source data, so optional and may be empty string.
+   */
+  authorDetails?: string;
 };
 
 export type GoogleUser = {

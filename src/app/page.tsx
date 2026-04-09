@@ -14,7 +14,7 @@ import { hasServicePage } from '@/lib/services';
 
 import { basePath } from './base-path';
 import config from './config';
-import { googleReviews, reasonsToChooseNick, seo, services } from './data/index';
+import { reasonsToChooseNick, seo, services, staticGoogleReviews } from './data/index';
 import { baseOpenGraph } from './layout';
 
 // Page-level metadata overrides the defaults set in layout.tsx.
@@ -39,6 +39,15 @@ export default function HomePage() {
     url: `${seo.url}/`,
     websiteId: website,
   });
+  const googleReviews = { reviews: [] as typeof staticGoogleReviews };
+  googleReviews.reviews = [
+    staticGoogleReviews[0],
+    staticGoogleReviews[2],
+    staticGoogleReviews[4],
+    staticGoogleReviews[7],
+    staticGoogleReviews[14],
+    staticGoogleReviews[21],
+  ];
 
   return (
     <main className="flex min-h-screen flex-col justify-center">
@@ -57,7 +66,7 @@ export default function HomePage() {
                 <h2 className="text-foreground mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
                   Serving Watford, Bushey, Rickmansworth, and the surrounding areas
                 </h2>
-                <p className="text-muted-foreground-2 mb-4 text-center text-xl font-light md:text-left">
+                <p className="text-muted-foreground-2 mb-4 text-center text-xl font-normal md:text-left">
                   Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on
                 </p>
                 <p className="pt-4 text-center md:text-left">
@@ -76,7 +85,7 @@ export default function HomePage() {
               {/*-- Carousel --*/}
               <Carousel>
                 {googleReviews.reviews.map((review) => (
-                  <ReviewCardV2 key={review.publishTime} review={review} />
+                  <ReviewCardV2 key={review.reviewId} review={review} />
                 ))}
               </Carousel>
               {/*-- End Carousel --*/}
@@ -92,7 +101,7 @@ export default function HomePage() {
           <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
             <div>
               <SectionHeading sectionName="About" />
-              <p className="text-xl font-light">
+              <p className="text-xl font-normal">
                 Prompt Recovery Ltd is a locally trusted vehicle recovery company based in Watford. With experience and
                 a commitment to fast, reliable service, we provide breakdown recovery and towing for cars and vans
                 across Watford and the surrounding area. We&apos;re the first call you make when you&apos;re stuck.
@@ -100,7 +109,7 @@ export default function HomePage() {
               <p className="mt-8">
                 <Link
                   href="/about/"
-                  className="text-navy underline-navy inline text-xl leading-5 font-semibold underline-offset-4 hover:underline"
+                  className="text-brand underline-brand inline text-xl leading-5 font-normal underline-offset-4 hover:underline"
                 >
                   Learn more about us
                 </Link>
