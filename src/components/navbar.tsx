@@ -134,7 +134,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
           <Link
             href={`tel:${phoneNumber}`}
-            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent px-3 py-3 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base lg:text-xl"
+            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent p-3 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base lg:text-xl"
           >
             Call Now
           </Link>
@@ -192,7 +192,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           </button>
         </div>
         <div className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto" id="navbar-sticky">
-          <ul className="border-default rounded-base mt-4 mb-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:space-x-8 rtl:space-x-reverse">
+          <ul className="border-default rounded-base mt-4 mb-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:mb-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:mb-4 lg:space-x-8 rtl:space-x-reverse">
             {menuItemLinks}
           </ul>
         </div>
