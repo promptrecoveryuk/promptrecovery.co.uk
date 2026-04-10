@@ -12,6 +12,8 @@ import { baseOpenGraph } from '../../layout';
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 /**
  * Statically generates every blog post route from the MDX collection.
  */
@@ -24,8 +26,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const slugs = getPostSlugs();
-  if (!slugs.includes(slug)) notFound();
+  if (!getPostSlugs().includes(slug)) return {};
   const { meta } = getPostContent(slug);
   const image = getPictureAsImage(meta.imageIndex, 1);
 

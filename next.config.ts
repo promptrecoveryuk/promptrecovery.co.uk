@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   // `output: 'export'` tells Next.js to produce a fully static site in the
   // `out/` directory when you run `next build`. No Node.js server is needed
   // at runtime — perfect for GitHub Pages.
-  output: 'export',
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
 
   // Static export cannot use Next.js's built-in image optimisation (which
   // requires a server). Setting `unoptimized: true` lets you use <Image />

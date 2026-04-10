@@ -13,6 +13,8 @@ import { baseOpenGraph } from '../../layout';
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 /**
  * Statically generates every area route from the MDX collection.
  */
@@ -25,8 +27,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const slugs = getAreaSlugs();
-  if (!slugs.includes(slug)) notFound();
+  if (!getAreaSlugs().includes(slug)) return {};
   const { meta } = getAreaContent(slug);
   const image = getPictureAsImage(meta.imageIndex, 1);
 

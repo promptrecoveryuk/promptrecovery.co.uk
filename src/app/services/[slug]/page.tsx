@@ -12,14 +12,15 @@ import { baseOpenGraph } from '../../layout';
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return getServiceSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const slugs = getServiceSlugs();
-  if (!slugs.includes(slug)) notFound();
+  if (!getServiceSlugs().includes(slug)) return {};
   const { meta } = getServiceContent(slug);
   const image = getPictureAsImage(meta.imageIndex, 1);
 
