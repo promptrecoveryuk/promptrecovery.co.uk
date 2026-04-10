@@ -18,7 +18,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  if (!getServiceSlugs().includes(slug)) return {};
+  const slugs = getServiceSlugs();
+  if (!slugs.includes(slug)) notFound();
   const { meta } = getServiceContent(slug);
   const image = getPictureAsImage(meta.imageIndex, 1);
 
