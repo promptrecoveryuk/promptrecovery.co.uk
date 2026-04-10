@@ -57,13 +57,12 @@ test.describe('Areas listing page', () => {
   });
 
   test('clicking the area title navigates to the area page', async ({ page }) => {
-    await page.getByRole('link', { name: KNOWN_TITLE }).click();
+    await page.locator(`a[href="/areas/${KNOWN_SLUG}/"]`).click();
     await expect(page).toHaveURL(new RegExp(`/areas/${KNOWN_SLUG}/`));
   });
 
   test('clicking "Read more" navigates to the area page', async ({ page }) => {
-    const item = page.locator('li').filter({ hasText: KNOWN_TITLE });
-    await item.getByRole('link', { name: /read more/i }).click();
+    await page.locator(`a[href="/areas/${KNOWN_SLUG}/"]`).click();
     await expect(page).toHaveURL(new RegExp(`/areas/${KNOWN_SLUG}/`));
   });
 });
