@@ -135,6 +135,8 @@ export interface PostMeta extends BaseContentMeta {
 export interface AreaMeta extends BaseContentMeta {
   /** Optional FAQs — used to generate FAQPage structured data. */
   faqs?: Faq[];
+  /** Optional Google review IDs to display at the bottom of the page. */
+  reviewIds?: string[];
 }
 
 export interface ServiceMeta extends BaseContentMeta {

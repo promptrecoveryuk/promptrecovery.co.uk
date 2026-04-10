@@ -2,10 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
-import type { BaseContentMeta, BreadcrumbItem, Faq, PictureImage } from '@/types';
+import type { BaseContentMeta, BreadcrumbItem, Faq, GoogleReview, PictureImage } from '@/types';
 
 import { mdxComponents } from '../../mdx-components';
 import { FaqItem } from './faq-item';
+import { ReviewCardV2 } from './review-card-v2';
 
 /**
  * Shared renderer for MDX-backed article pages. Blog posts and area pages use
@@ -16,6 +17,7 @@ type ContentArticlePageProps = {
   breadcrumbs: BreadcrumbItem[];
   content: string;
   faqs?: Faq[];
+  reviews?: GoogleReview[];
   image: PictureImage;
   meta: BaseContentMeta;
   readingTime: number;
@@ -33,6 +35,7 @@ export function ContentArticlePage({
   breadcrumbs,
   content,
   faqs,
+  reviews,
   image,
   meta,
   readingTime,
@@ -103,6 +106,15 @@ export function ContentArticlePage({
             <h2 className="text-heading mb-6 text-xl font-semibold">Common questions</h2>
             {faqs.map((faq) => (
               <FaqItem key={faq.question} faq={faq} />
+            ))}
+          </aside>
+        )}
+
+        {reviews && reviews.length > 0 && (
+          <aside className="mt-12 border-t border-gray-200 pt-8">
+            <h2 className="text-heading mb-6 text-xl font-semibold">What our customers say</h2>
+            {reviews.map((review) => (
+              <ReviewCardV2 key={review.authorUrl} review={review} />
             ))}
           </aside>
         )}

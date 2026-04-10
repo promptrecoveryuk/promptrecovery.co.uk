@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ContentArticlePage } from '@/components/content-article-page';
 import { getAllAreasMeta, getAreaContent, getAreaSlugs } from '@/lib/areas';
 import { getPictureAsImage } from '@/lib/pictures';
+import { getGoogleReviewById } from '@/lib/reviews';
 import { buildArticleSchema, buildBreadcrumbSchema, buildFaqPageSchema, getSchemaIds } from '@/lib/schema';
 
 import { seo } from '../../data/index';
@@ -64,6 +65,7 @@ export default async function AreaPostPage({ params }: Props) {
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   const relatedPosts = getAllAreasMeta().filter((p) => p.slug !== slug);
+  const reviews = (meta.reviewIds ?? []).map(getGoogleReviewById).filter((r) => r !== undefined);
   const schemaObjects = [
     buildArticleSchema({
       authorName: meta.author,
@@ -88,6 +90,7 @@ export default async function AreaPostPage({ params }: Props) {
       breadcrumbs={[{ name: 'Home', item: '/' }, { name: 'Areas', item: '/areas/' }, { name: meta.title }]}
       content={content}
       faqs={meta.faqs}
+      reviews={reviews}
       image={image}
       meta={meta}
       readingTime={readingTime}
