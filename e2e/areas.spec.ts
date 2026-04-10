@@ -176,6 +176,18 @@ test.describe('Area detail page', () => {
   });
 
   // -------------------------------------------------------------------------
+  // Reviews section
+  // -------------------------------------------------------------------------
+
+  test('shows the "What our customers say" heading when reviewIds are set', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: /What our customers say/i })).toBeVisible();
+  });
+
+  test('renders at least one review card', async ({ page }) => {
+    await expect(page.locator('blockquote').first()).toBeVisible();
+  });
+
+  // -------------------------------------------------------------------------
   // "More from the area" related areas sidebar
   // -------------------------------------------------------------------------
   // This test is skipped because it relies on the presence of at least one other area .mdx file in the content directory.
@@ -186,6 +198,24 @@ test.describe('Area detail page', () => {
     const aside = page.getByRole('complementary');
     const heading = aside.getByRole('heading', { name: /More from the area/i });
     await expect(heading).toBeVisible();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Page without reviewIds — reviews section should be absent
+// ---------------------------------------------------------------------------
+
+test.describe('Area page without reviewIds', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/areas/made-up-area-test/');
+  });
+
+  test('does not show the "What our customers say" heading', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: /What our customers say/i })).not.toBeVisible();
+  });
+
+  test('does not render any review cards', async ({ page }) => {
+    await expect(page.locator('blockquote')).toHaveCount(0);
   });
 });
 
