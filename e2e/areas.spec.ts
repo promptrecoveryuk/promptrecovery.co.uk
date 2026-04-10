@@ -1,9 +1,22 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
+
+/** Reads and parses every JSON-LD script block in the page. */
+async function getJsonLdSchemas(page: Page): Promise<Record<string, unknown>[]> {
+  return page.evaluate(() =>
+    Array.from(document.querySelectorAll('script[type="application/ld+json"]')).flatMap((el) => {
+      try {
+        return [JSON.parse(el.textContent ?? '') as Record<string, unknown>];
+      } catch {
+        return [];
+      }
+    })
+  );
+}
 
 // Known area — the real Rickmansworth area page.
 const KNOWN_SLUG = 'rickmansworth';
 const KNOWN_TITLE = 'Breakdown Recovery in Rickmansworth';
-const KNOWN_DATE = '28 March 2026'; // en-GB localeDateString
+const KNOWN_DATE = '10 April 2026'; // en-GB localeDateString
 const KNOWN_DESCRIPTION = 'Fast, friendly vehicle recovery and towing in Rickmansworth';
 
 // ---------------------------------------------------------------------------
@@ -128,51 +141,24 @@ test.describe('Area detail page', () => {
   // -------------------------------------------------------------------------
 
   test('emits a FAQPage JSON-LD script block', async ({ page }) => {
-    const scripts = page.locator('script[type="application/ld+json"]');
-    const count = await scripts.count();
-    let found = false;
-    for (let i = 0; i < count; i++) {
-      const json = await scripts.nth(i).textContent();
-      if (json && JSON.parse(json)['@type'] === 'FAQPage') {
-        found = true;
-        break;
-      }
-    }
-    expect(found).toBe(true);
+    const schemas = await getJsonLdSchemas(page);
+    expect(schemas.some((s) => s['@type'] === 'FAQPage')).toBe(true);
   });
 
   test('FAQPage JSON-LD contains the expected questions', async ({ page }) => {
-    const scripts = page.locator('script[type="application/ld+json"]');
-    const count = await scripts.count();
-    let schema: { mainEntity?: Array<{ name: string }> } = {};
-    for (let i = 0; i < count; i++) {
-      const json = await scripts.nth(i).textContent();
-      if (json) {
-        const parsed = JSON.parse(json);
-        if (parsed['@type'] === 'FAQPage') {
-          schema = parsed;
-          break;
-        }
-      }
-    }
-    expect(schema.mainEntity).toBeDefined();
-    expect(schema.mainEntity!.length).toBeGreaterThan(0);
-    const questions = schema.mainEntity!.map((q) => q.name);
+    const schemas = await getJsonLdSchemas(page);
+    const faqSchema = schemas.find((s) => s['@type'] === 'FAQPage') as
+      | { mainEntity: Array<{ name: string }> }
+      | undefined;
+    expect(faqSchema).toBeDefined();
+    expect(faqSchema!.mainEntity.length).toBeGreaterThan(0);
+    const questions = faqSchema!.mainEntity.map((q) => q.name);
     expect(questions).toContain('Do you cover the motorway routes near Rickmansworth?');
   });
 
   test('emits a BreadcrumbList JSON-LD script block', async ({ page }) => {
-    const scripts = page.locator('script[type="application/ld+json"]');
-    const count = await scripts.count();
-    let found = false;
-    for (let i = 0; i < count; i++) {
-      const json = await scripts.nth(i).textContent();
-      if (json && JSON.parse(json)['@type'] === 'BreadcrumbList') {
-        found = true;
-        break;
-      }
-    }
-    expect(found).toBe(true);
+    const schemas = await getJsonLdSchemas(page);
+    expect(schemas.some((s) => s['@type'] === 'BreadcrumbList')).toBe(true);
   });
 
   // -------------------------------------------------------------------------

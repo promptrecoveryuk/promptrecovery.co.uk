@@ -25,6 +25,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  if (!getAreaSlugs().includes(slug)) notFound();
   const { meta } = getAreaContent(slug);
   const image = getPictureAsImage(meta.imageIndex, 1);
 
