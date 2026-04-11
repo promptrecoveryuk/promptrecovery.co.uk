@@ -134,9 +134,10 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
           <Link
             href={`tel:${phoneNumber}`}
-            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent p-3 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base lg:text-xl"
+            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent px-2 py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base"
           >
-            Call Now
+            <span className="block text-center">Call Now</span>
+            <span className="block text-center text-xs">24hr Mon-Sat</span>
           </Link>
           <Link
             href={`https://wa.me/${phoneNumber}`}

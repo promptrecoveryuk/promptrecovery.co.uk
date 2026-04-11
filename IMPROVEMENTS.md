@@ -172,7 +172,7 @@ Practical backlog for improving `promptrecovery.co.uk`.
 
 ## Useful Supporting Assets
 
-- [ ] Create a shared folder for approved photos, short-form video clips, logos, thumbnails, and reusable post
+- [x] Create a shared folder for approved photos, short-form video clips, logos, thumbnails, and reusable post
       descriptions.
   - [ ] Separate raw assets from approved publish-ready assets.
   - [ ] Use consistent naming so assets are easy to find.

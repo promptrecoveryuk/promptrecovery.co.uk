@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
         <PageHeader
           title="Vehicle recovery services in and around Watford"
-          subtitle="We provide safe, fast, and affordable towing for cars and vans that can't be driven — whether you're at home, at work, or stuck after a breakdown."
+          subtitle="We provide safe, fast, and affordable towing for cars and vans that can't be driven — whether you're at home, at work, or stuck after a breakdown. 24 hours a day, Monday to Saturday."
         />
 
         <div className="mx-auto grid max-w-7xl items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">

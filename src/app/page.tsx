@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Breakdown Recovery Watford | Car & Van Recovery | Prompt Recovery' },
   alternates: { canonical: `${seo.url}/` },
   description:
-    'Breakdown recovery in Watford for cars and vans. Fast, friendly vehicle recovery, towing, motorway recovery, and jump starts across Watford and surrounding areas.',
+    'Breakdown recovery in Watford for cars and vans. Fast, friendly vehicle recovery, towing, motorway recovery, and jump starts across Watford and surrounding areas. 24 hours a day, Monday to Saturday.',
   openGraph: { ...baseOpenGraph, url: seo.url },
 };
 
@@ -71,14 +71,15 @@ export default function HomePage() {
                   , and the surrounding areas
                 </h2>
                 <p className="text-muted-foreground-2 mb-4 text-center text-xl font-normal md:text-left">
-                  Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on
+                  Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on.
                 </p>
                 <p className="pt-4 text-center md:text-left">
                   <Link
                     href={`tel:${seo.phone}`}
-                    className="bg-brand hover:bg-brand-light focus:ring-yellow rounded-base text-md box-border inline border border-transparent px-3 py-3 leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none"
+                    className="bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border inline-block border border-transparent px-3 py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none"
                   >
-                    Call Now
+                    <span className="block text-center">Call Now</span>
+                    <span className="block text-center text-xs">24hr Mon-Sat</span>
                   </Link>
                 </p>
               </div>

@@ -51,7 +51,7 @@ export default function Footer({
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-[1fr_1fr_2fr] sm:gap-6">
             <div>
-              <h2 className="text-yellow mb-6 text-sm font-semibold uppercase">Pages</h2>
+              <h2 className="text-yellow mb-8 text-sm font-semibold uppercase">Pages</h2>
               <ul className="font-medium text-white">
                 <li className="mb-4">
                   <Link href="/about/" className="hover:underline">
@@ -81,7 +81,7 @@ export default function Footer({
               </ul>
             </div>
             <div>
-              <h2 className="text-yellow mb-6 text-sm font-semibold uppercase">Follow us</h2>
+              <h2 className="text-yellow mb-8 text-sm font-semibold uppercase">Follow us</h2>
               <ul className="font-medium text-white">
                 <li className="mb-4">
                   <Link
@@ -115,8 +115,9 @@ export default function Footer({
                 </li>
               </ul>
             </div>
-            <div>
-              <h2 className="text-yellow mb-6 text-sm font-semibold uppercase">Contact Us</h2>
+            <div className="col-span-2 sm:col-span-1">
+              <h2 className="text-yellow mb-1 text-sm font-semibold uppercase">Contact Us</h2>
+              <h2 className="text-yellow mb-3 text-xs font-semibold uppercase">Mon–Sat · 24 Hrs</h2>
               <ul className="font-medium text-white">
                 <li className="mb-4">
                   <Link

@@ -9,7 +9,7 @@
   {
     "name": "Motorway Recovery",
     "id": "motorway-recovery",
-    "description": "Stuck on the M25, M1 or any smart motorway? We have rescued drivers from the roadside at all hours — including midnight callouts on the hard shoulder.",
+    "description": "Stuck on the M25, M1 or a smart motorway? We have rescued drivers from the motorway 24 hours a day, Monday to Saturday — including night-time callouts on the hard shoulder.",
     "icon": "Route",
     "pictureIndex": 3
   },
@@ -37,7 +37,7 @@
   {
     "name": "Out-of-Hours Emergency Recovery",
     "id": "out-of-hours-emergency-recovery",
-    "description": "Breakdowns don't keep office hours — and neither do we. From early mornings to past midnight, call and we'll answer.",
+    "description": "Breakdowns don't keep office hours — and neither do we. Call us 24 hours a day, Monday to Saturday, and we'll answer.",
     "icon": "Clock",
     "pictureIndex": 14
   },

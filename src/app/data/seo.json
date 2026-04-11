@@ -1,7 +1,7 @@
 {
   "businessName": "Prompt Recovery",
   "legalName": "Prompt Recovery Ltd",
-  "description": "Fast, friendly and affordable breakdown recovery and towing in Watford and surrounding areas. Vehicle recovery, motorway recovery, stuck vehicles, and more — available early mornings to past midnight.",
+  "description": "Fast, friendly and affordable breakdown recovery and towing in Watford and surrounding areas. Vehicle recovery, motorway recovery, stuck vehicles, and more — available 24 hours a day, Monday to Saturday.",
   "url": "https://promptrecovery.co.uk",
   "phone": "+447799525650",
   "phoneDisplayAs": "07799525650",
@@ -17,7 +17,7 @@
     "latitude": 51.68032,
     "longitude": -0.3967379
   },
-  "openingHours": ["Mo-Su 00:00-23:59"],
+  "openingHours": ["Mo-Sa 00:00-23:59"],
   "sameAs": [
     "https://www.facebook.com/promptrecovery",
     "https://x.com/prompt_recovery",
