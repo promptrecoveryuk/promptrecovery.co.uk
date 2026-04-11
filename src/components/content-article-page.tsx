@@ -112,7 +112,7 @@ export function ContentArticlePage({
 
         {reviews && reviews.length > 0 && (
           <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading mb-6 text-xl font-semibold">What our customers say</h2>
+            <h2 className="text-heading mb-0 text-xl font-semibold">What our customers say</h2>
             {reviews.map((review) => (
               <ReviewCardV2 key={review.authorUrl} review={review} />
             ))}

@@ -64,7 +64,11 @@ export default function HomePage() {
                   Breakdown Recovery in Watford
                 </h1>
                 <h2 className="text-foreground mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
-                  Serving Watford, Bushey, Rickmansworth, and the surrounding areas
+                  Serving Watford, Bushey,{' '}
+                  <Link href="/areas/rickmansworth/" className="text-brand underline">
+                    Rickmansworth
+                  </Link>
+                  , and the surrounding areas
                 </h2>
                 <p className="text-muted-foreground-2 mb-4 text-center text-xl font-normal md:text-left">
                   Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on
@@ -109,7 +113,7 @@ export default function HomePage() {
               <p className="mt-8">
                 <Link
                   href="/about/"
-                  className="text-brand underline-brand inline text-xl leading-5 font-normal underline-offset-4 hover:underline"
+                  className="text-brand inline text-xl leading-5 font-normal underline underline-offset-4 hover:underline"
                 >
                   Learn more about us
                 </Link>

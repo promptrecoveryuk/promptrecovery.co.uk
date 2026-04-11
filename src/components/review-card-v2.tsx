@@ -16,16 +16,16 @@ export function ReviewCardV2({ review }: { review: GoogleReview }) {
   return (
     <>
       {/*-- Testimonials --*/}
-      <div className="relative mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <div className="relative mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8">
         {/*-- Blockquote --*/}
         <blockquote className="text-center lg:mx-auto lg:w-3/5">
           <GoogleUserProfile userProfile={review}>
             <p className="text-left text-sm text-gray-500">{review.authorDetails}</p>
           </GoogleUserProfile>
-          <p className="mt-1 text-left">
+          <div className="mt-1 text-left">
             <Rating rating={review.rating} outOf={5} />
             <span>&nbsp;{review.when}</span>
-          </p>
+          </div>
 
           <div className="mt-4 lg:mt-6">
             <p className="text-foreground relative text-lg font-medium sm:text-xl md:text-xl md:leading-normal">

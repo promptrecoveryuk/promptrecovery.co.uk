@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { ContentArticlePage } from '@/components/content-article-page';
 import { getPictureAsImage } from '@/lib/pictures';
+import { getGoogleReviewById } from '@/lib/reviews';
 import { buildArticleSchema, buildBreadcrumbSchema, buildFaqPageSchema, getSchemaIds } from '@/lib/schema';
 import { getAllServicesMeta, getServiceContent, getServiceSlugs } from '@/lib/services';
 
@@ -54,6 +55,7 @@ export default async function ServicePage({ params }: Props) {
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   const relatedServices = getAllServicesMeta().filter((service) => service.slug !== slug);
+  const reviews = (meta.reviewIds ?? []).map(getGoogleReviewById).filter((r) => r !== undefined);
 
   const schemaObjects = [
     buildArticleSchema({
@@ -80,6 +82,7 @@ export default async function ServicePage({ params }: Props) {
       breadcrumbs={[{ name: 'Home', item: '/' }, { name: 'Services', item: '/services/' }, { name: meta.title }]}
       content={content}
       faqs={meta.faqs}
+      reviews={reviews}
       image={image}
       meta={meta}
       readingTime={readingTime}

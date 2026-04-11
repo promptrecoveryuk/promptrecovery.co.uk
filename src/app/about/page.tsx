@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { GridGallery } from '@/components/grid-gallery';
 import { PageHeader } from '@/components/page-header';
@@ -48,8 +49,12 @@ export default function AboutPage() {
               <p className="text-thin font-light">
                 I have over 20 years of experience as a professional truck driver, and I&apos;ve built this business to
                 offer fast, honest, and reliable towing for inoperable vehicles. I recover cars, SUVs, and small vans
-                (under 4 tonnes) across Watford, Bushey, Rickmansworth, and nearby areas. Whether it&apos;s a breakdown,
-                accident, or stuck vehicle, I&apos;ll handle it with care, like I&apos;m helping a neighbour.
+                (under 4 tonnes) across Watford, Bushey,{' '}
+                <Link href="/areas/rickmansworth/" className="text-brand underline">
+                  Rickmansworth
+                </Link>
+                , and nearby areas. Whether it&apos;s a breakdown, accident, or stuck vehicle, I&apos;ll handle it with
+                care, like I&apos;m helping a neighbour.
               </p>
               <p className="text-thin font-light">
                 I&apos;m local to Watford, and I treat every call like I&apos;m helping a neighbour because most of the

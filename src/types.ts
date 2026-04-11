@@ -142,6 +142,8 @@ export interface AreaMeta extends BaseContentMeta {
 export interface ServiceMeta extends BaseContentMeta {
   /** Optional FAQs — used to generate FAQPage structured data. */
   faqs?: Faq[];
+  /** Optional Google review IDs to display at the bottom of the page. */
+  reviewIds?: string[];
 }
 
 export type MdxContent<TMeta extends BaseContentMeta> = {

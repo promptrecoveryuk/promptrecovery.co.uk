@@ -18,6 +18,7 @@ export {
   ArrowRight,
   BadgePoundSterling,
   BatteryWarning,
+  Car,
   Check,
   ChevronLeft,
   ChevronRight,

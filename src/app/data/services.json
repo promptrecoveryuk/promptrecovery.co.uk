@@ -54,5 +54,12 @@
     "description": "Need help after an accident? We can recover your vehicle and help you get back on the road safely.",
     "icon": "OctagonAlert",
     "pictureIndex": 20
+  },
+  {
+    "name": "Car Towing",
+    "id": "car-towing-watford",
+    "description": "Car developed a fault and unsafe to drive? We'll load your vehicle and deliver it to your chosen garage or straight home — safely, quickly, and without fuss.",
+    "icon": "Car",
+    "pictureIndex": 0
   }
 ]

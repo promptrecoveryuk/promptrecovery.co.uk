@@ -54,5 +54,6 @@ function parseServiceFrontmatter(slug: string, data: Record<string, unknown>): S
     imageIndex: data.imageIndex as number,
     author: (data.author as string) ?? 'Nick',
     faqs: Array.isArray(data.faqs) ? data.faqs : undefined,
+    reviewIds: Array.isArray(data.reviewIds) ? (data.reviewIds as string[]) : undefined,
   };
 }
