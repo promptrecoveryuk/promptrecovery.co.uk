@@ -173,7 +173,7 @@ export default function Footer({
             Registered company{' '}
             <Link href="https://find-and-update.company-information.service.gov.uk/company/16305356">16305356</Link>.
           </span>
-          <div className="mt-4 flex sm:mt-0 sm:justify-center">
+          <div className="mt-4 flex justify-end sm:mt-0">
             <Link
               href={`https://www.facebook.com/${facebookProfileId}`}
               className="text-white hover:text-white"
