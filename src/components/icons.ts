@@ -25,6 +25,7 @@ export {
   CircleHelp,
   Clock,
   Eye,
+  FileCheck,
   Handshake,
   House,
   Mail,

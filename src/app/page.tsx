@@ -71,7 +71,8 @@ export default function HomePage() {
                   , and the surrounding areas
                 </h2>
                 <p className="text-muted-foreground-2 mb-4 text-center text-xl font-normal md:text-left">
-                  Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on.
+                  Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on. Fully insured,
+                  professionally trained, and experienced in safe vehicle recovery.
                 </p>
                 <p className="pt-4 text-center md:text-left">
                   <Link
