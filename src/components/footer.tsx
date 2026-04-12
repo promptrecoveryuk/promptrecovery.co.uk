@@ -46,7 +46,14 @@ export default function Footer({
                 className="me-3 h-32"
                 alt="Prompt Recovery Logo"
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Prompt Recovery</span>
+              <p>
+                <span className="block text-left text-2xl font-semibold whitespace-nowrap text-white md:text-center">
+                  Prompt Recovery
+                </span>
+                <span className="block text-left text-sm text-white md:text-center">
+                  Leggatts Wood Ave, Watford, WD24 6RR
+                </span>
+              </p>
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-[1fr_1fr_2fr] sm:gap-6">

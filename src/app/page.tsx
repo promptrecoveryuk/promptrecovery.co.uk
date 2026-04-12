@@ -172,7 +172,8 @@ export default function HomePage() {
       <Section id="find-us">
         <div className="mx-auto max-w-7xl px-4 py-10 pt-18 sm:px-6 lg:px-8 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Find us" />
-          <h3 className="mb-8 text-center text-xl">We operate throughout Watford and surrounding areas.</h3>
+          <h3 className="mb-2 text-center text-xl">We operate throughout Watford and surrounding areas.</h3>
+          <h4 className="text-gl mb-8 text-center">Leggatts Wood Ave, Watford, WD24 6RR</h4>
           <GoogleMap />
         </div>
       </Section>
