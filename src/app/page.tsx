@@ -83,6 +83,9 @@ export default function HomePage() {
                     <span className="block text-center text-xs">24hr Mon-Sat</span>
                   </Link>
                 </p>
+                <p className="text-muted-foreground-2 my-4 text-center text-lg font-normal md:text-left">
+                  Trusted local recovery with safe vehicle handling from an experienced Class 1 HGV driver.
+                </p>
               </div>
               {/*-- End Title --*/}
             </div>

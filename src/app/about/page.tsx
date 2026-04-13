@@ -47,10 +47,9 @@ export default function AboutPage() {
             <div>
               <SectionHeading sectionName="Hi, I'm Nick - Founder of Prompt Recovery" />
               <p className="text-thin pb-4 font-normal">
-                I&apos;m fully insured, professionally trained, and experienced in safe vehicle recovery, with over 20
-                years of experience as a professional truck driver. I&apos;ve built this business to offer fast, honest,
-                and reliable towing for inoperable vehicles. I recover cars, SUVs, and small vans (under 4 tonnes)
-                across Watford, Bushey,{' '}
+                I hold a Class 1 HGV licence, I&apos;m fully insured, and I&apos;ve spent over 20 years as a
+                professional truck driver. I&apos;ve built this business to offer fast, honest, and reliable towing for
+                inoperable vehicles. I recover cars, SUVs, and small vans (under 4 tonnes) across Watford, Bushey,{' '}
                 <Link href="/areas/rickmansworth/" className="text-brand underline">
                   Rickmansworth
                 </Link>
