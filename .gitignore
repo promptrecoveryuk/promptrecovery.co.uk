@@ -25,3 +25,6 @@ next-env.d.ts
 # Playwright
 playwright-report/
 test-results/
+
+# Local copy review artifacts
+artifacts/

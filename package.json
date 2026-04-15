@@ -6,7 +6,13 @@
     "node": "24.x"
   },
   "scripts": {
+    "copy-diff": "node --import tsx scripts/copy-diff.ts",
+    "copy-diff:baseline": "node --import tsx scripts/copy-diff.ts capture --snapshot-set baseline",
+    "copy-diff:baseline:live": "node --import tsx scripts/copy-diff.ts capture --snapshot-set baseline --base-url https://promptrecovery.co.uk",
+    "copy-diff:current": "node --import tsx scripts/copy-diff.ts capture --snapshot-set current",
+    "copy-diff:compare": "node --import tsx scripts/copy-diff.ts compare",
     "dev": "next dev",
+    "dev:copy-diff": "COPY_DIFF=1 next dev",
     "build": "next build",
     "fetch-reviews": "node scripts/fetch-google-reviews.mjs",
     "format": "prettier . --check",

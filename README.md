@@ -218,6 +218,63 @@ describe('My feature', () => {
 
 ### Test output
 
+---
+
+## Copy Diff Workflow
+
+For copy review and stakeholder sign-off, there is a local screenshot diff workflow built on Playwright plus
+ImageMagick.
+
+Typical usage:
+
+```bash
+# 1. Start the site
+npm run dev
+
+# 2. Capture a baseline set from local or live
+npm run copy-diff:baseline
+# or
+npm run copy-diff:baseline:live
+
+# 3. Make your content edits, then capture the current set
+npm run copy-diff:current
+
+# 4. Generate a report with before/current/diff images
+npm run copy-diff:compare
+```
+
+Artifacts are written to `artifacts/copy-diff/`:
+
+- `baseline/` — approved screenshots
+- `current/` — latest screenshots
+- `diff/` — highlighted diff images when ImageMagick is installed
+- `report.html` — a simple visual report you can send around
+
+### Targeting specific sections
+
+Capture only selected targets:
+
+```bash
+npm run copy-diff -- capture --snapshot-set current --targets home-page,navbar
+```
+
+The target definitions live in `scripts/copy-diff.targets.ts`. Add or edit them to capture other page sections.
+
+### Screenshot stabilisation
+
+Before each screenshot, the workflow injects a small stylesheet to reduce noisy diffs:
+
+- disables CSS animations and transitions
+- hides carousel controls and indicators
+- keeps only the active carousel slide visible
+
+This helps keep copy-review diffs focused on the changed content rather than moving UI state.
+
+### ImageMagick
+
+The compare step will still generate a report without ImageMagick, but it will only show baseline/current images until
+ImageMagick is installed locally.
+
 The native runner produces TAP-compatible output by default. Pass `--test-reporter=spec` for a more human-readable
 format:
 

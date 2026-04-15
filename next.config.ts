@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // Hide the Next.js dev indicator when running screenshot/copy-diff sessions.
+  devIndicators: process.env.COPY_DIFF ? false : undefined,
+
   // `output: 'export'` tells Next.js to produce a fully static site in the
   // `out/` directory when you run `next build`. No Node.js server is needed
   // at runtime — perfect for GitHub Pages.
