@@ -49,26 +49,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${seo.url}/`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {
       url: `${seo.url}/about/`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${seo.url}/services/`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     ...servicePageSitemapEntries,
     {
       url: `${seo.url}/faqs/`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
@@ -79,10 +79,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...blogPostSitemapEntries,
     {
-      url: `${seo.url}/area/`,
+      url: `${seo.url}/areas/`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     ...areaPageSitemapEntries,
   ];
