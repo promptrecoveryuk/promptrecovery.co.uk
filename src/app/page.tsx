@@ -64,7 +64,11 @@ export default function HomePage() {
                   Breakdown Recovery in Watford
                 </h1>
                 <h2 className="text-foreground mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
-                  Serving Watford, Bushey,{' '}
+                  Serving Watford,{' '}
+                  <Link href="/areas/bushey/" className="text-brand underline">
+                    Bushey
+                  </Link>
+                  ,{' '}
                   <Link href="/areas/rickmansworth/" className="text-brand underline">
                     Rickmansworth
                   </Link>

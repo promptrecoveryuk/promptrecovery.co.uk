@@ -274,5 +274,17 @@
     "width2": 600,
     "height2": 200,
     "description": "Rickmansworth canal and river with the slucegates in the foreground and houses and trees in the background"
+  },
+  {
+    "filePath": "/images/pics/bushey.png",
+    "filePath1": "/images/pics/bushey-1.png",
+    "filePath2": "/images/pics/bushey-2.png",
+    "width": 600,
+    "height": 900,
+    "width1": 600,
+    "height1": 450,
+    "width2": 600,
+    "height2": 200,
+    "description": "Bushey Park at dawn with a large bare oak tree beside a path, open grass fields stretching into the distance under a clear blue sky"
   }
 ]

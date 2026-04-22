@@ -49,7 +49,11 @@ export default function AboutPage() {
               <p className="text-thin pb-4 font-normal">
                 I hold a Class 1 HGV licence, I&apos;m fully insured, and I&apos;ve spent over 20 years as a
                 professional truck driver. I&apos;ve built this business to offer fast, honest, and reliable towing for
-                inoperable vehicles. I recover cars, SUVs, and small vans (under 4 tonnes) across Watford, Bushey,{' '}
+                inoperable vehicles. I recover cars, SUVs, and small vans (under 4 tonnes) across Watford,{' '}
+                <Link href="/areas/bushey/" className="text-brand underline">
+                  Bushey
+                </Link>
+                ,{' '}
                 <Link href="/areas/rickmansworth/" className="text-brand underline">
                   Rickmansworth
                 </Link>
