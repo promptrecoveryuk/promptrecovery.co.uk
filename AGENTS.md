@@ -18,6 +18,7 @@ Guidance for coding agents working in this repository.
 - Unit tests: `npm test`
 - UI tests: `npm run test:ui`
 - Build static export: `npm run build`
+- Trello backlog dry-run sync: `npm run trello:sync -- --dry-run`
 
 ## Architecture
 
@@ -80,6 +81,21 @@ Important: `services.json` remains the source of truth for service cards on the 
 Individual service pages are opt-in via matching MDX files in `src/content/services`.
 
 If a service page exists, its slug should match the corresponding `services.json` `id`.
+
+### Trello backlog files
+
+The local SEO backlog and Trello board contract live in:
+
+- `LOCAL_SEO_PLAN.md`
+- `TRELLO.md`
+
+The sync script lives in:
+
+- `scripts/trello-sync.ts`
+
+Shared parsing/building helpers live in:
+
+- `src/lib/trello-backlog.ts`
 
 ## Conventions
 
@@ -174,6 +190,26 @@ These are rendered by:
 
 If FAQ answers are used in structured data, strip markdown first rather than emitting raw markdown into JSON-LD.
 
+### Trello backlog sync
+
+- `LOCAL_SEO_PLAN.md` is machine-parsed by the Trello sync script, so keep its card format stable unless you also update
+  the parser and tests
+- Each card must use:
+  - `### Card: <title>`
+  - blank line
+  - `Card ID: ...`
+  - `List: Inbox 📥`
+  - `Labels: ...`
+  - `#### What are we trying to achieve?`
+  - `#### Why are we doing this?`
+  - `#### Acceptance criteria`
+- `Card ID` is the sync key for updates, so do not change it casually after a card has been synced
+- Trello labels in `LOCAL_SEO_PLAN.md` must match the names in `TRELLO.md` exactly
+- The Trello card description contains the narrative sections; acceptance criteria are synced as a checklist named
+  `Acceptance criteria`
+- Prefer `npm run trello:sync -- --dry-run` before applying Trello changes
+- If you change the Trello backlog format or sync behavior, update README and the Trello backlog tests
+
 ## Testing Guidance
 
 - Unit tests live in `src/__tests__`
@@ -182,7 +218,8 @@ If FAQ answers are used in structured data, strip markdown first rather than emi
 - Existing coverage includes posts, areas, services, schema builders, and generic MDX collection helpers
 - Playwright specs live in `e2e`
 
-When adding behavior in shared loaders, schema helpers, or service-linking logic, add or update unit tests.
+When adding behavior in shared loaders, schema helpers, or service-linking logic, add or update unit tests. When
+changing the Trello backlog parser or sync contract, update `src/__tests__/trello-backlog.test.ts`.
 
 ## Deployment Notes
 

@@ -89,8 +89,11 @@ accidentally indexed. Remove or unset it if you need to test production crawler 
 | --------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `GOOGLE_PLACE_ID`     | Your Google Business place ID — used by `fetch-reviews` to identify which business to fetch | [Find your Place ID](https://developers.google.com/maps/documentation/places/web-service/place-id) |
 | `GOOGLE_MAPS_API_KEY` | Google Maps API key with **Places API (New)** enabled                                       | [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials          |
+| `TRELLO_API_KEY`      | Trello REST API key — used by `trello:sync` to read board metadata and create/update cards  | Trello Power-Up admin → API key                                                                    |
+| `TRELLO_API_TOKEN`    | Trello REST API token for the account that will create/update cards                         | Generated from the Trello API key page                                                             |
+| `TRELLO_BOARD_ID`     | Trello board ID where cards should be synced                                                | Trello board URL or API                                                                            |
 
-These two are only read by `scripts/fetch-google-reviews.mjs` and are never injected into the Next.js build.
+These variables are only read by local scripts and are never injected into the Next.js build.
 
 ### Local development
 
@@ -674,6 +677,84 @@ The key is only used locally and is never exposed in the browser or committed to
 
 Run `npm run fetch-reviews` whenever you want to pull in new reviews, then commit the updated
 `src/app/data/google-reviews.json`. The next deployment will include the latest data automatically.
+
+---
+
+## Trello Card Sync — `trello:sync`
+
+The local SEO backlog in [`LOCAL_SEO_PLAN.md`](LOCAL_SEO_PLAN.md) can be synced to Trello as cards on the board
+described in [`TRELLO.md`](TRELLO.md).
+
+### Running the script
+
+Preview the sync without changing Trello:
+
+```bash
+npm run trello:sync -- --dry-run
+```
+
+Apply the sync to Trello:
+
+```bash
+npm run trello:sync -- --apply
+```
+
+Sync a single card by `Card ID`:
+
+```bash
+npm run trello:sync -- --dry-run --card-id=audit-gbp-business-type-address-service-areas
+npm run trello:sync -- --apply --card-id=audit-gbp-business-type-address-service-areas
+```
+
+### What the script does
+
+`scripts/trello-sync.ts`:
+
+1. Reads `LOCAL_SEO_PLAN.md` and parses each `### Card: ...` block.
+2. Reads `TRELLO.md` and validates the referenced list and label names.
+3. Connects to the Trello board using `TRELLO_API_KEY`, `TRELLO_API_TOKEN`, and `TRELLO_BOARD_ID`.
+4. Uses `Card ID` as the sync key so reruns update existing synced cards instead of creating duplicates.
+5. Creates new cards in `Inbox 📥`.
+6. Keeps existing synced cards in whatever list they have already been moved to.
+7. Syncs the narrative card description and labels.
+8. Syncs the acceptance criteria as a Trello checklist named `Acceptance criteria`.
+
+### Backlog format contract
+
+Each card in `LOCAL_SEO_PLAN.md` must follow this structure:
+
+```md
+### Card: Example card title
+
+Card ID: example-card-id List: Inbox 📥 Labels: 🔎 SEO, 🔍 Investigation
+
+#### What are we trying to achieve?
+
+...
+
+#### Why are we doing this?
+
+...
+
+#### Acceptance criteria
+
+- First criterion
+- Second criterion
+```
+
+Notes:
+
+- Leave a blank line after the `### Card: ...` title.
+- `Card ID` must stay stable once a card has been synced, otherwise the script will treat it as a different card.
+- Labels must match the names listed in `TRELLO.md` exactly.
+- The current workflow expects every synced card to start in `Inbox 📥`.
+
+### Safe usage
+
+- Start with `--dry-run` every time you change the backlog format or label names.
+- Use `--card-id` first if you want to test a single card before syncing the whole backlog.
+- `npm test` includes parser tests for the Trello backlog format, so run it after changing the sync logic or markdown
+  contract.
 
 ---
 
