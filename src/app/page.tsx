@@ -60,10 +60,10 @@ export default function HomePage() {
             <div>
               {/*-- Title --*/}
               <div className="mt-4 md:mb-12">
-                <h1 className="text-foreground mb-4 text-center text-4xl font-bold md:text-left lg:text-5xl">
+                <h1 className="text-foreground font-heading mb-4 text-center text-4xl font-semibold md:text-left lg:text-5xl">
                   Breakdown Recovery in Watford
                 </h1>
-                <h2 className="text-foreground mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
+                <h2 className="text-foreground font-heading mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
                   Serving Watford,{' '}
                   <Link href="/areas/bushey/" className="text-brand underline">
                     Bushey

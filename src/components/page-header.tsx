@@ -9,7 +9,7 @@
 export function PageHeader({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <div className="mx-auto mb-10 max-w-2xl lg:mb-14">
-      <h1 className="text-foreground mb-4 text-center text-4xl font-semibold md:leading-tight">{title}</h1>
+      <h1 className="text-foreground font-heading mb-4 text-center text-4xl font-semibold md:leading-tight">{title}</h1>
       <h2 className="text-center text-xl">{subtitle}</h2>
     </div>
   );

@@ -2,7 +2,7 @@ import './globals.css';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Bitter, Inter } from 'next/font/google';
 import Script from 'next/script';
 
 import Footer from '@/components/footer';
@@ -93,6 +93,12 @@ const websiteSchema = buildWebsiteSchema({
 
 const inter = Inter({
   subsets: ['latin'],
+  variable: '--font-inter',
+});
+
+const bitter = Bitter({
+  subsets: ['latin'],
+  variable: '--font-bitter',
 });
 
 // RootLayout wraps every page in the application. It must render an <html>
@@ -100,7 +106,7 @@ const inter = Inter({
 // (nav, footer) should live here once they are built.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={`${inter.variable} ${bitter.variable}`}>
       <body>
         {/* GTM noscript must be the first element inside <body> per GTM docs */}
         <noscript>

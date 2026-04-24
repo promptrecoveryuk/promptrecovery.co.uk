@@ -44,6 +44,11 @@ footer a:focus-visible {
   border-radius: var(--radius-sm, 2px);
 }
 
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-bitter);
+}
+
 @theme {
   --color-brand: #a21212;
   --color-brand-light: #c43737;

@@ -74,7 +74,7 @@ export function ContentArticlePage({
 
         <article>
           <header className="mb-8 border-b border-gray-200 pb-8">
-            <h1 className="text-heading text-center text-3xl leading-tight font-bold md:text-left md:text-4xl">
+            <h1 className="text-heading font-heading text-center text-3xl leading-tight font-bold md:text-left md:text-4xl">
               {meta.title}
             </h1>
             <h2 className="mt-3 text-lg text-gray-600">{meta.description}</h2>
@@ -103,7 +103,7 @@ export function ContentArticlePage({
 
         {faqs && faqs.length > 0 && (
           <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading mb-6 text-xl font-semibold">Common questions</h2>
+            <h2 className="text-heading font-heading mb-6 text-xl font-semibold">Common questions</h2>
             {faqs.map((faq) => (
               <FaqItem key={faq.question} faq={faq} />
             ))}
@@ -112,7 +112,7 @@ export function ContentArticlePage({
 
         {reviews && reviews.length > 0 && (
           <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading mb-0 text-xl font-semibold">What our customers say</h2>
+            <h2 className="text-heading font-heading mb-0 text-xl font-semibold">What our customers say</h2>
             {reviews.map((review) => (
               <ReviewCardV2 key={review.authorUrl} review={review} />
             ))}
@@ -121,7 +121,7 @@ export function ContentArticlePage({
 
         {relatedTitle && relatedHrefBase && relatedItems.length > 0 && (
           <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading mb-6 text-xl font-semibold">{relatedTitle}</h2>
+            <h2 className="text-heading font-heading mb-6 text-xl font-semibold">{relatedTitle}</h2>
             <ul className="space-y-4">
               {relatedItems.map((item) => (
                 <li key={item.slug}>
