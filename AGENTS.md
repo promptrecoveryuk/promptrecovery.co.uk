@@ -84,9 +84,9 @@ If a service page exists, its slug should match the corresponding `services.json
 
 ### Trello backlog files
 
-The local SEO backlog and Trello board contract live in:
+The backlog and Trello board contract live in:
 
-- `LOCAL_SEO_PLAN.md`
+- `improvement-ideas/*.md`
 - `TRELLO.md`
 
 The sync script lives in:
@@ -192,8 +192,8 @@ If FAQ answers are used in structured data, strip markdown first rather than emi
 
 ### Trello backlog sync
 
-- `LOCAL_SEO_PLAN.md` is machine-parsed by the Trello sync script, so keep its card format stable unless you also update
-  the parser and tests
+- `improvement-ideas/*.md` are machine-parsed by the Trello sync script, so keep its card format stable unless you also
+  update the parser and tests
 - Each card must use:
   - `### Card: <title>`
   - blank line
@@ -204,7 +204,7 @@ If FAQ answers are used in structured data, strip markdown first rather than emi
   - `#### Why are we doing this?`
   - `#### Acceptance criteria`
 - `Card ID` is the sync key for updates, so do not change it casually after a card has been synced
-- Trello labels in `LOCAL_SEO_PLAN.md` must match the names in `TRELLO.md` exactly
+- Trello labels in `improvement-ideas/*.md` must match the names in `TRELLO.md` exactly
 - The Trello card description contains the narrative sections; acceptance criteria are synced as a checklist named
   `Acceptance criteria`
 - Prefer `npm run trello:sync -- --dry-run` before applying Trello changes

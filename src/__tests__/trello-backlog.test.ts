@@ -13,7 +13,8 @@ import {
 } from '../lib/trello-backlog';
 
 const repoRoot = process.cwd();
-const localSeoPlan = fs.readFileSync(path.join(repoRoot, 'LOCAL_SEO_PLAN.md'), 'utf8');
+const localSeoPlanPath = path.join(repoRoot, 'improvement-ideas', 'LOCAL_SEO_PLAN.md');
+const localSeoPlan = fs.readFileSync(localSeoPlanPath, 'utf8');
 const trelloBoardSpec = fs.readFileSync(path.join(repoRoot, 'TRELLO.md'), 'utf8');
 
 describe('parseTrelloBoardSpec()', () => {
@@ -28,11 +29,12 @@ describe('parseTrelloBoardSpec()', () => {
 });
 
 describe('parseLocalSeoBacklog()', () => {
-  it('parses Trello-ready cards from LOCAL_SEO_PLAN.md', () => {
-    const cards = parseLocalSeoBacklog(localSeoPlan);
+  it('parses Trello-ready cards from improvement-ideas/LOCAL_SEO_PLAN.md', () => {
+    const cards = parseLocalSeoBacklog(localSeoPlan, 'improvement-ideas/LOCAL_SEO_PLAN.md');
 
     assert.ok(cards.length > 10, 'expected a substantial backlog');
     assert.ok(cards.every((card) => card.listName === 'Inbox 📥'));
+    assert.ok(cards.every((card) => card.sourcePath === 'improvement-ideas/LOCAL_SEO_PLAN.md'));
     assert.ok(cards.some((card) => card.cardId === 'audit-gbp-business-type-address-service-areas'));
     assert.ok(cards.some((card) => card.labels.includes('🔎 SEO')));
   });
@@ -50,11 +52,11 @@ describe('parseLocalSeoBacklog()', () => {
 
 describe('buildTrelloCardDescription()', () => {
   it('includes the sync marker and the narrative sections only', () => {
-    const [card] = parseLocalSeoBacklog(localSeoPlan);
+    const [card] = parseLocalSeoBacklog(localSeoPlan, 'improvement-ideas/LOCAL_SEO_PLAN.md');
     const description = buildTrelloCardDescription(card);
 
     assert.equal(extractSyncedCardId(description), card.cardId);
-    assert.ok(description.includes('Source: LOCAL_SEO_PLAN.md'));
+    assert.ok(description.includes('Source: improvement-ideas/LOCAL_SEO_PLAN.md'));
     assert.ok(description.includes('## What are we trying to achieve?'));
     assert.ok(description.includes('## Why are we doing this?'));
     assert.ok(!description.includes(`## ${ACCEPTANCE_CHECKLIST_NAME}`));
@@ -64,7 +66,7 @@ describe('buildTrelloCardDescription()', () => {
 
 describe('buildAcceptanceChecklistItems()', () => {
   it('returns the acceptance criteria as checklist items', () => {
-    const [card] = parseLocalSeoBacklog(localSeoPlan);
+    const [card] = parseLocalSeoBacklog(localSeoPlan, 'improvement-ideas/LOCAL_SEO_PLAN.md');
     const items = buildAcceptanceChecklistItems(card);
 
     assert.deepEqual(items, [

@@ -3,6 +3,7 @@ export type TrelloBacklogCard = {
   cardId: string;
   labels: string[];
   listName: string;
+  sourcePath: string;
   title: string;
   what: string;
   why: string;
@@ -23,7 +24,10 @@ const WHY_TITLE = 'Why are we doing this?';
 const ACCEPTANCE_TITLE = 'Acceptance criteria';
 const SYNC_MARKER_PREFIX = '<!-- trello-sync-card-id:';
 
-export function parseLocalSeoBacklog(markdown: string): TrelloBacklogCard[] {
+export function parseLocalSeoBacklog(
+  markdown: string,
+  sourcePath: string = 'improvement-ideas/unknown.md'
+): TrelloBacklogCard[] {
   const headingRegex = /^### Card: (.+)$/gm;
   const matches = Array.from(markdown.matchAll(headingRegex));
 
@@ -63,6 +67,7 @@ export function parseLocalSeoBacklog(markdown: string): TrelloBacklogCard[] {
       cardId,
       labels,
       listName,
+      sourcePath,
       title,
       what,
       why,
@@ -113,7 +118,7 @@ export function parseTrelloBoardSpec(markdown: string): TrelloBoardSpec {
 export function buildTrelloCardDescription(card: TrelloBacklogCard): string {
   return [
     `${SYNC_MARKER_PREFIX}${card.cardId} -->`,
-    'Source: LOCAL_SEO_PLAN.md',
+    `Source: ${card.sourcePath}`,
     '',
     trelloSectionHeading(WHAT_TITLE),
     '',

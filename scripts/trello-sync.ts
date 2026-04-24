@@ -52,8 +52,8 @@ type SyncAction =
       type: 'noop' | 'update';
     };
 
-const DEFAULT_PLAN_PATH = 'LOCAL_SEO_PLAN.md';
 const DEFAULT_BOARD_SPEC_PATH = 'TRELLO.md';
+const DEFAULT_IMPROVEMENT_IDEAS_DIR = 'improvement-ideas';
 
 async function main() {
   const rawArgs = process.argv.slice(2);
@@ -61,8 +61,8 @@ async function main() {
   const dryRun = !args.has('--apply') || args.has('--dry-run');
   const selectedCardId = getArgValue(rawArgs, '--card-id');
 
-  const planPath = path.join(process.cwd(), DEFAULT_PLAN_PATH);
   const boardSpecPath = path.join(process.cwd(), DEFAULT_BOARD_SPEC_PATH);
+  const improvementIdeasPath = path.join(process.cwd(), DEFAULT_IMPROVEMENT_IDEAS_DIR);
   const apiKey = process.env.TRELLO_API_KEY;
   const token = process.env.TRELLO_API_TOKEN;
   const boardId = process.env.TRELLO_BOARD_ID;
@@ -71,12 +71,10 @@ async function main() {
     fail('Missing TRELLO_API_KEY, TRELLO_API_TOKEN, or TRELLO_BOARD_ID in the environment.');
   }
 
-  const [planMarkdown, boardSpecMarkdown] = await Promise.all([
-    fs.readFile(planPath, 'utf8'),
+  const [boardSpecMarkdown, parsedBacklogCards] = await Promise.all([
     fs.readFile(boardSpecPath, 'utf8'),
+    loadBacklogCards(improvementIdeasPath),
   ]);
-
-  const parsedBacklogCards = parseLocalSeoBacklog(planMarkdown);
   const backlogCards = filterCardsById(parsedBacklogCards, selectedCardId);
   const boardSpec = parseTrelloBoardSpec(boardSpecMarkdown);
 
@@ -175,11 +173,11 @@ function validateCardsAgainstBoardSpec(cards: TrelloBacklogCard[], boardSpec: { 
     const parts: string[] = [];
 
     if (unknownLists.size > 0) {
-      parts.push(`Unknown lists in LOCAL_SEO_PLAN.md: ${Array.from(unknownLists).join(', ')}`);
+      parts.push(`Unknown lists in improvement-ideas/*.md: ${Array.from(unknownLists).join(', ')}`);
     }
 
     if (unknownLabels.size > 0) {
-      parts.push(`Unknown labels in LOCAL_SEO_PLAN.md: ${Array.from(unknownLabels).join(', ')}`);
+      parts.push(`Unknown labels in improvement-ideas/*.md: ${Array.from(unknownLabels).join(', ')}`);
     }
 
     fail(parts.join('\n'));
@@ -198,6 +196,58 @@ function filterCardsById(cards: TrelloBacklogCard[], selectedCardId?: string): T
   }
 
   return filteredCards;
+}
+
+async function loadBacklogCards(improvementIdeasPath: string): Promise<TrelloBacklogCard[]> {
+  const improvementIdeaFiles = await getMarkdownFiles(improvementIdeasPath);
+  const improvementIdeaCards = (
+    await Promise.all(
+      improvementIdeaFiles.map(async (filePath) => {
+        const markdown = await fs.readFile(filePath, 'utf8');
+        return parseLocalSeoBacklog(markdown, path.relative(process.cwd(), filePath));
+      })
+    )
+  ).flat();
+
+  if (improvementIdeaCards.length > 0) {
+    assertUniqueCardIds(improvementIdeaCards);
+    return improvementIdeaCards;
+  }
+
+  fail(`No Trello backlog cards found in "${DEFAULT_IMPROVEMENT_IDEAS_DIR}/".`);
+}
+
+async function getMarkdownFiles(directoryPath: string): Promise<string[]> {
+  if (!(await fileExists(directoryPath))) {
+    return [];
+  }
+
+  const entries = await fs.readdir(directoryPath, { withFileTypes: true });
+  const filePaths = await Promise.all(
+    entries.map(async (entry) => {
+      const entryPath = path.join(directoryPath, entry.name);
+      if (entry.isDirectory()) {
+        return getMarkdownFiles(entryPath);
+      }
+
+      return entry.isFile() && entry.name.endsWith('.md') ? [entryPath] : [];
+    })
+  );
+
+  return filePaths.flat().sort();
+}
+
+function assertUniqueCardIds(cards: TrelloBacklogCard[]) {
+  const seen = new Map<string, string>();
+
+  for (const card of cards) {
+    const previousSource = seen.get(card.cardId);
+    if (previousSource) {
+      fail(`Duplicate Card ID "${card.cardId}" found in ${previousSource} and ${card.sourcePath}.`);
+    }
+
+    seen.set(card.cardId, card.sourcePath);
+  }
 }
 
 function buildSyncActions(
@@ -398,6 +448,15 @@ function getArgValue(args: string[], flagName: string): string | undefined {
   }
 
   return nextArg.trim();
+}
+
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 class TrelloClient {

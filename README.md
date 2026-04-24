@@ -682,8 +682,8 @@ Run `npm run fetch-reviews` whenever you want to pull in new reviews, then commi
 
 ## Trello Card Sync — `trello:sync`
 
-The local SEO backlog in [`LOCAL_SEO_PLAN.md`](LOCAL_SEO_PLAN.md) can be synced to Trello as cards on the board
-described in [`TRELLO.md`](TRELLO.md).
+The backlogs in [`improvement-ideas/*.md`](improvement-ideas/) can be synced to Trello as cards on the board described
+in [`TRELLO.md`](TRELLO.md).
 
 ### Running the script
 
@@ -710,7 +710,7 @@ npm run trello:sync -- --apply --card-id=audit-gbp-business-type-address-service
 
 `scripts/trello-sync.ts`:
 
-1. Reads `LOCAL_SEO_PLAN.md` and parses each `### Card: ...` block.
+1. Reads a markdown file in `improvement-ideas/*.md` and parses each `### Card: ...` block.
 2. Reads `TRELLO.md` and validates the referenced list and label names.
 3. Connects to the Trello board using `TRELLO_API_KEY`, `TRELLO_API_TOKEN`, and `TRELLO_BOARD_ID`.
 4. Uses `Card ID` as the sync key so reruns update existing synced cards instead of creating duplicates.
@@ -721,7 +721,7 @@ npm run trello:sync -- --apply --card-id=audit-gbp-business-type-address-service
 
 ### Backlog format contract
 
-Each card in `LOCAL_SEO_PLAN.md` must follow this structure:
+Each card in a `improvement-ideas/*.md` file must follow this structure:
 
 ```md
 ### Card: Example card title
