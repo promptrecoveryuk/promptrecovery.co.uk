@@ -16,7 +16,6 @@ import { basePath } from '@/app/base-path';
 import { Menu } from './icons';
 
 const pages: Record<string, string> = {
-  Home: '/',
   About: '/about/',
   Services: '/services/',
   FAQs: '/faqs/',
