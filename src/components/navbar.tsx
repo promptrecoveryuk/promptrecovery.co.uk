@@ -93,7 +93,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         {isActive ? (
           <Link
             href={pageRoute}
-            className="text-yellow bg-brand block rounded-sm px-3 py-2 text-xl font-normal hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:bg-transparent md:p-0 md:text-base md:hover:bg-transparent lg:text-xl md:dark:hover:bg-transparent"
+            className="bg-brand block rounded-sm px-3 py-2 text-base font-normal text-white underline underline-offset-4 hover:decoration-2 focus-visible:ring-2 md:border-0 md:bg-transparent md:p-0 md:text-base md:hover:bg-transparent lg:text-base md:dark:hover:bg-transparent"
             aria-current="page"
             onClick={() => closeMenu()}
           >
@@ -102,7 +102,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         ) : (
           <Link
             href={pageRoute}
-            className="hover:text-yellow md:hover:text-yellow focus-visible:ring-yellow block rounded px-3 py-2 text-xl font-normal text-white hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:p-0 md:text-base md:hover:bg-transparent lg:text-xl md:dark:hover:bg-transparent"
+            className="focus-visible:ring-yellow block rounded px-3 py-2 text-base font-normal text-white hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:p-0"
             onClick={() => closeMenu()}
           >
             {pageName}
@@ -113,11 +113,11 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
   });
 
   return (
-    <nav ref={navRef} className="bg-navy border-default fixed inset-s-0 top-0 z-40 w-full border-b">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 pt-4 pb-0">
+    <nav ref={navRef} className="bg-navy fixed inset-s-0 top-0 z-40 w-full">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 pt-6 pb-4 md:px-8">
         <Link
           href="/"
-          className="focus-visible:ring-yellow flex items-center space-x-3 rounded-sm focus-visible:ring-2 focus-visible:outline-none rtl:space-x-reverse"
+          className="focus-visible:ring-yellow flex h-8 items-center space-x-3 rounded-sm focus-visible:ring-2 focus-visible:outline-none md:h-9 lg:h-10 rtl:space-x-reverse"
         >
           <Image
             src={`${basePath}/images/logo-128x128.png`}
@@ -183,7 +183,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
-            className="text-body rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:ring-yellow inline-flex h-10 w-10 items-center justify-center p-2 text-sm focus:ring-2 focus:outline-none md:hidden"
+            className="rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:ring-yellow inline-flex h-10 w-10 items-center justify-center p-2 text-sm text-white focus:ring-2 focus:outline-none md:hidden"
             aria-controls="navbar-sticky"
             aria-expanded="false"
           >
@@ -192,7 +192,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           </button>
         </div>
         <div className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto" id="navbar-sticky">
-          <ul className="border-default rounded-base mt-4 mb-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:mb-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:mb-4 lg:space-x-8 rtl:space-x-reverse">
+          <ul className="border-default rounded-base mt-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:space-x-8 rtl:space-x-reverse">
             {menuItemLinks}
           </ul>
         </div>
