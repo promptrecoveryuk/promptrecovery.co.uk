@@ -35,25 +35,17 @@ export default function Footer({
 }) {
   return (
     <footer className="bg-navy">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+      <div className="mx-auto w-full max-w-7xl px-8 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mr-4 mb-6 md:mb-0">
-            <Link href="/" className="flex items-center md:flex-col lg:flex-row">
+            <Link href="/" className="flex h-8 items-center md:h-9 md:flex-col lg:h-10 lg:flex-row">
               <Image
-                src={`${basePath}/images/logo-128x128.png`}
-                width={128}
-                height={128}
-                className="me-3 h-32"
+                src={`${basePath}/images/logo-v2-1429x289.png`}
+                width={1429}
+                height={289}
+                className="h-[40px] w-[180px]"
                 alt="Prompt Recovery Logo"
               />
-              <p>
-                <span className="block text-left text-2xl font-semibold whitespace-nowrap text-white md:text-center">
-                  Prompt Recovery
-                </span>
-                <span className="block text-left text-sm text-white md:text-center">
-                  Leggatts Wood Ave, Watford, WD24 6RR
-                </span>
-              </p>
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-[1fr_1fr_2fr] sm:gap-6">
