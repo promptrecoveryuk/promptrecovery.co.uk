@@ -16,7 +16,7 @@ import { basePath } from '@/app/base-path';
 import { Menu } from './icons';
 
 const pages: Record<string, string> = {
-  Home: '/',
+  // Home: '/',
   About: '/about/',
   Services: '/services/',
   FAQs: '/faqs/',
@@ -121,27 +121,24 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           className="focus-visible:ring-yellow flex h-8 items-center space-x-3 rounded-sm focus-visible:ring-2 focus-visible:outline-none md:h-9 lg:h-10 rtl:space-x-reverse"
         >
           <Image
-            src={`${basePath}/images/logo-128x128.png`}
-            width={128}
-            height={128}
-            className="size-18 md:size-14 lg:size-18"
+            src={`${basePath}/images/logo-v2-1429x289.png`}
+            width={1429}
+            height={289}
+            className="block h-auto max-h-full w-auto max-w-full"
             alt="Prompt Recovery Logo"
           />
-          <span className="self-center pr-2 text-xl font-semibold whitespace-nowrap text-white md:text-base lg:text-xl">
-            Prompt Recovery
-          </span>
         </Link>
-        <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
+        <div className="xs:space-x-3 flex md:order-2 md:space-x-0 rtl:space-x-reverse">
           <Link
             href={`tel:${phoneNumber}`}
-            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent px-[10px] py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base"
+            className="bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border inline border border-transparent px-[10px] py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base"
           >
             <span className="block text-center">Call Now</span>
             <span className="block text-center text-xs">24hr Mon-Sat</span>
           </Link>
           <Link
             href={`https://wa.me/${phoneNumber}`}
-            className="xs:inline focus:ring-yellow rounded-base ml-0 box-border hidden border border-transparent bg-transparent px-2 py-0 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none lg:ml-4"
+            className="focus:ring-yellow rounded-base ml-0 box-border inline border border-transparent bg-transparent py-0 pl-2 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none lg:ml-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -53,23 +53,23 @@ export default function HomePage() {
     <main className="flex min-h-screen flex-col justify-center">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       {/*-- Hero --*/}
-      <div className="from-primary-100 dark:from-primary-950 bg-light-grey relative bg-linear-to-bl via-transparent dark:via-transparent">
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-36">
+      <div className="from-primary-100 dark:from-primary-950 bg-navy relative bg-linear-to-bl via-transparent text-white dark:via-transparent">
+        <div className="mx-auto max-w-7xl px-6 py-10 pt-36 md:px-8 lg:py-14 lg:pt-42">
           {/*-- Grid --*/}
           <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
             <div>
               {/*-- Title --*/}
               <div className="mt-4 md:mb-12">
                 <h1 className="text-foreground font-heading mb-4 text-center text-4xl font-semibold md:text-left lg:text-5xl">
-                  Breakdown Recovery in Watford
+                  Fast Breakdown Recovery in Watford
                 </h1>
                 <h2 className="text-foreground font-heading mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
                   Serving Watford,{' '}
-                  <Link href="/areas/bushey/" className="text-brand underline">
+                  <Link href="/areas/bushey/" className="text-yellow underline">
                     Bushey
                   </Link>
                   ,{' '}
-                  <Link href="/areas/rickmansworth/" className="text-brand underline">
+                  <Link href="/areas/rickmansworth/" className="text-yellow underline">
                     Rickmansworth
                   </Link>
                   ,{' '}
