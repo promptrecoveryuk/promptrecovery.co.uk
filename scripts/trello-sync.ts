@@ -58,11 +58,17 @@ const DEFAULT_IMPROVEMENT_IDEAS_DIR = 'improvement-ideas';
 async function main() {
   const rawArgs = process.argv.slice(2);
   const args = new Set(rawArgs);
+
+  if (args.has('--help') || args.has('-h')) {
+    printHelp();
+    return;
+  }
+
   const dryRun = !args.has('--apply') || args.has('--dry-run');
   const selectedCardId = getArgValue(rawArgs, '--card-id');
+  const backlogFilePath = resolveBacklogFilePath(rawArgs);
 
   const boardSpecPath = path.join(process.cwd(), DEFAULT_BOARD_SPEC_PATH);
-  const improvementIdeasPath = path.join(process.cwd(), DEFAULT_IMPROVEMENT_IDEAS_DIR);
   const apiKey = process.env.TRELLO_API_KEY;
   const token = process.env.TRELLO_API_TOKEN;
   const boardId = process.env.TRELLO_BOARD_ID;
@@ -73,7 +79,7 @@ async function main() {
 
   const [boardSpecMarkdown, parsedBacklogCards] = await Promise.all([
     fs.readFile(boardSpecPath, 'utf8'),
-    loadBacklogCards(improvementIdeasPath),
+    loadBacklogCards(backlogFilePath),
   ]);
   const backlogCards = filterCardsById(parsedBacklogCards, selectedCardId);
   const boardSpec = parseTrelloBoardSpec(boardSpecMarkdown);
@@ -106,7 +112,7 @@ async function main() {
 
   const actions = buildSyncActions(backlogCards, boardLists, boardLabels, boardCards, checklistsByCardId);
 
-  printSyncPlan(actions, dryRun, selectedCardId);
+  printSyncPlan(actions, dryRun, path.relative(process.cwd(), backlogFilePath), selectedCardId);
 
   if (dryRun) {
     return;
@@ -173,11 +179,11 @@ function validateCardsAgainstBoardSpec(cards: TrelloBacklogCard[], boardSpec: { 
     const parts: string[] = [];
 
     if (unknownLists.size > 0) {
-      parts.push(`Unknown lists in improvement-ideas/*.md: ${Array.from(unknownLists).join(', ')}`);
+      parts.push(`Unknown lists in selected backlog file: ${Array.from(unknownLists).join(', ')}`);
     }
 
     if (unknownLabels.size > 0) {
-      parts.push(`Unknown labels in improvement-ideas/*.md: ${Array.from(unknownLabels).join(', ')}`);
+      parts.push(`Unknown labels in selected backlog file: ${Array.from(unknownLabels).join(', ')}`);
     }
 
     fail(parts.join('\n'));
@@ -198,43 +204,30 @@ function filterCardsById(cards: TrelloBacklogCard[], selectedCardId?: string): T
   return filteredCards;
 }
 
-async function loadBacklogCards(improvementIdeasPath: string): Promise<TrelloBacklogCard[]> {
-  const improvementIdeaFiles = await getMarkdownFiles(improvementIdeasPath);
-  const improvementIdeaCards = (
-    await Promise.all(
-      improvementIdeaFiles.map(async (filePath) => {
-        const markdown = await fs.readFile(filePath, 'utf8');
-        return parseLocalSeoBacklog(markdown, path.relative(process.cwd(), filePath));
-      })
-    )
-  ).flat();
+async function loadBacklogCards(filePath: string): Promise<TrelloBacklogCard[]> {
+  if (!(await fileExists(filePath))) {
+    fail(`Trello backlog file not found: ${path.relative(process.cwd(), filePath)}`);
+  }
+
+  const stats = await fs.stat(filePath);
+  if (!stats.isFile()) {
+    fail(`Trello backlog path must be a markdown file: ${path.relative(process.cwd(), filePath)}`);
+  }
+
+  if (path.extname(filePath) !== '.md') {
+    fail(`Trello backlog file must use the .md extension: ${path.relative(process.cwd(), filePath)}`);
+  }
+
+  const markdown = await fs.readFile(filePath, 'utf8');
+  const sourcePath = path.relative(process.cwd(), filePath);
+  const improvementIdeaCards = parseLocalSeoBacklog(markdown, sourcePath);
 
   if (improvementIdeaCards.length > 0) {
     assertUniqueCardIds(improvementIdeaCards);
     return improvementIdeaCards;
   }
 
-  fail(`No Trello backlog cards found in "${DEFAULT_IMPROVEMENT_IDEAS_DIR}/".`);
-}
-
-async function getMarkdownFiles(directoryPath: string): Promise<string[]> {
-  if (!(await fileExists(directoryPath))) {
-    return [];
-  }
-
-  const entries = await fs.readdir(directoryPath, { withFileTypes: true });
-  const filePaths = await Promise.all(
-    entries.map(async (entry) => {
-      const entryPath = path.join(directoryPath, entry.name);
-      if (entry.isDirectory()) {
-        return getMarkdownFiles(entryPath);
-      }
-
-      return entry.isFile() && entry.name.endsWith('.md') ? [entryPath] : [];
-    })
-  );
-
-  return filePaths.flat().sort();
+  fail(`No Trello backlog cards found in "${sourcePath}".`);
 }
 
 function assertUniqueCardIds(cards: TrelloBacklogCard[]) {
@@ -390,12 +383,13 @@ async function applyChecklistPlan(client: TrelloClient, cardId: string, checklis
   }
 }
 
-function printSyncPlan(actions: SyncAction[], dryRun: boolean, selectedCardId?: string) {
+function printSyncPlan(actions: SyncAction[], dryRun: boolean, backlogFilePath: string, selectedCardId?: string) {
   const createCount = actions.filter((action) => action.type === 'create').length;
   const updateCount = actions.filter((action) => action.type === 'update').length;
   const noopCount = actions.filter((action) => action.type === 'noop').length;
 
   console.log(`${dryRun ? 'Dry run' : 'Apply'} mode`);
+  console.log(`Backlog file: ${backlogFilePath}`);
   if (selectedCardId) {
     console.log(`Card filter: ${selectedCardId}`);
   }
@@ -448,6 +442,40 @@ function getArgValue(args: string[], flagName: string): string | undefined {
   }
 
   return nextArg.trim();
+}
+
+function resolveBacklogFilePath(args: string[]): string {
+  const fileArg = getArgValue(args, '--file');
+  if (!fileArg) {
+    fail('Missing required --file <markdown-file> option. Run `npm run trello:sync -- --help` for usage.');
+  }
+
+  const normalizedFileArg = fileArg.endsWith('.md') ? fileArg : `${fileArg}.md`;
+  const candidatePath = path.isAbsolute(normalizedFileArg)
+    ? normalizedFileArg
+    : path.join(process.cwd(), normalizedFileArg);
+
+  if (fileArg.includes('/') || fileArg.includes(path.sep) || path.isAbsolute(fileArg)) {
+    return candidatePath;
+  }
+
+  return path.join(process.cwd(), DEFAULT_IMPROVEMENT_IDEAS_DIR, normalizedFileArg);
+}
+
+function printHelp() {
+  console.log(`Usage:
+  npm run trello:sync -- --file <markdown-file> [--dry-run|--apply] [--card-id <card-id>]
+
+Required:
+  --file <markdown-file>  Backlog markdown file to process. Use either a path such as
+                          improvement-ideas/LOCAL_SEO_PLAN.md or a filename in
+                          improvement-ideas/ such as LOCAL_SEO_PLAN.md.
+
+Options:
+  --dry-run               Preview the sync without changing Trello. This is the default mode.
+  --apply                 Apply creates and updates to Trello.
+  --card-id <card-id>     Process one Card ID from the selected file.
+  --help, -h              Show this help text.`);
 }
 
 async function fileExists(filePath: string): Promise<boolean> {

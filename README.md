@@ -682,35 +682,39 @@ Run `npm run fetch-reviews` whenever you want to pull in new reviews, then commi
 
 ## Trello Card Sync — `trello:sync`
 
-The backlogs in [`improvement-ideas/*.md`](improvement-ideas/) can be synced to Trello as cards on the board described
-in [`TRELLO.md`](TRELLO.md).
+Backlog markdown files in [`improvement-ideas/`](improvement-ideas/) can be synced to Trello as cards on the board
+described in [`TRELLO.md`](TRELLO.md). The sync script always requires an explicit file; it does not default to
+processing every file in the folder.
 
 ### Running the script
 
 Preview the sync without changing Trello:
 
 ```bash
-npm run trello:sync -- --dry-run
+npm run trello:sync -- --file LOCAL_SEO_PLAN.md --dry-run
 ```
 
 Apply the sync to Trello:
 
 ```bash
-npm run trello:sync -- --apply
+npm run trello:sync -- --file LOCAL_SEO_PLAN.md --apply
 ```
 
-Sync a single card by `Card ID`:
+Sync a single card by `Card ID` from the selected file:
 
 ```bash
-npm run trello:sync -- --dry-run --card-id=audit-gbp-business-type-address-service-areas
-npm run trello:sync -- --apply --card-id=audit-gbp-business-type-address-service-areas
+npm run trello:sync -- --file LOCAL_SEO_PLAN.md --dry-run --card-id=audit-gbp-business-type-address-service-areas
+npm run trello:sync -- --file LOCAL_SEO_PLAN.md --apply --card-id=audit-gbp-business-type-address-service-areas
 ```
+
+You can pass either a filename from `improvement-ideas/`, such as `LOCAL_SEO_PLAN.md`, or a relative path, such as
+`improvement-ideas/LOCAL_SEO_PLAN.md`.
 
 ### What the script does
 
 `scripts/trello-sync.ts`:
 
-1. Reads a markdown file in `improvement-ideas/*.md` and parses each `### Card: ...` block.
+1. Reads the markdown file passed with `--file` and parses each `### Card: ...` block.
 2. Reads `TRELLO.md` and validates the referenced list and label names.
 3. Connects to the Trello board using `TRELLO_API_KEY`, `TRELLO_API_TOKEN`, and `TRELLO_BOARD_ID`.
 4. Uses `Card ID` as the sync key so reruns update existing synced cards instead of creating duplicates.
@@ -752,7 +756,7 @@ Notes:
 ### Safe usage
 
 - Start with `--dry-run` every time you change the backlog format or label names.
-- Use `--card-id` first if you want to test a single card before syncing the whole backlog.
+- Use `--card-id` first if you want to test a single card before syncing all cards in the selected file.
 - `npm test` includes parser tests for the Trello backlog format, so run it after changing the sync logic or markdown
   contract.
 

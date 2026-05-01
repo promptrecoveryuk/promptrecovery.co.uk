@@ -18,7 +18,7 @@ Guidance for coding agents working in this repository.
 - Unit tests: `npm test`
 - UI tests: `npm run test:ui`
 - Build static export: `npm run build`
-- Trello backlog dry-run sync: `npm run trello:sync -- --dry-run`
+- Trello backlog dry-run sync: `npm run trello:sync -- --file LOCAL_SEO_PLAN.md --dry-run`
 
 ## Architecture
 
@@ -207,7 +207,7 @@ If FAQ answers are used in structured data, strip markdown first rather than emi
 - Trello labels in `improvement-ideas/*.md` must match the names in `TRELLO.md` exactly
 - The Trello card description contains the narrative sections; acceptance criteria are synced as a checklist named
   `Acceptance criteria`
-- Prefer `npm run trello:sync -- --dry-run` before applying Trello changes
+- Prefer `npm run trello:sync -- --file <filename>.md --dry-run` before applying Trello changes
 - If you change the Trello backlog format or sync behavior, update README and the Trello backlog tests
 
 ## Testing Guidance
