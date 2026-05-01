@@ -19,6 +19,7 @@
     "format:write": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint-staged": "lint-staged",
     "start": "next start",
     "test": "node --import tsx --test src/__tests__/*.test.ts",
     "trello:sync": "node --import tsx scripts/trello-sync.ts",
@@ -51,11 +52,19 @@
     "eslint-config-next": "^16.2.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "postcss": "^8.0.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "serve": "^14.2.6",
     "tailwindcss": "^4.0.0",
     "tsx": "^4.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "eslint --fix --no-warn-ignored",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,css,scss,yml,yaml}": "prettier --write"
   }
 }

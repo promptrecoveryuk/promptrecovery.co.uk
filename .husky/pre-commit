@@ -1,14 +1,6 @@
 # Pre-commit hook — runs on every `git commit`.
 #
-# 1. ESLint auto-fix: fixes what it can; exits non-zero (blocking the commit)
-#    if any errors cannot be fixed automatically.
-# 2. Prettier reformat: rewrites files to match .prettierrc.
-# 3. git add -u: re-stages files that were modified by the fixers above so the
-#    commit contains the cleaned-up versions rather than the originals.
-#    Note: `git add -u` stages ALL modifications to tracked files, including
-#    any changes you intentionally left unstaged. If you need finer control,
-#    consider adopting lint-staged (https://github.com/lint-staged/lint-staged).
+# lint-staged runs fixers against only the files staged for this commit and
+# re-stages its own fixes without sweeping in unrelated unstaged changes.
 
-npm run lint:fix || exit 1
-npm run format:write
-git add -u
+npm run lint-staged

@@ -853,12 +853,13 @@ it, files and folders starting with `_` (which Next.js uses internally) would be
 
 ## Linting & Formatting
 
-Two separate tools handle code quality:
+ESLint and Prettier handle code quality, with lint-staged wiring them into commits:
 
-| Tool                             | Config file         | Responsibility                                     |
-| -------------------------------- | ------------------- | -------------------------------------------------- |
-| [ESLint](https://eslint.org/)    | `eslint.config.mjs` | Code correctness, style rules, import order        |
-| [Prettier](https://prettier.io/) | `.prettierrc`       | Consistent code formatting, Tailwind class sorting |
+| Tool                                                      | Config file         | Responsibility                                            |
+| --------------------------------------------------------- | ------------------- | --------------------------------------------------------- |
+| [ESLint](https://eslint.org/)                             | `eslint.config.mjs` | Code correctness, style rules, import order               |
+| [Prettier](https://prettier.io/)                          | `.prettierrc`       | Consistent code formatting, Tailwind class sorting        |
+| [lint-staged](https://github.com/lint-staged/lint-staged) | `package.json`      | Runs fixers only against files staged for the next commit |
 
 ### ESLint
 
@@ -890,6 +891,24 @@ npm run format:write  # reformat all files in place
 - `proseWrap: always` — wraps Markdown prose at `printWidth`, keeping the README readable in any editor
 - `plugins: ["prettier-plugin-tailwindcss"]` — automatically sorts Tailwind utility classes in `className` props into
   the [recommended order](https://tailwindcss.com/blog/automatic-class-sorting-with-prettier); no manual ordering needed
+
+### Staged file checks
+
+```bash
+npm run lint-staged
+```
+
+The Husky pre-commit hook (`.husky/pre-commit`) runs `npm run lint-staged` on every `git commit`. This only processes
+files already staged for the commit, so you can keep unrelated local changes unstaged without them being swept into the
+commit.
+
+Current staged-file rules:
+
+- `*.{js,jsx,ts,tsx,mjs,cjs}` — run `eslint --fix --no-warn-ignored`, then `prettier --write`
+- `*.{json,md,mdx,css,scss,yml,yaml}` — run `prettier --write`
+
+When a fixer changes a staged file, lint-staged re-stages that file's fixed version automatically. It does not run the
+full-repo `npm run lint:fix`, `npm run format:write`, or `git add -u` during commits.
 
 ### Running both together
 
