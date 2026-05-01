@@ -103,7 +103,9 @@ export function ContentArticlePage({
 
         {faqs && faqs.length > 0 && (
           <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading font-heading mb-6 text-xl font-semibold">Common questions</h2>
+            <h2 className="text-heading font-heading decoration-yellow mb-4 text-2xl font-semibold underline decoration-3 underline-offset-8">
+              Common questions
+            </h2>
             {faqs.map((faq) => (
               <FaqItem key={faq.question} faq={faq} />
             ))}
@@ -112,7 +114,9 @@ export function ContentArticlePage({
 
         {reviews && reviews.length > 0 && (
           <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading font-heading mb-0 text-xl font-semibold">What our customers say</h2>
+            <h2 className="text-heading font-heading decoration-yellow mb-0 text-2xl font-semibold underline decoration-3 underline-offset-8">
+              What our customers say
+            </h2>
             {reviews.map((review) => (
               <ReviewCardV2 key={review.authorUrl} review={review} />
             ))}
