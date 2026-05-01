@@ -57,6 +57,10 @@ export default function AboutPage() {
                 <Link href="/areas/rickmansworth/" className="text-brand underline">
                   Rickmansworth
                 </Link>
+                ,{' '}
+                <Link href="/areas/st-albans/" className="text-brand underline">
+                  St Albans
+                </Link>
                 , and nearby areas.
               </p>
               <p className="text-thin pb-4 font-normal">

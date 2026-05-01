@@ -18,7 +18,7 @@ export function ReviewCardV2({ review }: { review: GoogleReview }) {
       {/*-- Testimonials --*/}
       <div className="relative mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8">
         {/*-- Blockquote --*/}
-        <blockquote className="text-center lg:mx-auto lg:w-3/5">
+        <blockquote className="text-left lg:mx-auto lg:w-3/5">
           <GoogleUserProfile userProfile={review}>
             <p className="text-left text-sm text-gray-500">{review.authorDetails}</p>
           </GoogleUserProfile>
@@ -43,7 +43,11 @@ export function ReviewCardV2({ review }: { review: GoogleReview }) {
                   fill="currentColor"
                 />
               </svg>
-              <span className="text-foreground relative z-10 text-xl font-normal italic">{review.text}</span>
+              {review.text.split('\n').map((line, index) => (
+                <span key={index} className="text-foreground relative z-10 mb-4 block text-xl font-normal">
+                  {line}
+                </span>
+              ))}
             </p>
           </div>
         </blockquote>

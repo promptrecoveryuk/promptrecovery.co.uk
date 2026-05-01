@@ -41,12 +41,12 @@ export default function HomePage() {
   });
   const googleReviews = { reviews: [] as typeof staticGoogleReviews };
   googleReviews.reviews = [
-    staticGoogleReviews[0],
-    staticGoogleReviews[2],
-    staticGoogleReviews[4],
-    staticGoogleReviews[7],
-    staticGoogleReviews[14],
-    staticGoogleReviews[21],
+    staticGoogleReviews[1],
+    staticGoogleReviews[3],
+    staticGoogleReviews[5],
+    staticGoogleReviews[8],
+    staticGoogleReviews[15],
+    staticGoogleReviews[22],
   ];
 
   return (
@@ -71,6 +71,10 @@ export default function HomePage() {
                   ,{' '}
                   <Link href="/areas/rickmansworth/" className="text-brand underline">
                     Rickmansworth
+                  </Link>
+                  ,{' '}
+                  <Link href="/areas/st-albans/" className="text-brand underline">
+                    St Albans
                   </Link>
                   , and the surrounding areas
                 </h2>
