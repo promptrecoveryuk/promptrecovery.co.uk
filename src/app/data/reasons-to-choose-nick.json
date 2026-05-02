@@ -10,9 +10,9 @@
     "icon": "BadgePoundSterling"
   },
   {
-    "name": "Fully insured",
-    "description": "Fully insured recovery carried out by an experienced Class 1 HGV driver using a DAF LF flatbed truck for safe vehicle transport.",
-    "icon": "FileCheck"
+    "name": "Go the extra mile",
+    "description": "24 hours a day, Monday to Saturday. Overnight storage. Last-minute destination changes. We will sort it.",
+    "icon": "ArrowRight"
   },
   {
     "name": "Deliver when others let you down",
@@ -20,14 +20,15 @@
     "icon": "ShieldCheck"
   },
   {
-    "name": "Valued service",
-    "description": "Customers come back, and they tell their friends.",
-    "icon": "Star"
+    "name": "250+ 5-star Google reviews",
+    "description": "A public track record built by local drivers who needed clear communication, careful recovery and fair upfront pricing.",
+    "icon": "Trophy",
+    "urlPath": "/blog/250-plus-5-star-google-reviews/"
   },
   {
-    "name": "Go the extra mile",
-    "description": "24 hours a day, Monday to Saturday. Overnight storage. Last-minute destination changes. We will sort it.",
-    "icon": "ArrowRight"
+    "name": "Fully insured",
+    "description": "Fully insured recovery carried out by an experienced Class 1 HGV driver using a DAF LF flatbed truck for safe vehicle transport.",
+    "icon": "FileCheck"
   },
   {
     "name": "Fully transparent, never any surprises",
@@ -35,9 +36,8 @@
     "icon": "Eye"
   },
   {
-    "name": "250+ 5-star Google reviews",
-    "description": "A public track record built by local drivers who needed clear communication, careful recovery and fair upfront pricing.",
-    "icon": "Trophy",
-    "urlPath": "/blog/250-plus-5-star-google-reviews/"
+    "name": "Valued service",
+    "description": "Customers come back, and they tell their friends.",
+    "icon": "Star"
   }
 ]
