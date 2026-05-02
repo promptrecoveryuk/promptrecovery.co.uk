@@ -37,6 +37,7 @@ export {
   ShieldCheck,
   Star,
   TriangleAlert,
+  Trophy,
   Truck,
   UserStar,
   Van,

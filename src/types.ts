@@ -90,6 +90,7 @@ export type ItemWithIcon = {
   name: string;
   description: string;
   icon: string;
+  urlPath?: string;
 };
 
 export type ItemWithIconAndPicture = {
