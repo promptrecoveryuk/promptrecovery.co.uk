@@ -33,5 +33,11 @@
     "name": "Fully transparent, never any surprises",
     "description": "Quote given before arrival. Price confirmed before we touch your vehicle. That's it.",
     "icon": "Eye"
+  },
+  {
+    "name": "250+ 5-star Google reviews",
+    "description": "A public track record built by local drivers who needed clear communication, careful recovery and fair upfront pricing.",
+    "icon": "Trophy",
+    "urlPath": "/blog/250-plus-5-star-google-reviews/"
   }
 ]
