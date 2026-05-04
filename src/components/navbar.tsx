@@ -16,7 +16,6 @@ import { basePath } from '@/app/base-path';
 import { Menu } from './icons';
 
 const pages: Record<string, string> = {
-  // Home: '/',
   About: '/about/',
   Services: '/services/',
   FAQs: '/faqs/',
@@ -115,10 +114,10 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
 
   return (
     <nav ref={navRef} className="bg-navy fixed inset-s-0 top-0 z-40 w-full">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 pt-6 pb-4 md:px-8">
+      <div className="xs:px-6 mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 pt-6 pb-2 md:px-8 md:pb-0">
         <Link
           href="/"
-          className="focus-visible:ring-yellow flex h-8 items-center space-x-3 rounded-sm focus-visible:ring-2 focus-visible:outline-none md:h-9 lg:h-10 rtl:space-x-reverse"
+          className="focus-visible:ring-yellow xs:h-8 flex h-7 items-center space-x-3 rounded-sm focus-visible:ring-2 focus-visible:outline-none md:h-9 lg:h-10 rtl:space-x-reverse"
         >
           <Image
             src={`${basePath}/images/logo-v2-1429x289.png`}
@@ -131,7 +130,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         <div className="xs:space-x-3 flex md:order-2 md:space-x-0 rtl:space-x-reverse">
           <Link
             href={`tel:${phoneNumber}`}
-            className="bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border inline border border-transparent px-[10px] py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base"
+            className="bg-brand hover:bg-brand-light focus:ring-yellow box-border inline rounded-[100px] border border-transparent px-[16px] py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base"
           >
             <span className="block text-center">Call Now</span>
             <span className="block text-center text-xs">24hr Mon-Sat</span>
@@ -195,7 +194,11 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           </ul>
         </div>
       </div>
-      {children && <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center pb-2">{children}</div>}
+      {children && (
+        <div className="xs:px-6 mx-auto flex max-w-7xl flex-wrap items-center justify-center px-4 pb-2 md:px-8">
+          {children}
+        </div>
+      )}
     </nav>
   );
 }

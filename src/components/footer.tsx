@@ -35,7 +35,7 @@ export default function Footer({
 }) {
   return (
     <footer className="bg-navy">
-      <div className="mx-auto w-full max-w-7xl px-8 py-6 lg:py-8">
+      <div className="xs:px-6 mx-auto w-full max-w-7xl px-4 py-6 md:px-8 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mr-4 mb-6 md:mb-0">
             <Link href="/" className="flex h-8 items-center md:h-9 md:flex-col lg:h-10 lg:flex-row">

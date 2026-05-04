@@ -106,7 +106,7 @@ export function ContactForm({ action, accessKey }: { action: string; accessKey: 
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="bg-brand hover:bg-brand-light focus:ring-yellow rounded-base text-normal box-border border border-transparent px-4 py-2.5 leading-5 font-medium text-white shadow-xs focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
+            className="bg-brand hover:bg-brand-light focus:ring-yellow text-normal box-border rounded-[100px] border border-transparent px-4 py-2.5 leading-5 font-medium text-white shadow-xs focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
           >
             {status === 'loading' ? 'Sending…' : 'Request quote'}
           </button>
