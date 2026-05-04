@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { twJoin } from 'tailwind-merge';
+
+import { BackgroundMode } from '@/types';
 
 import { ChevronLeft, ChevronRight } from './icons';
 
@@ -18,9 +21,18 @@ import { ChevronLeft, ChevronRight } from './icons';
  *
  * @param props.children - Slide content; each direct child becomes one slide.
  * @param props.interval - Milliseconds between automatic slide transitions. Defaults to `10_000`.
+ * @param props.bgMode - The background style on which this component will be rendered
  * @see https://flowbite.com/docs/components/carousel/#default-slider
  */
-export function Carousel({ children, interval = 10_000 }: { children: React.ReactNode; interval?: number }) {
+export function Carousel({
+  children,
+  interval = 10_000,
+  bgMode = 'light',
+}: {
+  children: React.ReactNode;
+  interval?: number;
+  bgMode: BackgroundMode;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -81,7 +93,12 @@ export function Carousel({ children, interval = 10_000 }: { children: React.Reac
         className="group absolute start-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
         data-carousel-prev
       >
-        <span className="rounded-base group-focus:ring-yellow inline-flex h-10 w-10 items-center justify-center bg-white/30 group-hover:bg-white/50 group-focus:ring-2 group-focus:outline-none dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60">
+        <span
+          className={twJoin(
+            'rounded-base group-focus:ring-yellow inline-flex h-10 w-10 items-center justify-center group-focus:ring-2 group-focus:outline-none',
+            bgMode === 'light' ? 'bg-white/30 group-hover:bg-white/50' : 'bg-gray/30 group-hover:bg-gray/50'
+          )}
+        >
           <ChevronLeft className="h-5 w-5 text-white rtl:rotate-180" aria-hidden="true" />
           <span className="sr-only">Previous</span>
         </span>
@@ -93,7 +110,12 @@ export function Carousel({ children, interval = 10_000 }: { children: React.Reac
         className="group absolute end-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
         data-carousel-next
       >
-        <span className="rounded-base group-focus:ring-yellow inline-flex h-10 w-10 items-center justify-center bg-white/30 group-hover:bg-white/50 group-focus:ring-2 group-focus:outline-none dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60">
+        <span
+          className={twJoin(
+            'rounded-base group-focus:ring-yellow inline-flex h-10 w-10 items-center justify-center group-focus:ring-2 group-focus:outline-none',
+            bgMode === 'light' ? 'bg-white/30 group-hover:bg-white/50' : 'bg-gray/30 group-hover:bg-gray/50'
+          )}
+        >
           <ChevronRight className="h-5 w-5 text-white rtl:rotate-180" aria-hidden="true" />
           <span className="sr-only">Next</span>
         </span>

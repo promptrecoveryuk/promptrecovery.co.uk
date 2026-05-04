@@ -1,4 +1,6 @@
-import { GoogleReview } from '@/types';
+import { twJoin } from 'tailwind-merge';
+
+import { BackgroundMode, GoogleReview } from '@/types';
 
 import { GoogleUserProfile } from './google-user-profile';
 import { Rating } from './rating';
@@ -10,16 +12,17 @@ import { Rating } from './rating';
  * quotation mark SVG.
  *
  * @param props.review - Google review data object containing text, rating, author details, and date.
+ * @param props.bgMode - The background style on which this component will be rendered
  * @see https://preline.co/examples/testimonials.html#testimonials-simple-center-aligned-with-logo
  */
-export function ReviewCardV2({ review }: { review: GoogleReview }) {
+export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleReview; bgMode: BackgroundMode }) {
   return (
     <>
       {/*-- Testimonials --*/}
       <div className="relative mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8">
         {/*-- Blockquote --*/}
         <blockquote className="text-left lg:mx-auto lg:w-3/5">
-          <GoogleUserProfile userProfile={review}>
+          <GoogleUserProfile userProfile={review} bgMode={bgMode}>
             <p className="text-left text-sm text-gray-500">{review.authorDetails}</p>
           </GoogleUserProfile>
           <div className="mt-1 text-left">
@@ -30,7 +33,10 @@ export function ReviewCardV2({ review }: { review: GoogleReview }) {
           <div className="mt-4 lg:mt-6">
             <p className="text-foreground relative text-lg font-medium sm:text-xl md:text-xl md:leading-normal">
               <svg
-                className="absolute start-4 top-0 size-16 -translate-x-8 -translate-y-8 transform text-black/20 sm:h-24 sm:w-24 lg:start-0"
+                className={twJoin(
+                  'absolute start-4 top-0 size-16 -translate-x-8 -translate-y-8 transform sm:h-24 sm:w-24 lg:start-0',
+                  bgMode === 'light' ? 'text-black/20' : 'text-white/30'
+                )}
                 width="16"
                 height="13"
                 viewBox="0 0 16 13"

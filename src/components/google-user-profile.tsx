@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { twJoin } from 'tailwind-merge';
 
-import { GoogleUser } from '@/types';
+import { BackgroundMode, GoogleUser } from '@/types';
 
 /**
  * Renders a Google reviewer's avatar and display name as a linked profile.
@@ -11,8 +12,17 @@ import { GoogleUser } from '@/types';
  *
  * @param props.userProfile - Reviewer profile data: `author`, `authorPhoto`, and `authorUrl`.
  * @param props.children - Optional content rendered below the author's name inside the link.
+ * @param props.bgMode - The background style on which this component will be rendered
  */
-export function GoogleUserProfile({ userProfile, children }: { userProfile: GoogleUser; children?: React.ReactNode }) {
+export function GoogleUserProfile({
+  userProfile,
+  children,
+  bgMode = 'light',
+}: {
+  userProfile: GoogleUser;
+  children?: React.ReactNode;
+  bgMode: BackgroundMode;
+}) {
   return (
     <Link
       href={userProfile.authorUrl}
@@ -25,7 +35,7 @@ export function GoogleUserProfile({ userProfile, children }: { userProfile: Goog
         src={userProfile.authorPhoto}
         alt={userProfile.author}
       />
-      <div className="text-heading font-medium">
+      <div className={twJoin('font-medium', bgMode === 'light' ? 'text-heading' : 'text-white')}>
         <div className="text-left">{userProfile.author}</div>
         {children}
       </div>
