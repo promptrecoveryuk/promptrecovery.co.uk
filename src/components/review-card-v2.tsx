@@ -15,7 +15,7 @@ import { Rating } from './rating';
  * @param props.bgMode - The background style on which this component will be rendered
  * @see https://preline.co/examples/testimonials.html#testimonials-simple-center-aligned-with-logo
  */
-export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleReview; bgMode: BackgroundMode }) {
+export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleReview; bgMode?: BackgroundMode }) {
   return (
     <>
       {/*-- Testimonials --*/}

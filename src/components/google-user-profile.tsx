@@ -21,7 +21,7 @@ export function GoogleUserProfile({
 }: {
   userProfile: GoogleUser;
   children?: React.ReactNode;
-  bgMode: BackgroundMode;
+  bgMode?: BackgroundMode;
 }) {
   return (
     <Link

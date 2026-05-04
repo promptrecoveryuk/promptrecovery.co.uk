@@ -31,7 +31,7 @@ export function Carousel({
 }: {
   children: React.ReactNode;
   interval?: number;
-  bgMode: BackgroundMode;
+  bgMode?: BackgroundMode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
