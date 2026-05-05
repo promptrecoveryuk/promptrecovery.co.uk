@@ -1,3 +1,4 @@
+import { joinUrl, resolveSiteUrl } from '../../lib/site-url';
 import { basePath } from '../base-path';
 import faqs from './faqs.json';
 import googleReviews from './google-reviews.json';
@@ -8,20 +9,7 @@ import services from './services.json';
 import staticGoogleReviews from './static-google-reviews.json';
 import values from './values.json';
 
-function normalizeBasePath(path: string): string {
-  if (!path) return '';
-
-  return `/${path.replace(/^\/+|\/+$/g, '')}`;
-}
-
-function joinUrl(base: string, path: string): string {
-  const normalizedBase = base.replace(/\/+$/g, '');
-  const normalizedPath = path ? `/${path.replace(/^\/+/, '')}` : '';
-
-  return `${normalizedBase}${normalizedPath}`;
-}
-
-const siteUrl = joinUrl(seoData.url, normalizeBasePath(basePath));
+const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_ORIGIN ?? seoData.url, basePath);
 
 const seo = {
   ...seoData,
