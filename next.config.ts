@@ -22,9 +22,11 @@ const nextConfig: NextConfig = {
   // rather than `about.html`, so this prevents 404s on direct navigation.
   trailingSlash: true,
 
-  // Set NEXT_PUBLIC_BASE_PATH=/promptrecovery.co.uk when building for GitHub Pages
-  // (project page URL: username.github.io/repo-name). Leave it unset for the
-  // custom domain (promptrecovery.co.uk) and for local dev / Playwright tests.
+  // Set NEXT_PUBLIC_BASE_PATH=/promptrecovery.co.uk when building for a GitHub
+  // Pages project URL (username.github.io/repo-name). Pair it with
+  // NEXT_PUBLIC_SITE_ORIGIN=https://username.github.io so metadata, sitemap,
+  // and JSON-LD URLs resolve to the same host. Leave it unset for the custom
+  // domain (promptrecovery.co.uk) and for local dev / Playwright tests.
   basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? '',
 };
 

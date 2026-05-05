@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   ],
   formatDetection: { telephone: true },
   icons: { icon: `${seo.url}/favicon.png` },
-  manifest: '/manifest.json',
+  manifest: `${seo.url}/manifest.json`,
   openGraph: baseOpenGraph,
   twitter: {
     card: 'summary_large_image',

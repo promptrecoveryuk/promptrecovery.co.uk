@@ -1,0 +1,109 @@
+# GitHub Actions workflow: manually deploy any branch/tag/SHA to the regular
+# GitHub Pages project URL, e.g. https://promptrecoveryuk.github.io/promptrecovery.co.uk/.
+#
+# This is for temporary branch deployments. It publishes to the same GitHub Pages
+# site as the production workflow, so running it replaces the currently deployed
+# Pages artifact until the production workflow is run again.
+
+name: Deploy branch to regular GitHub Pages URL
+
+run-name: Deploy ${{ inputs.ref || github.ref_name }} to github.io Pages URL
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch, tag, or SHA to deploy. Leave blank to deploy the selected workflow ref.'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build branch static site
+    runs-on: ubuntu-latest
+    environment: github-pages
+    env:
+      REGULAR_PAGES_BASE_PATH: /${{ github.event.repository.name }}
+      REGULAR_PAGES_ORIGIN: https://${{ github.repository_owner }}.github.io
+      REGULAR_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Fetch latest Google Reviews
+        env:
+          NODE_ENV: production
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+        run: npm run fetch-reviews
+
+      - name: Build for regular GitHub Pages URL
+        run: npm run build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SITE_ORIGIN: ${{ env.REGULAR_PAGES_ORIGIN }}
+          NEXT_PUBLIC_BASE_PATH: ${{ env.REGULAR_PAGES_BASE_PATH }}
+          FORM_ACCESS_KEY: ${{ secrets.FORM_ACCESS_KEY }}
+          GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
+          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+          APP_INDEX_MODE: NOINDEX
+
+      - name: Remove custom domain marker from artifact
+        run: rm -f out/CNAME
+
+      - name: Verify branch Pages artifact
+        run: |
+          test -f out/index.html
+          test ! -f out/CNAME
+
+      - name: Report regular GitHub Pages URL
+        run: echo "::notice title=Regular GitHub Pages URL::${REGULAR_PAGES_URL}"
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run UI tests
+        run: npm run test:ui
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./out
+
+  deploy:
+    name: Deploy branch to regular Pages URL
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
