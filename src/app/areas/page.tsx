@@ -35,7 +35,7 @@ export default function AreaPage() {
     <main className="flex min-h-screen flex-col justify-center">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       <div className="bg-navy mb-10 lg:mb-6">
-        <div className="mx-auto max-w-340 px-4 py-10 pt-42 text-white sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
+        <div className="mx-auto max-w-340 px-4 py-10 pt-32 text-white sm:px-6 lg:px-8 lg:py-14 lg:pt-36">
           <PageHeader
             title="Areas"
             subtitle="Local breakdown recovery pages for Watford, nearby towns, and the roads we regularly cover."

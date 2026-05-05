@@ -76,9 +76,9 @@ export function ContentArticlePage({
       </div>
 
       <article>
-        <div className="bg-navy mb-2 text-white">
+        <div className="bg-linear-(--navy-white-gradient) text-white">
           <div className="xs:px-6 mx-auto max-w-2xl px-4 pb-6 sm:px-6 lg:px-8 lg:pb-10">
-            <header className="">
+            <header className="pt-4">
               <h1 className="font-heading text-center text-3xl leading-tight font-bold md:text-left md:text-4xl">
                 {meta.title}
               </h1>
@@ -104,13 +104,13 @@ export function ContentArticlePage({
             </header>
           </div>
         </div>
-        <div className="xs:px-6 mx-auto max-w-2xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-14">
+        <div className="xs:px-6 mx-auto max-w-2xl px-4 pt-10 sm:px-6 lg:px-8">
           <MDXRemote source={content} components={mdxComponents} />
         </div>
       </article>
 
       {faqs && faqs.length > 0 && (
-        <aside className="xs:px-6 mx-auto mt-12 max-w-2xl border-t border-gray-200 px-4 pt-8 pb-6 sm:px-6 lg:px-8 lg:pb-10">
+        <aside className="xs:px-6 mx-auto mt-12 max-w-2xl border-t border-gray-200 px-4 pt-12 pb-6 sm:px-6 lg:px-8">
           <h2 className="text-heading font-heading decoration-yellow mb-4 text-2xl font-semibold underline decoration-3 underline-offset-8">
             Common questions
           </h2>
@@ -121,7 +121,7 @@ export function ContentArticlePage({
       )}
 
       {reviews && reviews.length > 0 && (
-        <aside className="xs:px-6 mx-auto mt-12 max-w-2xl border-t border-gray-200 px-4 pt-8 pb-6 sm:px-6 lg:px-8 lg:pb-10">
+        <aside className="xs:px-6 mx-auto mt-12 max-w-2xl border-t border-gray-200 px-4 pt-12 pb-6 sm:px-6 lg:px-8">
           <h2 className="text-heading font-heading decoration-yellow mb-0 text-2xl font-semibold underline decoration-3 underline-offset-8">
             What our customers say
           </h2>
@@ -132,7 +132,7 @@ export function ContentArticlePage({
       )}
 
       {relatedTitle && relatedHrefBase && relatedItems.length > 0 && (
-        <aside className="xs:px-6 mx-auto mb-8 w-full max-w-2xl border-t border-gray-200 px-4 pt-8 pb-6 sm:px-6 lg:px-8 lg:pb-10">
+        <aside className="xs:px-6 mx-auto mb-8 w-full max-w-2xl border-t border-gray-200 px-4 pt-12 pb-6 sm:px-6 lg:px-8">
           <h2 className="text-heading font-heading mb-6 text-xl font-semibold">{relatedTitle}</h2>
           <ul className="space-y-4">
             {relatedItems.map((item) => (

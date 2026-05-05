@@ -43,7 +43,7 @@ export default function FaqsPage() {
       {/* FAQ */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }} />
       <div className="bg-navy mb-10 lg:mb-6">
-        <div className="mx-auto max-w-340 px-4 py-10 pt-42 text-white sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
+        <div className="mx-auto max-w-340 px-4 py-10 pt-32 text-white sm:px-6 lg:px-8 lg:py-14 lg:pt-36">
           <PageHeader
             title="Frequently asked questions"
             subtitle="Got a question before booking? Here are answers to the most common things customers ask about our breakdown recovery and towing services in Watford and the surrounding area. 24 hours a day, Monday to Saturday."

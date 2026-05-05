@@ -133,9 +133,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href={`https://www.google.com/maps/place/${config.socials.googleReviewsId}`}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="text-sm"
+                className="inline-block text-sm"
               >
-                Rated {ratingToString(googleReviews.rating)}/5 from {googleReviews.userRatingCount} Google reviews
+                <span className="xs:inline hidden">Rated </span>
+                {ratingToString(googleReviews.rating)}/5 from {googleReviews.userRatingCount} Google reviews
               </a>
             </span>
           </div>
