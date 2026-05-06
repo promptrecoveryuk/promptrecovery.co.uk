@@ -39,15 +39,18 @@ export default function FaqsPage() {
   };
 
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }} />
+    <main className="flex min-h-screen flex-col justify-center">
       {/* FAQ */}
-      <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
-        <PageHeader
-          title="Frequently asked questions"
-          subtitle="Got a question before booking? Here are answers to the most common things customers ask about our breakdown recovery and towing services in Watford and the surrounding area. 24 hours a day, Monday to Saturday."
-        />
-
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }} />
+      <div className="bg-navy mb-10 lg:mb-6">
+        <div className="mx-auto max-w-340 px-4 py-10 pt-32 text-white sm:px-6 lg:px-8 lg:py-14 lg:pt-36">
+          <PageHeader
+            title="Frequently asked questions"
+            subtitle="Got a question before booking? Here are answers to the most common things customers ask about our breakdown recovery and towing services in Watford and the surrounding area. 24 hours a day, Monday to Saturday."
+          />
+        </div>
+      </div>
+      <div className="mx-auto max-w-2xl px-4 py-10 pt-4 sm:px-6 md:max-w-7xl lg:px-8 lg:py-14 lg:pt-14">
         <div className="divide-line-2 mx-auto max-w-2xl divide-y">
           {faqs.map((faq) => (
             <FaqItem key={faq.question} faq={faq} />
@@ -55,6 +58,6 @@ export default function FaqsPage() {
         </div>
       </div>
       {/* End FAQ */}
-    </>
+    </main>
   );
 }

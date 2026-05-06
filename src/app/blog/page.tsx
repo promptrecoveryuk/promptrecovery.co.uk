@@ -32,40 +32,45 @@ export default function BlogPage() {
   });
 
   return (
-    <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
+    <main className="flex min-h-screen flex-col justify-center">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
-      <PageHeader title="Blog" subtitle="Helpful guides on breakdowns, motorway safety, and vehicle recovery." />
-
-      <ul className="mx-auto max-w-2xl divide-y divide-gray-200">
-        {posts.map((post) => {
-          const image = getPictureAsImage(post.imageIndex, 2);
-          return (
-            <li key={post.slug} className="py-8">
-              <Link href={`/blog/${post.slug}/`} className="hover:text-brand block">
-                <time className="text-sm text-gray-500">
-                  {new Date(post.modified).toLocaleDateString('en-GB', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </time>
-                <h3 className="mt-2 text-xl font-semibold">{post.title}</h3>
-                {image && (
-                  <Image
-                    className="rounded-base my-3 h-auto w-full"
-                    width={image.width}
-                    height={image.height}
-                    src={image.url}
-                    alt={image.description}
-                  />
-                )}
-                <p className="mt-2">{post.description}</p>
-                <span className="mt-3 inline-block text-sm font-medium">Read more →</span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+      <div className="bg-navy mb-10 lg:mb-6">
+        <div className="mx-auto max-w-340 px-4 py-10 pt-32 text-white sm:px-6 lg:px-8 lg:py-14 lg:pt-36">
+          <PageHeader title="Blog" subtitle="Helpful guides on breakdowns, motorway safety, and vehicle recovery." />
+        </div>
+      </div>
+      <div className="mx-auto max-w-2xl px-4 py-10 pt-4 sm:px-6 md:max-w-7xl lg:px-8 lg:py-14 lg:pt-14">
+        <ul className="mx-auto max-w-2xl divide-y divide-gray-200">
+          {posts.map((post) => {
+            const image = getPictureAsImage(post.imageIndex, 2);
+            return (
+              <li key={post.slug} className="py-8">
+                <Link href={`/blog/${post.slug}/`} className="hover:text-brand block">
+                  <time className="text-sm text-gray-500">
+                    {new Date(post.modified).toLocaleDateString('en-GB', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </time>
+                  <h3 className="mt-2 text-xl font-semibold">{post.title}</h3>
+                  {image && (
+                    <Image
+                      className="rounded-base my-3 h-auto w-full"
+                      width={image.width}
+                      height={image.height}
+                      src={image.url}
+                      alt={image.description}
+                    />
+                  )}
+                  <p className="mt-2">{post.description}</p>
+                  <span className="mt-3 inline-block text-sm font-medium">Read more →</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </main>
   );
 }

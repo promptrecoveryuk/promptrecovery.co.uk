@@ -16,7 +16,6 @@ import { basePath } from '@/app/base-path';
 import { Menu } from './icons';
 
 const pages: Record<string, string> = {
-  Home: '/',
   About: '/about/',
   Services: '/services/',
   FAQs: '/faqs/',
@@ -94,7 +93,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         {isActive ? (
           <Link
             href={pageRoute}
-            className="text-yellow bg-brand block rounded-sm px-3 py-2 text-xl font-normal hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:bg-transparent md:p-0 md:text-base md:hover:bg-transparent lg:text-xl md:dark:hover:bg-transparent"
+            className="bg-brand block rounded-sm px-3 py-2 text-base font-normal text-white underline underline-offset-4 hover:decoration-2 focus-visible:ring-2 md:border-0 md:bg-transparent md:p-0 md:text-base md:hover:bg-transparent lg:text-base md:dark:hover:bg-transparent"
             aria-current="page"
             onClick={() => closeMenu()}
           >
@@ -103,7 +102,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
         ) : (
           <Link
             href={pageRoute}
-            className="hover:text-yellow md:hover:text-yellow focus-visible:ring-yellow block rounded px-3 py-2 text-xl font-normal text-white hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:border-0 md:p-0 md:text-base md:hover:bg-transparent lg:text-xl md:dark:hover:bg-transparent"
+            className="focus-visible:ring-yellow block rounded px-3 py-2 text-base font-normal text-white hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:ring-2 md:p-0"
             onClick={() => closeMenu()}
           >
             {pageName}
@@ -114,34 +113,31 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
   });
 
   return (
-    <nav ref={navRef} className="bg-navy border-default fixed inset-s-0 top-0 z-40 w-full border-b">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 pt-4 pb-0">
+    <nav ref={navRef} className="bg-navy fixed inset-s-0 top-0 z-40 w-full">
+      <div className="xs:px-6 mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 pt-6 pb-2 md:px-8 md:pb-0">
         <Link
           href="/"
-          className="focus-visible:ring-yellow flex items-center space-x-3 rounded-sm focus-visible:ring-2 focus-visible:outline-none rtl:space-x-reverse"
+          className="focus-visible:ring-yellow xs:h-8 flex h-7 items-center space-x-3 rounded-sm focus-visible:ring-2 focus-visible:outline-none md:h-9 lg:h-10 rtl:space-x-reverse"
         >
           <Image
-            src={`${basePath}/images/logo-128x128.png`}
-            width={128}
-            height={128}
-            className="size-18 md:size-14 lg:size-18"
+            src={`${basePath}/images/logo-v2-1429x289.png`}
+            width={1429}
+            height={289}
+            className="block h-auto max-h-full w-auto max-w-full"
             alt="Prompt Recovery Logo"
           />
-          <span className="self-center pr-2 text-xl font-semibold whitespace-nowrap text-white md:text-base lg:text-xl">
-            Prompt Recovery
-          </span>
         </Link>
-        <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
+        <div className="xs:space-x-3 flex md:order-2 md:space-x-0 rtl:space-x-reverse">
           <Link
             href={`tel:${phoneNumber}`}
-            className="xs:inline bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border hidden border border-transparent px-[10px] py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base"
+            className="bg-brand hover:bg-brand-light focus:ring-yellow box-border inline rounded-[100px] border border-transparent px-[16px] py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none md:text-base"
           >
             <span className="block text-center">Call Now</span>
             <span className="block text-center text-xs">24hr Mon-Sat</span>
           </Link>
           <Link
             href={`https://wa.me/${phoneNumber}`}
-            className="xs:inline focus:ring-yellow rounded-base ml-0 box-border hidden border border-transparent bg-transparent px-2 py-0 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none lg:ml-4"
+            className="focus:ring-yellow rounded-base ml-0 box-border inline border border-transparent bg-transparent py-0 pl-2 text-xl leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none lg:ml-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +180,7 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
-            className="text-body rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:ring-yellow inline-flex h-10 w-10 items-center justify-center p-2 text-sm focus:ring-2 focus:outline-none md:hidden"
+            className="rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:ring-yellow inline-flex h-10 w-10 items-center justify-center p-2 text-sm text-white focus:ring-2 focus:outline-none md:hidden"
             aria-controls="navbar-sticky"
             aria-expanded="false"
           >
@@ -193,12 +189,16 @@ export default function Navbar({ children, phoneNumber }: { children?: React.Rea
           </button>
         </div>
         <div className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto" id="navbar-sticky">
-          <ul className="border-default rounded-base mt-4 mb-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:mb-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:mb-4 lg:space-x-8 rtl:space-x-reverse">
+          <ul className="border-default rounded-base mt-4 flex flex-col border px-4 py-4 font-medium md:mt-0 md:flex-row md:space-x-3 md:border-0 md:p-0 lg:space-x-8 rtl:space-x-reverse">
             {menuItemLinks}
           </ul>
         </div>
       </div>
-      {children && <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center pb-2">{children}</div>}
+      {children && (
+        <div className="xs:px-6 mx-auto flex max-w-7xl flex-wrap items-center justify-center px-4 pb-2 md:px-8">
+          {children}
+        </div>
+      )}
     </nav>
   );
 }

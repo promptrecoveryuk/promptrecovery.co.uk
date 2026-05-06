@@ -62,4 +62,7 @@ footer a:focus-visible {
   --breakpoint-xs: 32rem;
 
   --font-sans: 'Inter', sans-serif;
+
+  --navy-white-gradient:
+    to bottom, var(--color-navy) 0%, var(--color-navy) 90%, var(--color-white) 90.01%, var(--color-white) 100%;
 }

@@ -126,16 +126,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             no currentPage prop needed. */}
         <Navbar phoneNumber={seo.phone}>
           <div className="flex justify-center">
-            <Rating rating={googleReviews.rating} />
+            <Rating rating={googleReviews.rating} size={26} />
             <span className="text-white">
               &nbsp;
               <a
                 href={`https://www.google.com/maps/place/${config.socials.googleReviewsId}`}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="text-sm md:text-lg"
+                className="inline-block text-sm"
               >
-                Rated {ratingToString(googleReviews.rating)}/5 from {googleReviews.userRatingCount} Google reviews
+                <span className="xs:inline hidden">Rated </span>
+                {ratingToString(googleReviews.rating)}/5 from {googleReviews.userRatingCount} Google reviews
               </a>
             </span>
           </div>

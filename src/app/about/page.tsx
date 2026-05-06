@@ -34,15 +34,18 @@ export default function AboutPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       {/* About */}
-      <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
-        <PageHeader
-          title="Meet Prompt Recovery — Watford's trusted recovery specialist"
-          subtitle="Prompt Recovery Ltd was built on one mission: to provide fast, friendly and reliable breakdown recovery across Watford and nearby areas. Get to know the person behind the wheel and what drives our services."
-        />
-
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-4 sm:px-6 lg:px-8 lg:py-14 lg:pt-4">
+      <main className="flex min-h-screen flex-col justify-center">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
+        <div className="bg-navy mb-10 lg:mb-6">
+          <div className="mx-auto max-w-2xl px-4 pt-32 pb-10 text-white sm:px-6 md:max-w-7xl lg:px-8 lg:pt-36 lg:pb-6">
+            <PageHeader
+              title="Meet Prompt Recovery — Watford's trusted recovery specialist"
+              subtitle="Prompt Recovery Ltd was built on one mission: to provide fast, friendly and reliable breakdown recovery across Watford and nearby areas. Get to know the person behind the wheel and what drives our services."
+            />
+          </div>
+        </div>
+        <div className="mx-auto max-w-2xl px-4 py-10 pt-4 sm:px-6 md:max-w-7xl lg:px-8 lg:py-14 lg:pt-14">
           <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
             <div>
               <SectionHeading sectionName="Hi, I'm Nick - Founder of Prompt Recovery" />
@@ -94,11 +97,11 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="mt-4">
+        <div className="mx-auto max-w-7xl px-4 py-10 pt-4 sm:px-6 lg:px-8 lg:py-14 lg:pt-4">
           <SectionHeading sectionName="Some of our recoveries" />
           <GridGallery items={pictures.slice(0, 22)} />
         </div>
-      </div>
+      </main>
       {/* End About */}
     </>
   );

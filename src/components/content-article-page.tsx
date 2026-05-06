@@ -45,7 +45,7 @@ export function ContentArticlePage({
   schemaObjects,
 }: ContentArticlePageProps) {
   return (
-    <div className="mx-auto max-w-340 px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-42">
+    <main className="flex min-h-screen flex-col justify-center">
       {schemaObjects.map((schemaObject, index) => (
         <script
           key={index}
@@ -54,102 +54,109 @@ export function ContentArticlePage({
         />
       ))}
 
-      <div className="mx-auto max-w-2xl">
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-sm text-gray-500">
-          {breadcrumbs.map((item, index) => (
-            <div key={`${item.name}-${index}`} className="contents">
-              {index > 0 && <span aria-hidden="true">/</span>}
-              {item.item ? (
-                <Link href={item.item} className="hover:text-brand">
-                  {item.name}
-                </Link>
-              ) : (
-                <span className="text-gray-700" aria-current="page">
-                  {item.name}
-                </span>
-              )}
-            </div>
-          ))}
-        </nav>
-
-        <article>
-          <header className="mb-8 border-b border-gray-200 pb-8">
-            <h1 className="text-heading font-heading text-center text-3xl leading-tight font-bold md:text-left md:text-4xl">
-              {meta.title}
-            </h1>
-            <h2 className="mt-3 text-lg text-gray-600">{meta.description}</h2>
-            <p className="mt-3 text-sm text-gray-500">
-              By {meta.author} &middot;{' '}
-              <time dateTime={meta.modified}>
-                {new Date(meta.modified).toLocaleDateString('en-GB', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </time>{' '}
-              &middot; {readingTime} min read
-            </p>
-            <Image
-              className="rounded-base mt-4 h-auto w-full"
-              width={image.width}
-              height={image.height}
-              src={image.url}
-              alt={image.description}
-            />
-          </header>
-
-          <MDXRemote source={content} components={mdxComponents} />
-        </article>
-
-        {faqs && faqs.length > 0 && (
-          <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading font-heading decoration-yellow mb-4 text-2xl font-semibold underline decoration-3 underline-offset-8">
-              Common questions
-            </h2>
-            {faqs.map((faq) => (
-              <FaqItem key={faq.question} faq={faq} />
-            ))}
-          </aside>
-        )}
-
-        {reviews && reviews.length > 0 && (
-          <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading font-heading decoration-yellow mb-0 text-2xl font-semibold underline decoration-3 underline-offset-8">
-              What our customers say
-            </h2>
-            {reviews.map((review) => (
-              <ReviewCardV2 key={review.authorUrl} review={review} />
-            ))}
-          </aside>
-        )}
-
-        {relatedTitle && relatedHrefBase && relatedItems.length > 0 && (
-          <aside className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="text-heading font-heading mb-6 text-xl font-semibold">{relatedTitle}</h2>
-            <ul className="space-y-4">
-              {relatedItems.map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    href={`${relatedHrefBase}/${item.slug}/`}
-                    className="text-brand hover:text-brand-light font-medium"
-                  >
-                    {item.title}
+      <div className="bg-navy text-white">
+        <div className="xs:px-6 mx-auto max-w-2xl px-4 pt-32 sm:px-6 lg:px-8 lg:pt-36">
+          <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-2 text-sm">
+            {breadcrumbs.map((item, index) => (
+              <div key={`${item.name}-${index}`} className="contents">
+                {index > 0 && <span aria-hidden="true">/</span>}
+                {item.item ? (
+                  <Link href={item.item} className="underline">
+                    {item.name}
                   </Link>
-                  <p className="mt-1 text-sm text-gray-500">
-                    <time dateTime={item.date}>
-                      {new Date(item.date).toLocaleDateString('en-GB', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric',
-                      })}
-                    </time>
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        )}
+                ) : (
+                  <span className="" aria-current="page">
+                    {item.name}
+                  </span>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
       </div>
-    </div>
+
+      <article>
+        <div className="bg-linear-(--navy-white-gradient) text-white">
+          <div className="xs:px-6 mx-auto max-w-2xl px-4 pb-6 sm:px-6 lg:px-8 lg:pb-10">
+            <header className="pt-4">
+              <h1 className="font-heading text-center text-3xl leading-tight font-bold md:text-left md:text-4xl">
+                {meta.title}
+              </h1>
+              <h2 className="mt-3 text-lg">{meta.description}</h2>
+              <p className="mt-3 text-sm">
+                By {meta.author} &middot;{' '}
+                <time dateTime={meta.modified}>
+                  {new Date(meta.modified).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </time>{' '}
+                &middot; {readingTime} min read
+              </p>
+              <Image
+                className="rounded-base mt-4 h-auto w-full"
+                width={image.width}
+                height={image.height}
+                src={image.url}
+                alt={image.description}
+              />
+            </header>
+          </div>
+        </div>
+        <div className="xs:px-6 mx-auto max-w-2xl px-4 pt-10 sm:px-6 lg:px-8">
+          <MDXRemote source={content} components={mdxComponents} />
+        </div>
+      </article>
+
+      {faqs && faqs.length > 0 && (
+        <aside className="xs:px-6 mx-auto mt-12 max-w-2xl border-t border-gray-200 px-4 pt-12 pb-6 sm:px-6 lg:px-8">
+          <h2 className="text-heading font-heading decoration-yellow mb-4 text-2xl font-semibold underline decoration-3 underline-offset-8">
+            Common questions
+          </h2>
+          {faqs.map((faq) => (
+            <FaqItem key={faq.question} faq={faq} />
+          ))}
+        </aside>
+      )}
+
+      {reviews && reviews.length > 0 && (
+        <aside className="xs:px-6 mx-auto mt-12 max-w-2xl border-t border-gray-200 px-4 pt-12 pb-6 sm:px-6 lg:px-8">
+          <h2 className="text-heading font-heading decoration-yellow mb-0 text-2xl font-semibold underline decoration-3 underline-offset-8">
+            What our customers say
+          </h2>
+          {reviews.map((review) => (
+            <ReviewCardV2 key={review.authorUrl} review={review} />
+          ))}
+        </aside>
+      )}
+
+      {relatedTitle && relatedHrefBase && relatedItems.length > 0 && (
+        <aside className="xs:px-6 mx-auto mb-8 w-full max-w-2xl border-t border-gray-200 px-4 pt-12 pb-6 sm:px-6 lg:px-8">
+          <h2 className="text-heading font-heading mb-6 text-xl font-semibold">{relatedTitle}</h2>
+          <ul className="space-y-4">
+            {relatedItems.map((item) => (
+              <li key={item.slug}>
+                <Link
+                  href={`${relatedHrefBase}/${item.slug}/`}
+                  className="text-brand hover:text-brand-light font-medium"
+                >
+                  {item.title}
+                </Link>
+                <p className="mt-1 text-sm text-gray-500">
+                  <time dateTime={item.date}>
+                    {new Date(item.date).toLocaleDateString('en-GB', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </time>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+    </main>
   );
 }

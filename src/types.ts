@@ -155,3 +155,5 @@ export type BreadcrumbItem = {
   name: string;
   item?: string;
 };
+
+export type BackgroundMode = 'light' | 'dark';

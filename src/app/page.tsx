@@ -53,45 +53,45 @@ export default function HomePage() {
     <main className="flex min-h-screen flex-col justify-center">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }} />
       {/*-- Hero --*/}
-      <div className="from-primary-100 dark:from-primary-950 bg-light-grey relative bg-linear-to-bl via-transparent dark:via-transparent">
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-42 sm:px-6 lg:px-8 lg:py-14 lg:pt-36">
+      <div className="from-primary-100 dark:from-primary-950 bg-navy relative bg-linear-to-bl via-transparent text-white dark:via-transparent">
+        <div className="mx-auto max-w-2xl px-6 py-10 pt-32 md:max-w-7xl md:px-8 lg:py-14 lg:pt-36">
           {/*-- Grid --*/}
           <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
             <div>
               {/*-- Title --*/}
               <div className="mt-4 md:mb-12">
-                <h1 className="text-foreground font-heading mb-4 text-center text-4xl font-semibold md:text-left lg:text-5xl">
-                  Breakdown Recovery in Watford
+                <h1 className="text-foreground font-heading mb-4 text-left text-4xl font-semibold md:text-left lg:text-5xl">
+                  Fast Breakdown Recovery in Watford
                 </h1>
-                <h2 className="text-foreground font-heading mb-4 text-center text-2xl font-semibold md:text-left lg:text-3xl">
+                <h2 className="text-foreground font-heading mb-4 text-left text-2xl font-semibold md:text-left lg:text-3xl">
                   Serving Watford,{' '}
-                  <Link href="/areas/bushey/" className="text-brand underline">
+                  <Link href="/areas/bushey/" className="text-yellow underline">
                     Bushey
                   </Link>
                   ,{' '}
-                  <Link href="/areas/rickmansworth/" className="text-brand underline">
+                  <Link href="/areas/rickmansworth/" className="text-yellow underline">
                     Rickmansworth
                   </Link>
                   ,{' '}
-                  <Link href="/areas/st-albans/" className="text-brand underline">
+                  <Link href="/areas/st-albans/" className="text-yellow underline">
                     St Albans
                   </Link>
                   , and the surrounding areas
                 </h2>
-                <p className="text-muted-foreground-2 mb-4 text-center text-xl font-normal md:text-left">
+                <p className="text-muted-foreground-2 mb-4 text-left text-xl font-normal md:text-left">
                   Fast, friendly and affordable help for vehicles under 4 tonnes you can rely on. Fully insured,
                   professionally trained, and experienced in safe vehicle recovery.
                 </p>
-                <p className="pt-4 text-center md:text-left">
+                <p className="pt-4 text-left md:text-left">
                   <Link
                     href={`tel:${seo.phone}`}
-                    className="bg-brand hover:bg-brand-light focus:ring-yellow rounded-base box-border inline-block border border-transparent px-3 py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none"
+                    className="bg-brand hover:bg-brand-light focus:ring-yellow box-border inline-block rounded-[100px] border border-transparent px-4 py-1 text-lg leading-5 font-normal text-white shadow-xs focus:ring-2 focus:outline-none"
                   >
                     <span className="block text-center">Call Now</span>
                     <span className="block text-center text-xs">24hr Mon-Sat</span>
                   </Link>
                 </p>
-                <p className="text-muted-foreground-2 my-4 text-center text-lg font-normal md:text-left">
+                <p className="text-muted-foreground-2 my-4 text-left text-lg font-normal md:text-left">
                   Trusted local recovery with safe vehicle handling from an experienced Class 1 HGV driver.
                 </p>
               </div>
@@ -100,9 +100,9 @@ export default function HomePage() {
 
             <div>
               {/*-- Carousel --*/}
-              <Carousel>
+              <Carousel bgMode="dark">
                 {googleReviews.reviews.map((review) => (
-                  <ReviewCardV2 key={review.reviewId} review={review} />
+                  <ReviewCardV2 key={review.reviewId} review={review} bgMode="dark" />
                 ))}
               </Carousel>
               {/*-- End Carousel --*/}
@@ -114,7 +114,7 @@ export default function HomePage() {
       {/*-- End Hero --*/}
       {/* About Section */}
       <Section id="about" classNames="bg-light-yellow">
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-18 sm:px-6 lg:px-8 lg:py-14 lg:pt-18">
+        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
           <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
             <div>
               <SectionHeading sectionName="About" />
@@ -145,7 +145,7 @@ export default function HomePage() {
       {/* End About Section */}
       {/* Contact Form Section */}
       <Section id="request-a-quote">
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-18 sm:px-6 lg:px-8 lg:py-14 lg:pt-18">
+        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Request a quote" />
           <ContactForm action={config.form.action} accessKey={config.form.accessKey} />
         </div>
@@ -153,7 +153,7 @@ export default function HomePage() {
       {/* End Contact Form Section */}
       {/* Services Section */}
       <Section id="services" classNames="bg-light-grey">
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-18 sm:px-6 lg:px-8 lg:py-14 lg:pt-18">
+        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Services" />
           <div className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
@@ -169,7 +169,7 @@ export default function HomePage() {
       {/* End Services Section */}
       {/* Why Choose Us Section */}
       <Section id="choose-us" classNames="bg-light-grey">
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-18 sm:px-6 lg:px-8 lg:py-14 lg:pt-18">
+        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Why choose us" />
           <div className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {reasonsToChooseNick.map((reason) => (
@@ -181,7 +181,7 @@ export default function HomePage() {
       {/* End Why Choose Us Section */}
       {/* Find Us Section */}
       <Section id="find-us">
-        <div className="mx-auto max-w-7xl px-4 py-10 pt-18 sm:px-6 lg:px-8 lg:py-14 lg:pt-18">
+        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Find us" />
           <h3 className="mb-2 text-center text-xl">We operate throughout Watford and surrounding areas.</h3>
           <h4 className="text-gl mb-8 text-center">Leggatts Wood Ave, Watford, WD24 6RR</h4>
