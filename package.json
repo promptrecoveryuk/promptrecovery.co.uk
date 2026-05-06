@@ -15,6 +15,7 @@
     "dev:copy-diff": "COPY_DIFF=1 next dev",
     "build": "next build",
     "fetch-reviews": "node scripts/fetch-google-reviews.mjs",
+    "scrape-reviews": "node scripts/scrape-google-reviews.mjs",
     "format": "prettier . --check",
     "format:write": "prettier . --write",
     "lint": "eslint .",

@@ -9,6 +9,7 @@ import { ReviewCardV2 } from '@/components/review-card-v2';
 import { Section } from '@/components/section';
 import { SectionHeading } from '@/components/section-heading';
 import { ServiceItem } from '@/components/service-item';
+import { getGoogleReviewsByIds } from '@/lib/reviews';
 import { buildPageSchema, getSchemaIds } from '@/lib/schema';
 import { hasServicePage } from '@/lib/services';
 
@@ -40,14 +41,14 @@ export default function HomePage() {
     websiteId: website,
   });
   const googleReviews = { reviews: [] as typeof staticGoogleReviews };
-  googleReviews.reviews = [
-    staticGoogleReviews[1],
-    staticGoogleReviews[3],
-    staticGoogleReviews[5],
-    staticGoogleReviews[8],
-    staticGoogleReviews[15],
-    staticGoogleReviews[22],
-  ];
+  googleReviews.reviews = getGoogleReviewsByIds([
+    'Ci9DQUlRQUNvZENodHljRjlvT21GMFEwWnVVbDgyYjNWMFNXc3RXREV0UnpreE0xRRAB',
+    'Ci9DQUlRQUNvZENodHljRjlvT2paNWFYVkJZbFpNU1VGNVQxSTRkRk5rZVdoQmMzYxAB',
+    'Ci9DQUlRQUNvZENodHljRjlvT2tSeVMzVXlSekpwUTNFMGFrNXVkRVo0VlhOb1ExRRAB',
+    'Ci9DQUlRQUNvZENodHljRjlvT2tGYVFXYzFkRFJhYXpWR1FtMUxZVFZoTUVoWVFuYxAB',
+    'Ci9DQUlRQUNvZENodHljRjlvT2xCUmFtSTRjbGx1U2w5eVducFVSRU5oUW05WFNIYxAB',
+    'Ci9DQUlRQUNvZENodHljRjlvT2psRlgyTXRjRlI0TVdkcWIyNUlXVTFzTW1wd2IyYxAB',
+  ]);
 
   return (
     <main className="flex min-h-screen flex-col justify-center">

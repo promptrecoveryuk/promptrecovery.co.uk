@@ -25,7 +25,7 @@ export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleRevie
           <GoogleUserProfile userProfile={review} bgMode={bgMode}>
             <p className="text-left text-sm text-gray-500">{review.authorDetails}</p>
           </GoogleUserProfile>
-          <div className="mt-1 text-left">
+          <div className="mt-1 flex text-left">
             <Rating rating={review.rating} outOf={5} />
             <span>&nbsp;{review.when}</span>
           </div>

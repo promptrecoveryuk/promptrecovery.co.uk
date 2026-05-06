@@ -681,6 +681,41 @@ The key is only used locally and is never exposed in the browser or committed to
 Run `npm run fetch-reviews` whenever you want to pull in new reviews, then commit the updated
 `src/app/data/google-reviews.json`. The next deployment will include the latest data automatically.
 
+### Scraping the full Google Maps review list
+
+The API script keeps the aggregate rating data up to date. To refresh the fuller static review archive used for
+hand-picked testimonials, run the Playwright-based scraper:
+
+```bash
+npm run scrape-reviews
+```
+
+This calls `scripts/scrape-google-reviews.mjs`, opens the Google Maps reviews URL, expands visible `More` buttons,
+scrolls the reviews pane until no more reviews load, then writes the extracted review array to
+`src/app/data/static-google-reviews.json`.
+
+If Google shows a consent or verification screen, run it with a visible browser:
+
+```bash
+npm run scrape-reviews -- --headed
+```
+
+If Google Maps shows a limited view without review cards, use a persistent profile and sign in once:
+
+```bash
+npm run scrape-reviews -- --headed --channel chrome --user-data-dir /private/tmp/prompt-recovery-google-maps-profile --timeout 120000
+```
+
+After signing in, rerun the same command. You can also set `GOOGLE_MAPS_USER_DATA_DIR` instead of passing
+`--user-data-dir` each time.
+
+Useful options:
+
+```bash
+npm run scrape-reviews -- --out /tmp/google-reviews.json --max-scrolls 10
+npm run scrape-reviews -- --url "https://www.google.com/maps/place/..." --debug
+```
+
 ---
 
 ## Trello Card Sync — `trello:sync`

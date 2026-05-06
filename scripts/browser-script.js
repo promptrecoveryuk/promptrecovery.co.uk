@@ -1,36 +1,97 @@
-// Run on https://www.google.com/maps/place/Prompt+Recovery/@51.68032,-0.3967379,17z/data=!3m1!4b1!4m8!3m7!1s0xa470618e0a0b3b7f:0xc97900f577ce9f7c!8m2!3d51.68032!4d-0.3967379!9m1!1b1!16s%2Fg%2F11xgsxw_k3?entry=ttu&g_ep=EgoyMDI2MDQwNy4wIKXMDSoASAFQAw%3D%3D
-(function () {
-  // Top-level review containers (exclude nested duplicates)
-  const containers = [...document.querySelectorAll('div[data-review-id]')]
-    .filter(el => !el.parentElement.closest('[data-review-id]'));
+// Run on the Google Maps reviews page, or inject from scripts/scrape-google-reviews.mjs.
+(function (global) {
+  function getTopLevelReviewContainers(root) {
+    return [...root.querySelectorAll('div[data-review-id]')].filter(
+      (el) => !el.parentElement?.closest('[data-review-id]')
+    );
+  }
 
-  const reviews = containers.map(el => {
-    const stars = el.querySelector('[aria-label*="stars"]')?.getAttribute('aria-label');
-    const rating = stars ? parseInt(stars) : null;
+  function getText(el, selector) {
+    return el.querySelector(selector)?.textContent?.trim() ?? null;
+  }
 
+  function getDatasetValue(el, selector, key) {
+    return el.querySelector(selector)?.dataset?.[key] ?? null;
+  }
+
+  function getImageSource(el, selector) {
+    return el.querySelector(selector)?.src ?? null;
+  }
+
+  function getRating(el) {
+    const stars = el
+      .querySelector('[role="img"][aria-label*="star"], [aria-label*="stars"], [aria-label*="star"]')
+      ?.getAttribute('aria-label');
+
+    return stars ? parseInt(stars, 10) : null;
+  }
+
+  function normaliseReview(review) {
     return {
-      reviewId: el.dataset.reviewId,
-      author: el.querySelector('.d4r55')?.textContent.trim() ?? null,
-      authorDetails: el.querySelector('.RfnDt')?.textContent.trim() ?? null,
-      authorPhoto: el.querySelector('.NBa7we')?.src ?? null,
-      authorUrl: el.querySelector('[data-href]')?.dataset.href ?? null,
-      rating,
-      when: el.querySelector('.rsqaWe')?.textContent.trim() ?? null,
-      publishTime: el.querySelector('.rsqaWe')?.textContent.trim() ?? null,
-      // span.wiI7pd = review text; div.wiI7pd = owner response — this targets review only
-      text: el.querySelector('span.wiI7pd')?.textContent.trim() ?? null,
+      ...review,
+      author: review.author ?? 'Google user',
+      authorDetails: review.authorDetails ?? '',
+      authorPhoto: review.authorPhoto ?? '',
+      authorUrl: review.authorUrl ?? '',
+      rating: review.rating ?? 0,
+      when: review.when ?? '',
+      publishTime: review.publishTime ?? '',
+      text: review.text ?? '',
     };
-  });
+  }
 
-  console.log(`Found ${reviews.length} reviews`);
-  console.table(reviews);
+  function extractGoogleReviews(root = document) {
+    const seen = new Set();
 
-  // Trigger download
-  const blob = new Blob([JSON.stringify(reviews, null, 2)], { type: 'application/json' });
-  const a = Object.assign(document.createElement('a'), {
-    href: URL.createObjectURL(blob),
-    download: 'google-reviews.json',
-  });
-  a.click();
-  URL.revokeObjectURL(a.href);
-})();
+    return getTopLevelReviewContainers(root)
+      .map((el) => {
+        const when = getText(el, '.rsqaWe');
+
+        return normaliseReview({
+          reviewId: el.dataset.reviewId ?? null,
+          author: getText(el, '.d4r55'),
+          authorDetails: getText(el, '.RfnDt'),
+          authorPhoto: getImageSource(el, '.NBa7we'),
+          authorUrl: getDatasetValue(el, '[data-href]', 'href'),
+          rating: getRating(el),
+          when,
+          publishTime: when,
+          // span.wiI7pd = review text; div.wiI7pd = owner response, so target the review text only.
+          text: getText(el, 'span.wiI7pd'),
+        });
+      })
+      .filter((review) => {
+        if (!review.reviewId || seen.has(review.reviewId)) {
+          return false;
+        }
+
+        seen.add(review.reviewId);
+        return true;
+      });
+  }
+
+  function downloadGoogleReviews(filename = 'google-reviews.json') {
+    const reviews = extractGoogleReviews();
+
+    console.log(`Found ${reviews.length} reviews`);
+    console.table(reviews);
+
+    const blob = new Blob([JSON.stringify(reviews, null, 2)], { type: 'application/json' });
+    const a = Object.assign(document.createElement('a'), {
+      href: URL.createObjectURL(blob),
+      download: filename,
+    });
+
+    a.click();
+    URL.revokeObjectURL(a.href);
+
+    return reviews;
+  }
+
+  global.extractGoogleReviews = extractGoogleReviews;
+  global.downloadGoogleReviews = downloadGoogleReviews;
+
+  if (global.__PROMPT_RECOVERY_GOOGLE_REVIEWS_AUTORUN__ !== false) {
+    downloadGoogleReviews();
+  }
+})(window);
