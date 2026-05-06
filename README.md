@@ -73,9 +73,11 @@ required:
 
 ### Optional variables
 
-| Variable         | Description                                                              | When to set                                              |
-| ---------------- | ------------------------------------------------------------------------ | -------------------------------------------------------- |
-| `APP_INDEX_MODE` | Set to `NOINDEX` to make `robots.txt` block all crawlers (`Disallow: /`) | Staging / preview environments only — omit in production |
+| Variable                  | Description                                                              | When to set                                                                                           |
+| ------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_ORIGIN` | Origin used for canonical, sitemap, Open Graph, and JSON-LD URLs         | Set to `https://<username>.github.io` for a regular GitHub Pages project URL; omit for custom domain  |
+| `NEXT_PUBLIC_BASE_PATH`   | Path prefix for a GitHub Pages project URL                               | Set to `/promptrecovery.co.uk` when deploying to `https://<username>.github.io/promptrecovery.co.uk/` |
+| `APP_INDEX_MODE`          | Set to `NOINDEX` to make `robots.txt` block all crawlers (`Disallow: /`) | Staging / preview environments only — omit in production                                              |
 
 When `APP_INDEX_MODE=NOINDEX`, `robots.ts` returns `Disallow: /` for all user agents, preventing the environment from
 appearing in search results. Leave the variable unset (or absent) in production.
@@ -123,6 +125,7 @@ The `Build` step in `.github/workflows/deploy.yml` already maps them:
 
 ```yaml
 env:
+  NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
   FORM_ACCESS_KEY: ${{ secrets.FORM_ACCESS_KEY }}
   GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
   GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
@@ -798,6 +801,23 @@ Every push to `main`:
 ### Manual deployment trigger
 
 You can also deploy without pushing code via the **Actions** tab → **Deploy to GitHub Pages** → **Run workflow**.
+
+### Branch deployment to the regular GitHub Pages URL
+
+Use **Actions → Deploy branch to regular GitHub Pages URL → Run workflow** to deploy a branch, tag, or SHA to:
+
+```text
+https://promptrecoveryuk.github.io/promptrecovery.co.uk/
+```
+
+That workflow checks out the selected ref, builds with `NEXT_PUBLIC_SITE_ORIGIN=https://promptrecoveryuk.github.io`,
+`NEXT_PUBLIC_BASE_PATH=/promptrecovery.co.uk`, and `APP_INDEX_MODE=NOINDEX`, then removes `out/CNAME` before uploading
+the Pages artifact.
+
+This deploys to the same GitHub Pages site as production, so it replaces the current Pages artifact until the production
+workflow runs again. If the repository-level custom domain remains configured under **Settings → Pages**, GitHub may
+still present the Pages deployment using that setting; remove or change that Pages setting when you need the repository
+to resolve only on the regular `github.io` URL.
 
 ---
 
