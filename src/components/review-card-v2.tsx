@@ -23,7 +23,9 @@ export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleRevie
         {/*-- Blockquote --*/}
         <blockquote className="text-left lg:mx-auto lg:w-3/5">
           <GoogleUserProfile userProfile={review} bgMode={bgMode}>
-            <p className="text-left text-sm text-gray-500">{review.authorDetails}</p>
+            <p className={twJoin('text-left text-sm', bgMode === 'light' ? 'text-gray-500' : 'text-gray-300')}>
+              {review.authorDetails}
+            </p>
           </GoogleUserProfile>
           <div className="mt-1 flex text-left">
             <Rating rating={review.rating} outOf={5} />
