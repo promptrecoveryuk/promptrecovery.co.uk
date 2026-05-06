@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ContentArticlePage } from '@/components/content-article-page';
 import { getPictureAsImage } from '@/lib/pictures';
 import { getAllPostsMeta, getPostContent, getPostSlugs } from '@/lib/posts';
+import { getGoogleReviewById } from '@/lib/reviews';
 import { buildArticleSchema, buildBreadcrumbSchema, buildHowToSchema, getSchemaIds } from '@/lib/schema';
 
 import { seo } from '../../data/index';
@@ -67,6 +68,7 @@ export default async function BlogPostPage({ params }: Props) {
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   const relatedPosts = getAllPostsMeta().filter((p) => p.slug !== slug);
+  const reviews = (meta.reviewIds ?? []).map(getGoogleReviewById).filter((r) => r !== undefined);
   const schemaObjects = [
     buildArticleSchema({
       authorName: meta.author,
@@ -90,6 +92,7 @@ export default async function BlogPostPage({ params }: Props) {
     <ContentArticlePage
       breadcrumbs={[{ name: 'Home', item: '/' }, { name: 'Blog', item: '/blog/' }, { name: meta.title }]}
       content={content}
+      reviews={reviews}
       image={image}
       meta={meta}
       readingTime={readingTime}

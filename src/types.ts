@@ -130,6 +130,8 @@ export interface BaseContentMeta {
 export interface PostMeta extends BaseContentMeta {
   /** Optional ordered step names — used to generate HowTo structured data. */
   steps?: string[];
+  /** Optional Google review IDs to display at the bottom of the page. */
+  reviewIds?: string[];
 }
 
 export interface AreaMeta extends BaseContentMeta {

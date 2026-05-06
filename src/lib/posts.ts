@@ -51,5 +51,6 @@ function parsePostFrontmatter(slug: string, data: Record<string, unknown>): Post
     imageIndex: data.imageIndex as number,
     author: (data.author as string) ?? 'Nick',
     steps: Array.isArray(data.steps) ? (data.steps as string[]) : undefined,
+    reviewIds: Array.isArray(data.reviewIds) ? (data.reviewIds as string[]) : undefined,
   };
 }
