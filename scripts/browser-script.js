@@ -1,5 +1,7 @@
 // Run on the Google Maps reviews page, or inject from scripts/scrape-google-reviews.mjs.
 (function (global) {
+  const REVIEW_PHOTO_SIZE_SUFFIX = '=w300-h450-p-k-no';
+
   function getTopLevelReviewContainers(root) {
     return [...root.querySelectorAll('div[data-review-id]')].filter(
       (el) => !el.parentElement?.closest('[data-review-id]')
@@ -18,6 +20,25 @@
     return el.querySelector(selector)?.src ?? null;
   }
 
+  function getBackgroundImageSource(el, selector) {
+    const imageEl = el.querySelector(selector);
+
+    if (!imageEl) {
+      return null;
+    }
+
+    const backgroundImage = imageEl.style?.backgroundImage || window.getComputedStyle(imageEl).backgroundImage;
+    const match = backgroundImage.match(/url\((?:"([^"]+)"|'([^']+)'|([^)]*))\)/);
+
+    return match ? (match[1] ?? match[2] ?? match[3])?.trim() ?? null : null;
+  }
+
+  function getReviewPhotoSource(el) {
+    const source = getBackgroundImageSource(el, '.Tya61d[data-photo-index="0"], .Tya61d');
+
+    return source ? source.replace(/=w\d+-h\d+[^/?#]*(?=$|[?#])/, REVIEW_PHOTO_SIZE_SUFFIX) : null;
+  }
+
   function getRating(el) {
     const stars = el
       .querySelector('[role="img"][aria-label*="star"], [aria-label*="stars"], [aria-label*="star"]')
@@ -34,6 +55,7 @@
       authorPhoto: review.authorPhoto ?? '',
       authorUrl: review.authorUrl ?? '',
       rating: review.rating ?? 0,
+      ...(review.reviewPhoto ? { reviewPhoto: review.reviewPhoto } : {}),
       when: review.when ?? '',
       publishTime: review.publishTime ?? '',
       text: review.text ?? '',
@@ -54,6 +76,7 @@
           authorPhoto: getImageSource(el, '.NBa7we'),
           authorUrl: getDatasetValue(el, '[data-href]', 'href'),
           rating: getRating(el),
+          reviewPhoto: getReviewPhotoSource(el),
           when,
           publishTime: when,
           // span.wiI7pd = review text; div.wiI7pd = owner response, so target the review text only.

@@ -103,7 +103,7 @@ export default function HomePage() {
               {/*-- Carousel --*/}
               <Carousel bgMode="dark">
                 {googleReviews.reviews.map((review) => (
-                  <ReviewCardV2 key={review.reviewId} review={review} bgMode="dark" />
+                  <ReviewCardV2 key={review.reviewId} review={review} bgMode="dark" hideImage={true} />
                 ))}
               </Carousel>
               {/*-- End Carousel --*/}

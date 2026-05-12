@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { twJoin } from 'tailwind-merge';
 
 import { BackgroundMode, GoogleReview } from '@/types';
@@ -15,13 +16,21 @@ import { Rating } from './rating';
  * @param props.bgMode - The background style on which this component will be rendered
  * @see https://preline.co/examples/testimonials.html#testimonials-simple-center-aligned-with-logo
  */
-export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleReview; bgMode?: BackgroundMode }) {
+export function ReviewCardV2({
+  review,
+  bgMode = 'light',
+  hideImage = false,
+}: {
+  review: GoogleReview;
+  bgMode?: BackgroundMode;
+  hideImage?: boolean;
+}) {
   return (
     <>
       {/*-- Testimonials --*/}
-      <div className="relative mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex max-w-[85rem] flex-col gap-6 px-4 py-8 sm:px-6 lg:flex-row lg:items-start lg:px-0">
         {/*-- Blockquote --*/}
-        <blockquote className="text-left lg:mx-auto lg:w-3/5">
+        <blockquote className="min-w-0 text-left lg:mx-auto lg:w-3/5">
           <GoogleUserProfile userProfile={review} bgMode={bgMode}>
             <p className={twJoin('text-left text-sm', bgMode === 'light' ? 'text-gray-500' : 'text-gray-300')}>
               {review.authorDetails}
@@ -31,7 +40,6 @@ export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleRevie
             <Rating rating={review.rating} outOf={5} />
             <span>&nbsp;{review.when}</span>
           </div>
-
           <div className="mt-4 lg:mt-6">
             <p className="text-foreground relative text-lg font-medium sm:text-xl md:text-xl md:leading-normal">
               <svg
@@ -52,7 +60,7 @@ export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleRevie
                 />
               </svg>
               {review.text.split('\n').map((line, index) => (
-                <span key={index} className="text-foreground relative z-10 mb-4 block text-xl font-normal">
+                <span key={index} className="text-foreground relative z-10 mb-4 block text-lg font-normal">
                   {line}
                 </span>
               ))}
@@ -60,6 +68,11 @@ export function ReviewCardV2({ review, bgMode = 'light' }: { review: GoogleRevie
           </div>
         </blockquote>
         {/*-- End Blockquote --*/}
+        {!hideImage && review.reviewPhoto && (
+          <div className="rounded-base relative aspect-[2/3] w-full max-w-[300px] shrink-0 self-center overflow-hidden bg-neutral-300 lg:self-start">
+            <Image className="object-cover" fill sizes="300px" src={review.reviewPhoto} alt="Review photo" />
+          </div>
+        )}
       </div>
       {/*-- End Testimonials --*/}
     </>

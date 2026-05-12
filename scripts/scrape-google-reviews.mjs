@@ -593,8 +593,9 @@ async function main() {
 
     const reviews = await collectAllReviews(page, options);
     const outPath = await writeReviews(options.out, reviews);
+    const reviewPhotoCount = reviews.filter((review) => review.reviewPhoto).length;
 
-    console.log(`Wrote ${reviews.length} reviews to ${outPath}`);
+    console.log(`Wrote ${reviews.length} reviews to ${outPath} (${reviewPhotoCount} with review photos)`);
   } catch (err) {
     if (page) {
       await saveFailureArtifacts(page, options.artifactDir);
