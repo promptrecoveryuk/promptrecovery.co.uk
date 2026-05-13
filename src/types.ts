@@ -53,7 +53,7 @@ export type GoogleReview = {
   /**
    * The url to the first photo attached to the review, when Google Maps exposes one.
    */
-  reviewPhoto?: string;
+  reviewPhoto?: string | null;
   /**
    * Additional author details (e.g. "Top reviewer", "Local Guide level 5") — not always present in the source data, so optional and may be empty string.
    */
