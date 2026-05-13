@@ -29,7 +29,12 @@ export function ReviewCardV2({
     <>
       {/*-- Testimonials --*/}
       <div className="px-4 py-8 sm:px-6">
-        <div className={twJoin('grid min-w-0 gap-6 text-left', hideImage ? 'grid-cols-1' : 'grid-cols-2')}>
+        <div
+          className={twJoin(
+            'grid min-w-0 grid-cols-1 gap-6 text-left',
+            !hideImage && review.reviewPhoto ? 'md:grid-cols-2' : ''
+          )}
+        >
           <div className="col-span-2">
             <GoogleUserProfile userProfile={review} bgMode={bgMode}>
               <p className={twJoin('text-left text-sm', bgMode === 'light' ? 'text-gray-500' : 'text-gray-300')}>
@@ -42,7 +47,7 @@ export function ReviewCardV2({
             </div>
           </div>
           {/*-- Blockquote --*/}
-          <blockquote>
+          <blockquote className="col-span-2 md:col-span-1">
             <p className="text-foreground relative text-lg font-medium sm:text-xl md:text-xl md:leading-normal">
               <svg
                 className={twJoin(
@@ -70,8 +75,14 @@ export function ReviewCardV2({
           </blockquote>
           {/*-- End Blockquote --*/}
           {!hideImage && review.reviewPhoto && (
-            <div className="rounded-base relative aspect-[2/3] w-full max-w-[300px] shrink-0 self-center overflow-hidden bg-neutral-300 lg:self-start">
-              <Image className="object-cover" fill sizes="300px" src={review.reviewPhoto} alt="Review photo" />
+            <div className="relative col-span-2 aspect-[2/3] w-full max-w-[300px] overflow-hidden md:col-span-1">
+              <Image
+                className="rounded-base bg-neutral-300 object-cover"
+                fill
+                sizes="300px"
+                src={review.reviewPhoto}
+                alt="Review photo"
+              />
             </div>
           )}
         </div>
