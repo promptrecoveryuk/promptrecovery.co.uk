@@ -28,19 +28,21 @@ export function ReviewCardV2({
   return (
     <>
       {/*-- Testimonials --*/}
-      <div className="relative mx-auto flex max-w-[85rem] flex-col gap-6 px-4 py-8 sm:px-6 lg:flex-row lg:items-start lg:px-0">
-        {/*-- Blockquote --*/}
-        <blockquote className="min-w-0 text-left lg:mx-auto lg:w-3/5">
-          <GoogleUserProfile userProfile={review} bgMode={bgMode}>
-            <p className={twJoin('text-left text-sm', bgMode === 'light' ? 'text-gray-500' : 'text-gray-300')}>
-              {review.authorDetails}
-            </p>
-          </GoogleUserProfile>
-          <div className="mt-1 flex text-left">
-            <Rating rating={review.rating} outOf={5} />
-            <span>&nbsp;{review.when}</span>
+      <div className="px-4 py-8 sm:px-6">
+        <div className={twJoin('grid min-w-0 gap-6 text-left', hideImage ? 'grid-cols-1' : 'grid-cols-2')}>
+          <div className="col-span-2">
+            <GoogleUserProfile userProfile={review} bgMode={bgMode}>
+              <p className={twJoin('text-left text-sm', bgMode === 'light' ? 'text-gray-500' : 'text-gray-300')}>
+                {review.authorDetails}
+              </p>
+            </GoogleUserProfile>
+            <div className="mt-1 flex text-left">
+              <Rating rating={review.rating} outOf={5} />
+              <span>&nbsp;{review.when}</span>
+            </div>
           </div>
-          <div className="mt-4 lg:mt-6">
+          {/*-- Blockquote --*/}
+          <blockquote>
             <p className="text-foreground relative text-lg font-medium sm:text-xl md:text-xl md:leading-normal">
               <svg
                 className={twJoin(
@@ -65,14 +67,14 @@ export function ReviewCardV2({
                 </span>
               ))}
             </p>
-          </div>
-        </blockquote>
-        {/*-- End Blockquote --*/}
-        {!hideImage && review.reviewPhoto && (
-          <div className="rounded-base relative aspect-[2/3] w-full max-w-[300px] shrink-0 self-center overflow-hidden bg-neutral-300 lg:self-start">
-            <Image className="object-cover" fill sizes="300px" src={review.reviewPhoto} alt="Review photo" />
-          </div>
-        )}
+          </blockquote>
+          {/*-- End Blockquote --*/}
+          {!hideImage && review.reviewPhoto && (
+            <div className="rounded-base relative aspect-[2/3] w-full max-w-[300px] shrink-0 self-center overflow-hidden bg-neutral-300 lg:self-start">
+              <Image className="object-cover" fill sizes="300px" src={review.reviewPhoto} alt="Review photo" />
+            </div>
+          )}
+        </div>
       </div>
       {/*-- End Testimonials --*/}
     </>

@@ -62,7 +62,7 @@ export function Carousel({
   return (
     <div ref={ref} className="relative w-full">
       {/* Carousel wrapper */}
-      <div className="rounded-base relative h-72 overflow-hidden md:h-96">
+      <div className="rounded-base relative h-72 overflow-hidden px-4 sm:px-16 md:h-96 md:px-0 lg:px-8">
         {React.Children.map(children, (child, i) => (
           // data-carousel-item="active" tells Flowbite which slide to show
           // first. All other items start hidden; Flowbite's JS then toggles

@@ -57,7 +57,7 @@ export default function HomePage() {
       <div className="from-primary-100 dark:from-primary-950 bg-navy relative bg-linear-to-bl via-transparent text-white dark:via-transparent">
         <div className="mx-auto max-w-2xl px-6 py-10 pt-32 md:max-w-7xl md:px-8 lg:py-14 lg:pt-36">
           {/*-- Grid --*/}
-          <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
+          <div className="grid items-center gap-8 md:grid-cols-2 lg:grid-cols-[4fr_3fr] lg:gap-12">
             <div>
               {/*-- Title --*/}
               <div className="mt-4 md:mb-12">
@@ -114,8 +114,8 @@ export default function HomePage() {
       </div>
       {/*-- End Hero --*/}
       {/* About Section */}
-      <Section id="about" classNames="bg-light-yellow">
-        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
+      <Section id="about" classNames="bg-light-grey !px-0">
+        <div className="mx-auto max-w-2xl px-6 py-10 pt-18 md:max-w-7xl md:px-8 lg:py-14 lg:pt-18">
           <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
             <div>
               <SectionHeading sectionName="About" />
@@ -145,16 +145,16 @@ export default function HomePage() {
       </Section>
       {/* End About Section */}
       {/* Contact Form Section */}
-      <Section id="request-a-quote">
-        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
+      <Section id="request-a-quote" classNames="!px-0">
+        <div className="mx-auto max-w-2xl px-6 py-10 pt-18 md:max-w-7xl md:px-8 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Request a quote" />
           <ContactForm action={config.form.action} accessKey={config.form.accessKey} />
         </div>
       </Section>
       {/* End Contact Form Section */}
       {/* Services Section */}
-      <Section id="services" classNames="bg-light-grey">
-        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
+      <Section id="services" classNames="bg-light-grey !px-0">
+        <div className="mx-auto max-w-2xl px-6 py-10 pt-18 md:max-w-7xl md:px-8 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Services" />
           <div className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
@@ -169,8 +169,8 @@ export default function HomePage() {
       </Section>
       {/* End Services Section */}
       {/* Why Choose Us Section */}
-      <Section id="choose-us" classNames="bg-light-grey">
-        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
+      <Section id="choose-us" classNames="bg-light-grey !px-0">
+        <div className="mx-auto max-w-2xl px-6 py-10 pt-18 md:max-w-7xl md:px-8 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Why choose us" />
           <div className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {reasonsToChooseNick.map((reason) => (
@@ -181,8 +181,8 @@ export default function HomePage() {
       </Section>
       {/* End Why Choose Us Section */}
       {/* Find Us Section */}
-      <Section id="find-us">
-        <div className="mx-auto max-w-7xl px-0 py-10 pt-18 lg:py-14 lg:pt-18">
+      <Section id="find-us" classNames="!px-0">
+        <div className="mx-auto max-w-2xl px-6 py-10 pt-18 md:max-w-7xl md:px-8 lg:py-14 lg:pt-18">
           <SectionHeading sectionName="Find us" />
           <h3 className="mb-2 text-center text-xl">We operate throughout Watford and surrounding areas.</h3>
           <h4 className="text-gl mb-8 text-center">Leggatts Wood Ave, Watford, WD24 6RR</h4>
