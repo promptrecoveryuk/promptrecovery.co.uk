@@ -62,7 +62,7 @@ export function Carousel({
   return (
     <div ref={ref} className="relative w-full">
       {/* Carousel wrapper */}
-      <div className="rounded-base relative h-72 overflow-hidden px-4 sm:px-16 md:h-96 md:px-0 lg:px-8">
+      <div className="rounded-base relative h-72 overflow-hidden px-4 sm:px-16 md:h-116 md:px-0 lg:px-8">
         {React.Children.map(children, (child, i) => (
           // data-carousel-item="active" tells Flowbite which slide to show
           // first. All other items start hidden; Flowbite's JS then toggles
@@ -96,7 +96,7 @@ export function Carousel({
         <span
           className={twJoin(
             'rounded-base group-focus:ring-yellow inline-flex h-10 w-10 items-center justify-center group-focus:ring-2 group-focus:outline-none',
-            bgMode === 'light' ? 'bg-white/30 group-hover:bg-white/50' : 'bg-gray/30 group-hover:bg-gray/50'
+            bgMode === 'light' ? 'bg-black/30 group-hover:bg-black/50' : 'bg-gray/30 group-hover:bg-gray/50'
           )}
         >
           <ChevronLeft className="h-5 w-5 text-white rtl:rotate-180" aria-hidden="true" />
@@ -113,7 +113,7 @@ export function Carousel({
         <span
           className={twJoin(
             'rounded-base group-focus:ring-yellow inline-flex h-10 w-10 items-center justify-center group-focus:ring-2 group-focus:outline-none',
-            bgMode === 'light' ? 'bg-white/30 group-hover:bg-white/50' : 'bg-gray/30 group-hover:bg-gray/50'
+            bgMode === 'light' ? 'bg-black/30 group-hover:bg-black/50' : 'bg-gray/30 group-hover:bg-gray/50'
           )}
         >
           <ChevronRight className="h-5 w-5 text-white rtl:rotate-180" aria-hidden="true" />

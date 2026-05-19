@@ -164,3 +164,5 @@ export type BreadcrumbItem = {
 };
 
 export type BackgroundMode = 'light' | 'dark';
+
+export type ImageRatio = '2:3' | '1:1';

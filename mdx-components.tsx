@@ -1,4 +1,6 @@
 import type { MDXComponents } from 'mdx/types';
+import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
 
 import { basePath } from './src/app/base-path';
 
@@ -38,7 +40,16 @@ export const mdxComponents: MDXComponents = {
     <blockquote className="border-brand my-4 border-l-4 pl-4 text-gray-600 italic">{children}</blockquote>
   ),
   hr: () => <hr className="my-8 border-gray-200" />,
-};
+  img: ({ src, alt, width, height, className }) => (
+    <Image
+      src={src as string}
+      alt={alt ?? ''}
+      width={width ? Number(width) : 250}
+      height={height ? Number(height) : 250}
+      className={twMerge('mx-auto', className as string)}
+    />
+  ),
+} satisfies MDXComponents;
 
 /**
  * Required by @next/mdx for the app router.

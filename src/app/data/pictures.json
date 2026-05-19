@@ -298,5 +298,17 @@
     "width2": 600,
     "height2": 200,
     "description": "A view of St Albans Cathedral from the graveyard, looking up towards the sky, with tree branches coming into view"
+  },
+  {
+    "filePath": "/images/pics/nick-2-600x900-2x3.jpg",
+    "filePath1": "/images/pics/nick-2-600x450-4x3.jpg",
+    "filePath2": "/images/pics/nick-2-600x200-3x1.jpg",
+    "width": 600,
+    "height": 900,
+    "width1": 600,
+    "height1": 450,
+    "width2": 600,
+    "height2": 200,
+    "description": "Nick standing in front of his recovery truck, with a car on the back"
   }
 ]

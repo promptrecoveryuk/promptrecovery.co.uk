@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { twJoin } from 'tailwind-merge';
 
-import { BackgroundMode, GoogleReview } from '@/types';
+import { BackgroundMode, GoogleReview, ImageRatio } from '@/types';
 
 import { GoogleUserProfile } from './google-user-profile';
 import { Rating } from './rating';
@@ -20,10 +20,12 @@ export function ReviewCardV2({
   review,
   bgMode = 'light',
   hideImage = false,
+  imageRatio = '2:3',
 }: {
   review: GoogleReview;
   bgMode?: BackgroundMode;
   hideImage?: boolean;
+  imageRatio?: ImageRatio;
 }) {
   return (
     <>
@@ -75,12 +77,20 @@ export function ReviewCardV2({
           </blockquote>
           {/*-- End Blockquote --*/}
           {!hideImage && review.reviewPhoto && (
-            <div className="relative col-span-2 aspect-[2/3] w-full max-w-[300px] overflow-hidden md:col-span-1">
+            <div
+              className={twJoin(
+                'relative col-span-2 w-full max-w-[300px] overflow-hidden md:col-span-1',
+                imageRatio === '2:3' ? 'aspect-[2/3]' : 'aspect-[3/3]'
+              )}
+            >
               <Image
-                className="rounded-base bg-neutral-300 object-cover"
+                className="rounded-base bg-neutral-300 object-cover object-center"
                 fill
                 sizes="300px"
-                src={review.reviewPhoto}
+                src={review.reviewPhoto.replace(
+                  'w300-h450-p-k-no',
+                  imageRatio === '2:3' ? 'w300-h450-c-k-no' : 'w300-h300-c-k-no'
+                )}
                 alt="Review photo"
               />
             </div>
