@@ -83,7 +83,8 @@ jobs:
         run: echo "::notice title=Regular GitHub Pages URL::${REGULAR_PAGES_URL}"
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps --only-shell chromium
+        timeout-minutes: 10
 
       - name: Run UI tests
         run: npm run test:ui
