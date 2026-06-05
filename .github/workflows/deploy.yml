@@ -76,7 +76,8 @@ jobs:
           APP_INDEX_MODE: ${{ secrets.APP_INDEX_MODE }}
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps --only-shell chromium
+        timeout-minutes: 10
 
       - name: Run UI tests
         run: npm run test:ui
