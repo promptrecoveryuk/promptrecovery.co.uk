@@ -12,6 +12,7 @@ import {
 // These tests intentionally use the real service content collection so the
 // homepage/services card-linking logic stays aligned with the files on disk.
 const LINKED_SERVICE_SLUG = 'breakdown-recovery-watford';
+const JUMP_START_SERVICE_SLUG = 'jump-start-recovery';
 const UNLINKED_SERVICE_SLUG = 'motorway-recovery';
 
 describe('getServiceSlugs()', () => {
@@ -20,6 +21,7 @@ describe('getServiceSlugs()', () => {
 
     assert.ok(Array.isArray(slugs));
     assert.ok(slugs.includes(LINKED_SERVICE_SLUG));
+    assert.ok(slugs.includes(JUMP_START_SERVICE_SLUG));
   });
 });
 
@@ -42,6 +44,14 @@ describe('getServiceContent(slug)', () => {
     assert.ok(content.includes('Common Breakdown Scenarios We Handle in Watford'));
     assert.deepEqual(meta, getServiceMeta(LINKED_SERVICE_SLUG));
   });
+
+  it('returns the jump start recovery service content', () => {
+    const { meta, content } = getServiceContent(JUMP_START_SERVICE_SLUG);
+
+    assert.equal(meta.slug, JUMP_START_SERVICE_SLUG);
+    assert.equal(meta.imageIndex, 22);
+    assert.ok(content.includes('NOCO 4250-amp lithium booster'));
+  });
 });
 
 describe('getAllServicesMeta()', () => {
@@ -55,6 +65,7 @@ describe('getAllServicesMeta()', () => {
 describe('hasServicePage(slug)', () => {
   it('returns true when a matching service page exists', () => {
     assert.equal(hasServicePage(LINKED_SERVICE_SLUG), true);
+    assert.equal(hasServicePage(JUMP_START_SERVICE_SLUG), true);
   });
 
   it('returns false when no matching service page exists', () => {
